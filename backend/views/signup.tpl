@@ -5,6 +5,6 @@
     <title>Document</title>
   </head>
   <body>
-    this is signup page.
+    {% include 'navbar.tpl' %}
   </body>
 </html>

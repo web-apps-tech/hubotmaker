@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8"/>
     <title>Document</title>
+    {% include 'init.tpl' %}
   </head>
   <body>
-    DAS IST INDEX SEITE.
+    {% include 'navbar.tpl' %}
   </body>
 </html>

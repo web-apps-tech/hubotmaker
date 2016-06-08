@@ -4,5 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Document</title>
   </head>
-  <body>user page</body>
+  <body>
+    {% include 'navbar.tpl' %}
+  </body>
 </html>

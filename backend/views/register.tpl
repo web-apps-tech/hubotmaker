@@ -4,5 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Document</title>
   </head>
-  <body>This is Register page.</body>
+  <body>
+    {% include 'navbar.tpl' %}
+  </body>
 </html>

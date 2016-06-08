@@ -5,6 +5,6 @@
     <title>Document</title>
   </head>
   <body>
-    THIS IS LOGIN PAGE
+    {% include 'navbar.tpl' %}
   </body>
 </html>
