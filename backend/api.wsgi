@@ -15,6 +15,7 @@ post = app.post
 @param(require=['slack_token'])
 def api_run_hubot(params):
     h = common.Hubot.create(parmas['slack_token'])
+    h = Hubot.create(parmas['slack_token'])
     h.start()
     if h.last_status == 204:
         return success()
