@@ -11,9 +11,13 @@ import config
 
 
 class Hubot(object):
-    def __init__(self, name, db):
+    def __init__(self, name):
+        endpoint = '/containers/{0}/json'
         self.name = name
-        self.db = db
+        res = requests.get(
+            config.DOCKER_BASEURI + endpoint.format(self.name)
+        )
+        self.db = res.json()['HostConfig']['Links'][0].split('/')[1].split(':')[0]
 
     @classmethod
     def create(cls, slack_token):
