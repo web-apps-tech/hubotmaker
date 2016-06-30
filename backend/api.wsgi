@@ -22,6 +22,7 @@ def api_run_hubot(params):
     else:
         return failed(h.name)
 
+
 @post('/hubot/stop')
 @apikey
 @param(require=['name'])
