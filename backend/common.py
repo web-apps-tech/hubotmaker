@@ -120,7 +120,7 @@ def param(require=[], option=[]):
             for key in require:
                 if key not in form_data:
                     response.status = 400
-                    return RequeireNotSatisfiedError(key)
+                    return RequireNotSatisfiedError(key)
                 else:
                     params[key] = form_data[key]
             for key in option:
