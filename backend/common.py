@@ -50,7 +50,7 @@ class Hubot(object):
             },
             data=json.dumps(hubot_payload)
         )
-        return cls(name, db)
+        return cls(name)
 
     def remove(self):
         endpoint = '/containers/{0}'
