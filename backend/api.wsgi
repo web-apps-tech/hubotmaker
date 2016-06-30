@@ -10,7 +10,7 @@ app = application = Bottle()
 get = app.get
 post = app.post
 
-@post('/')
+@post('/hubot/run')
 @apikey
 @param(require=['slack_token'])
 def api_run_hubot(params):
