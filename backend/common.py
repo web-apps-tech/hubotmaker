@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from bottle import request, response
+from functools import wraps
 import json
 import requests
 from uuid import uuid4
@@ -93,3 +95,23 @@ def success(msg='Succeeded'):
 
 def RequireNotSatisfiedError(key):
     return failed(key)
+
+
+def param(require=[], option=[]):
+    def wrapper(func):
+        @wraps(func)
+        def _(*a, **ka):
+            params = {}
+            form_data = request.forms
+            for key in require:
+                if key not in form_data:
+                    response.status = 400
+                    return RequeireNotSatisfiedError(key)
+                else:
+                    params[key] = form_data[key]
+            for key in option:
+                if key in form_data:
+                    params[key] = form_data[key]
+            return func(params=params, *a, **ka)
+        return _
+    return wrapper
