@@ -93,6 +93,10 @@ def success(msg='Succeeded'):
     }
 
 
+def APIKeyNotValidError():
+    return failed('API key not valid')
+
+
 def RequireNotSatisfiedError(key):
     return failed(key)
 
