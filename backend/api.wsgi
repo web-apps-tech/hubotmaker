@@ -20,3 +20,14 @@ def api_run_hubot(params):
         return success(h.name)
     else:
         return failed(h.name)
+
+@post('/hubot/stop')
+@apikey
+@param(require=['name'])
+def api_stop_hubot(params):
+    h = Hubot(params['name'])
+    h.stop()
+    if h.last_response.status_code == 204:
+        return success(h.name)
+    else:
+        return failed(h.name)
