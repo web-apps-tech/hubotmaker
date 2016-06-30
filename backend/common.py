@@ -89,3 +89,7 @@ def success(msg='Succeeded'):
         'status': True,
         'message': msg
     }
+
+
+def RequireNotSatisfiedError(key):
+    return failed(key)
