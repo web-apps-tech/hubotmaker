@@ -82,6 +82,32 @@ class Hubot(object):
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
 
+    def update(self, env={}, slack_token=None):
+        endpoint = '/containers/{0}/json'.format(self.name)
+        if slack_token is None:
+            res = request.get(config.DOCKER_BASEURI + endpoint)
+            new_env = {k: v for k, v in [item.split('=') for item in res.json()['Config']['Env']]}
+            new_env.update(env)
+        endpoint = '/containers/{0}'.format(self.name)
+        requests.delete(
+            config.DOCKER_BASEURI + endpoint + '?force=True'
+        )
+        endpoint = '/containers/create'
+        self.name = str(uuid4())
+        hubot_payload = {
+            'Image': 'hubot',
+            'Env': [k + '=' + str(v) for k, v in new_env.iteritems()],
+            'HostConfig': {
+                'Links': [self.db + ":db"]
+            }
+        }
+        self.last_response = requrests.post(
+            config.DOCKER_BASEURI + endpoint,
+            headers={
+                'Content-type': 'application/json'
+            },
+            data=hubot_payload
+        )
 
     def get_env(self):
         endpoint = '/containers/{0}/json'.format(self.name)
