@@ -101,6 +101,16 @@ def RequireNotSatisfiedError(key):
     return failed(key)
 
 
+def apikey(func):
+    @wraps(func)
+    def _(*a, **ka):
+        if request.forms.get('apikey') == config.APIKEY:
+            return func(*a, **ka)
+        else:
+            return APIKeyNotValidError()
+    return _
+
+
 def param(require=[], option=[]):
     def wrapper(func):
         @wraps(func)
