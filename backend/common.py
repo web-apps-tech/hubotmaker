@@ -75,3 +75,17 @@ class Hubot(object):
             self.last_response = requests.post(
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
+
+
+def failed(msg='Failed'):
+    return {
+        'status': False,
+        'message': msg
+    }
+
+
+def success(msg='Succeeded'):
+    return {
+        'status': True,
+        'message': msg
+    }
