@@ -83,6 +83,12 @@ class Hubot(object):
             )
 
 
+    def get_env(self):
+        endpoint = '/containers/{0}/json'.format(self.name)
+        res = requests.get(config.DOCKER_BASEURI + endpoint)
+        return {k: v for k, v in [item.split('=') for item in res.json()['Config']['Env']]}
+
+
 def failed(msg='Failed'):
     return {
         'status': False,
