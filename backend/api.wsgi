@@ -9,6 +9,7 @@ import config
 app = application = Bottle()
 get = app.get
 post = app.post
+delete = app.delete
 
 @post('/hubot/run')
 @apikey
@@ -31,3 +32,15 @@ def api_stop_hubot(params):
         return success(h.name)
     else:
         return failed(h.name)
+
+
+@delete('/hubot')
+@apikey
+@param(require=['name'])
+def api_remove_hubot(params):
+    h = Hubot(params['name'])
+    h.remove()
+    if h.last_response.status_code == 204:
+        return success()
+    else:
+        return failed()
