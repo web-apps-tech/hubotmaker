@@ -55,11 +55,11 @@ class Hubot(object):
     def remove(self):
         endpoint = '/containers/{0}'
         self.last_response = requests.delete(
-            config.DOCKER_BASEURI + endpoint.format(self.db) + '?force=True'
+            config.DOCKER_BASEURI + endpoint.format(self.name)
         )
         if self.last_response.status_code == 204:
             self.last_response = requests.delete(
-                config.DOCKER_BASEURI + endpoint.format(self.name) + '?force=True'
+                config.DOCKER_BASEURI + endpoint.format(self.db)
             )
 
     def start(self):
