@@ -173,3 +173,23 @@ def param(require=[], option=[]):
             return func(params=params, *a, **ka)
         return _
     return wrapper
+
+
+def query(require=[], option=[]):
+    def wrapper(func):
+        @wraps(func)
+        def _(*a, **ka):
+            query = {}
+            form_data = request.query
+            for key in require:
+                if key not in form_data:
+                    response.status = 400
+                    return RequireNotSatisfiedError(key)
+                else:
+                    query[key] = form_data[key]
+            for key in option:
+                if key in form_data:
+                    query[key] = form_data[key]
+            return func(query=query, *a, **ka)
+        return _
+    return wrapper
