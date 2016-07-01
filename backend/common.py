@@ -148,7 +148,7 @@ def RequireNotSatisfiedError(key):
 def apikey(func):
     @wraps(func)
     def _(*a, **ka):
-        if request.forms.get('apikey') == config.APIKEY:
+        if request.params.get('apikey') == config.APIKEY:
             return func(*a, **ka)
         else:
             return APIKeyNotValidError()
