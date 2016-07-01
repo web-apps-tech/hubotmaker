@@ -31,7 +31,7 @@ def api_start_hubot(params):
     if h.last_response.status_code == 204:
         return success(h.name)
     else:
-        return success(h.name)
+        return failed(h.name)
 
 
 @post('/hubot/stop')
