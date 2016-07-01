@@ -142,7 +142,7 @@ def APIKeyNotValidError():
 
 
 def RequireNotSatisfiedError(key):
-    return failed(key)
+    return failed('Requirements not satisfied', key=key)
 
 
 def apikey(func):
