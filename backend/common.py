@@ -121,18 +121,20 @@ class Hubot(object):
         return _env2dict(res.json()['Config']['Env'])
 
 
-def failed(msg='Failed'):
-    return {
-        'status': False,
-        'message': msg
-    }
+def failed(msg='Failed', **ka):
+    return dict(
+        status=False,
+        message=msg,
+        **ka
+    )
 
 
-def success(msg='Succeeded'):
-    return {
-        'status': True,
-        'message': msg
-    }
+def success(msg='Succeeded', **ka):
+    return dict(
+        status=True,
+        message=msg,
+        **ka
+    )
 
 
 def APIKeyNotValidError():
