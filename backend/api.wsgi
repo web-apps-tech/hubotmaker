@@ -47,7 +47,7 @@ def api_remove_hubot(params):
         return failed()
 
 
-@get('/hubot/<name>')
+@get('/hubot/<name>/env')
 def api_get_hubot_env(name):
     h = Hubot(name)
     return success(h.get_env())
