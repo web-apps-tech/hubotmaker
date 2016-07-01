@@ -31,10 +31,10 @@ class Hubot(object):
         name = str(uuid4())
         db = str(uuid4())
         redis_payload = {
-            'Image': 'redis'
+            'Image': config.DOCKER_REDIS_IMAGE
         }
         hubot_payload = {
-            'Image': 'hubot',
+            'Image': config.DOCKER_HUBOT_IMAGE,
             'Env': [
                 'HUBOT_SLACK_TOKEN={0}'.format(slack_token)
             ],
