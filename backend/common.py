@@ -19,6 +19,12 @@ class Hubot(object):
         )
         self.db = res.json()['HostConfig']['Links'][0].split('/')[1].split(':')[0]
 
+    def _env2dict(env):
+        return {k: v for k, v in [item.split('=') for item in env]}
+
+    def _dict2env(dic):
+        return [k + '=' + str(v) for k, v in dic.iteritems()]
+
     @classmethod
     def create(cls, slack_token):
         endpoint = '/containers/create'
@@ -86,7 +92,7 @@ class Hubot(object):
         endpoint = '/containers/{0}/json'.format(self.name)
         if slack_token is None:
             res = request.get(config.DOCKER_BASEURI + endpoint)
-            new_env = {k: v for k, v in [item.split('=') for item in res.json()['Config']['Env']]}
+            new_env = _env2dict(res.json()['Config']['Env'])
             new_env.update(env)
         endpoint = '/containers/{0}'.format(self.name)
         requests.delete(
@@ -96,7 +102,7 @@ class Hubot(object):
         self.name = str(uuid4())
         hubot_payload = {
             'Image': 'hubot',
-            'Env': [k + '=' + str(v) for k, v in new_env.iteritems()],
+            'Env': _dict2env(new_env.iteritems()),
             'HostConfig': {
                 'Links': [self.db + ":db"]
             }
@@ -112,7 +118,7 @@ class Hubot(object):
     def get_env(self):
         endpoint = '/containers/{0}/json'.format(self.name)
         res = requests.get(config.DOCKER_BASEURI + endpoint)
-        return {k: v for k, v in [item.split('=') for item in res.json()['Config']['Env']]}
+        return _env2dict(res.json()['Config']['Env'])
 
 
 def failed(msg='Failed'):
