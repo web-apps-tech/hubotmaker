@@ -17,9 +17,9 @@ delete = app.delete
 def api_run_hubot(params):
     h = Hubot.create(params['slack_token'])
     if h.last_response.status_code == 204:
-        return success(h.name)
+        return success(name=h.name)
     else:
-        return failed(h.name)
+        return failed(name=h.name)
 
 
 @post('/hubot/start')
@@ -29,9 +29,9 @@ def api_start_hubot(params):
     h = Hubot(params['name'])
     h.start()
     if h.last_response.status_code == 204:
-        return success(h.name)
+        return success(name=h.name)
     else:
-        return failed(h.name)
+        return failed(name=h.name)
 
 
 @post('/hubot/stop')
@@ -41,9 +41,9 @@ def api_stop_hubot(params):
     h = Hubot(params['name'])
     h.stop()
     if h.last_response.status_code == 204:
-        return success(h.name)
+        return success(name=h.name)
     else:
-        return failed(h.name)
+        return failed(name=h.name)
 
 
 @delete('/hubot')
