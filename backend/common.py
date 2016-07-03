@@ -44,20 +44,21 @@ class Hubot(object):
                 'Links': [db + ":db"]
             }
         }
-        requests.post(
+        lres = requests.post(
             config.DOCKER_BASEURI + endpoint + '?name={}'.format(db),
             headers={
                 'Content-type': 'application/json'
             },
             data=json.dumps(redis_payload)
         )
-        lres = requests.post(
-            config.DOCKER_BASEURI + endpoint + '?name={}'.format(name),
-            headers={
-                'Content-type': 'application/json'
-            },
-            data=json.dumps(hubot_payload)
-        )
+        if lres.status_code == 201:
+            lres = requests.post(
+                config.DOCKER_BASEURI + endpoint + '?name={}'.format(name),
+                headers={
+                    'Content-type': 'application/json'
+                },
+                data=json.dumps(hubot_payload)
+            )
         return cls(name, lres)
 
     def remove(self):
