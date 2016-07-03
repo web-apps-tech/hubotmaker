@@ -11,13 +11,15 @@ import config
 
 
 class Hubot(object):
-    def __init__(self, name):
+    def __init__(self, name, res=None):
         endpoint = '/containers/{0}/json'
         self.name = name
         res = requests.get(
             config.DOCKER_BASEURI + endpoint.format(self.name)
         )
         self.db = res.json()['HostConfig']['Links'][0].split('/')[1].split(':')[0]
+        if res is not None:
+            self.last_response = res
 
     def _env2dict(env):
         return {k: v for k, v in [item.split('=') for item in env]}
@@ -49,14 +51,14 @@ class Hubot(object):
             },
             data=json.dumps(redis_payload)
         )
-        requests.post(
+        lres = requests.post(
             config.DOCKER_BASEURI + endpoint + '?name={}'.format(name),
             headers={
                 'Content-type': 'application/json'
             },
             data=json.dumps(hubot_payload)
         )
-        return cls(name)
+        return cls(name, lres)
 
     def remove(self):
         endpoint = '/containers/{0}'
