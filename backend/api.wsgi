@@ -16,7 +16,7 @@ delete = app.delete
 @param(require=['slack_token'])
 def api_run_hubot(params):
     h = Hubot.create(params['slack_token'])
-    if h.last_response.status_code == 204:
+    if h.last_response.status_code == 201:
         return success(name=h.name)
     else:
         return failed(name=h.name)
