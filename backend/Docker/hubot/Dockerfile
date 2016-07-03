@@ -6,5 +6,9 @@ RUN apk --no-cache add nodejs &&\
     adduser -h bot -D bot
 USER bot
 WORKDIR /bot
-RUN yes | yo hubot --owner="user" --description="No Description" --name="Hubot" --adapter=slack
+RUN yes | yo hubot --owner="user" --description="No Description" --name="Hubot" --adapter=slack &&\
+    sed -i -e '/"hubot-heroku-keepalive",/d' external-scripts.json &&\
+    sed -i -e '/"hubot-google-images",/d' external-scripts.json &&\
+    sed -i -e '/"hubot-google-translate",/d' external-scripts.json
+
 CMD ["/bot/bin/hubot", "--adapter", "slack"]
