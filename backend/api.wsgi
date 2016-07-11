@@ -67,11 +67,11 @@ def api_update_hubot(params):
     h = Hubot(params['name'])
     h.stop()
     h.update()
-    h.start()
-    if h.last_response.status_code == 204:
-        return success(h.name)
-    else:
-        return failed()
+    if h.last_response.status_code in [200, 201]:
+        h.start()
+        if h.last_response.status_code == 204:
+            return success(h.name)
+    return failed()
 
 
 @get('/hubot/<name>/env')
