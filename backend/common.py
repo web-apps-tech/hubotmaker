@@ -160,12 +160,6 @@ class Hubot(object):
         res = requests.get(config.DOCKER_BASEURI + endpoint)
         return self._env2dict(res.json()['Config']['Env'])
 
-    @_is_enable
-    def get_links(self):
-        endpoint = '/containers/{0}/json'.format(self.name)
-        res = requests.get(config.DOCKER_BASEURI + endpoint)
-        return res.json()['HostConfig']['Links']
-
 
 def failed(msg='Failed', **ka):
     return json.dumps(dict(

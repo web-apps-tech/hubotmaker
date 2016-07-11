@@ -97,7 +97,7 @@ def api_get_hubot_env(name):
 def api_get_hubot_links(name):
     h = Hubot(name)
     if h.enable:
-        return success(h.get_links())
+        return success(h.db)
     return failed(error='No Such Container: {}'.format(name))
 
 if __name__ == '__main__':
