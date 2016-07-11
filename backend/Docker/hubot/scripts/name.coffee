@@ -13,6 +13,6 @@
 # Author
 #   nasa9084
 
-module.export = (robot) ->
+module.exports = (robot) ->
     robot.respond /tell your name/, (msg) ->
         msg.send process.env.HUBOT_CONTAINER_NAME
