@@ -94,7 +94,7 @@ class Hubot(object):
     def update(self, env={}, slack_token=None):
         endpoint = '/containers/{0}/json'.format(self.name)
         res = request.get(config.DOCKER_BASEURI + endpoint)
-        new_env = _env2dict(res.json()['Config']['Env'])
+        new_env = self._env2dict(res.json()['Config']['Env'])
         new_env.update(env)
         if slack_token is not None:
             new_env['HUBOT_SLACK_TOKEN'] = slack_token
@@ -106,7 +106,7 @@ class Hubot(object):
         self.name = str(uuid4())
         hubot_payload = {
             'Image': 'hubot',
-            'Env': _dict2env(new_env),
+            'Env': self._dict2env(new_env),
             'HostConfig': {
                 'Links': [self.db + ":db"]
             }
@@ -122,7 +122,7 @@ class Hubot(object):
     def get_env(self):
         endpoint = '/containers/{0}/json'.format(self.name)
         res = requests.get(config.DOCKER_BASEURI + endpoint)
-        return _env2dict(res.json()['Config']['Env'])
+        return self._env2dict(res.json()['Config']['Env'])
 
 
 def failed(msg='Failed', **ka):
