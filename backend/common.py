@@ -98,9 +98,7 @@ class Hubot(object):
             )
 
     def update(self, env={}, slack_token=None):
-        endpoint = '/containers/{0}/json'.format(self.name)
-        res = requests.get(config.DOCKER_BASEURI + endpoint)
-        new_env = self._env2dict(res.json()['Config']['Env'])
+        new_env = self.get_env()
         new_env.update(env)
         if slack_token is not None:
             new_env['HUBOT_SLACK_TOKEN'] = slack_token
