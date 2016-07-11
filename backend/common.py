@@ -21,10 +21,10 @@ class Hubot(object):
         if res is not None:
             self.last_response = res
 
-    def _env2dict(env):
+    def _env2dict(self, env):
         return {k: v for k, v in [item.split('=') for item in env]}
 
-    def _dict2env(dic):
+    def _dict2env(self, dic):
         return [k + '=' + str(v) for k, v in dic.iteritems()]
 
     @classmethod
