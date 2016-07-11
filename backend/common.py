@@ -118,7 +118,7 @@ class Hubot(object):
             }
         }
         self.last_response = requests.post(
-            config.DOCKER_BASEURI + endpoint,
+            config.DOCKER_BASEURI + endpoint + '?name={}'.format(self.name),
             headers={
                 'Content-type': 'application/json'
             },
