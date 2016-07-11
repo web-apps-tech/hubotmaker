@@ -10,8 +10,6 @@ from uuid import uuid4
 
 import config
 
-PY_VER = platform.python_version_tuple()
-
 
 class Hubot(object):
     def __init__(self, name, res=None):
@@ -28,6 +26,7 @@ class Hubot(object):
         return {k: v for k, v in [item.split('=') for item in env]}
 
     def _dict2env(self, dic):
+        PY_VER = platform.python_version_tuple()
         if PY_VER[0] == 2:
             return [k + '=' + str(v) for k, v in dic.iteritems()]
         elif PY_VER[0] == 3:
