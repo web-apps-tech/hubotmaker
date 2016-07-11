@@ -48,6 +48,18 @@ def api_stop_hubot(params):
         return failed(error=h.last_response.text)
 
 
+@post('/hubot/restart')
+@apikey
+@param(require=['name'])
+def api_restart_hubot(params):
+    h = Hubot(params['name'])
+    h.restart()
+    if h.last_response.status_code == 204:
+        return success(name=h.name)
+    else:
+        return failed(error=h.last_response.text)
+
+
 @delete('/hubot')
 @apikey
 @param(require=['name'])

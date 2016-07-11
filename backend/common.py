@@ -115,6 +115,17 @@ class Hubot(object):
             )
 
     @_is_enable
+    def restart(self):
+        endpoint = '/containers/{0}/restart'
+        self.last_response = requests.post(
+            config.DOCKER_BASEURI + endpoint.format(self.db)
+        )
+        if self.last_response.status_code == 204:
+            self.last_response = requests.post(
+                config.DOCKER_BASEURI + endpoint.format(self.name)
+            )
+
+    @_is_enable
     def update(self, env={}, slack_token=None):
         new_env = self.get_env()
         new_env.update(env)
