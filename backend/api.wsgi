@@ -78,3 +78,6 @@ def api_update_hubot(params):
 def api_get_hubot_env(name):
     h = Hubot(name)
     return success(h.get_env())
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=8080, debug=True)
