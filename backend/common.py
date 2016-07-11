@@ -42,7 +42,7 @@ class Hubot(object):
         @wraps(func)
         def _(self, *a, **ka):
             if self.enable:
-                return func(*a, **ka)
+                return func(self, *a, **ka)
             else:
                 return False
         return _
