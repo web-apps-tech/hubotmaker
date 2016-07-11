@@ -18,9 +18,13 @@ class Hubot(object):
         res = requests.get(
             config.DOCKER_BASEURI + endpoint.format(self.name)
         )
-        self.db = res.json()['HostConfig']['Links'][0].split('/')[1].split(':')[0]
         if res is not None:
             self.last_response = res
+        if res.status_code == 200:
+            self.db = res.json()['HostConfig']['Links'][0].split('/')[1].split(':')[0]
+            self.enable = True
+        else:
+            self.enable = False
 
     def _env2dict(self, env):
         return {k: v for k, v in [item.split('=') for item in env]}
@@ -33,6 +37,15 @@ class Hubot(object):
             return [k + '=' + str(v) for k, v in dic.items()]
         else:
             raise Exception('PY_VER IS UNKNOWN: {}'.format(PY_VER[0]))
+
+    def _is_enable(self, func):
+        @wraps(func)
+        def _(*a, **ka):
+            if self.enable:
+                return func(*a, **ka)
+            else:
+                return False
+        return _
 
     @classmethod
     def create(cls, slack_token):
@@ -68,6 +81,7 @@ class Hubot(object):
             )
         return cls(name, lres)
 
+    @_is_enable
     def remove(self):
         endpoint = '/containers/{0}'
         self.last_response = requests.delete(
@@ -78,6 +92,7 @@ class Hubot(object):
                 config.DOCKER_BASEURI + endpoint.format(self.db)
             )
 
+    @_is_enable
     def start(self):
         endpoint = '/containers/{0}/start'
         self.last_response = requests.post(
@@ -88,6 +103,7 @@ class Hubot(object):
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
 
+    @_is_enable
     def stop(self):
         endpoint = '/containers/{0}/stop'
         self.last_response = requests.post(
@@ -98,6 +114,7 @@ class Hubot(object):
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
 
+    @_is_enable
     def update(self, env={}, slack_token=None):
         new_env = self.get_env()
         new_env.update(env)
@@ -124,6 +141,7 @@ class Hubot(object):
             data=json.dumps(hubot_payload)
         )
 
+    @_is_enable
     def get_env(self):
         endpoint = '/containers/{0}/json'.format(self.name)
         res = requests.get(config.DOCKER_BASEURI + endpoint)
