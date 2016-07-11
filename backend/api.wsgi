@@ -79,7 +79,7 @@ def api_get_hubot_env(name):
     h = Hubot(name)
     if h.enable:
         return success(h.get_env())
-    return failed()
+    return failed(error='No Such Container: {}'.format(name))
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
