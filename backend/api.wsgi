@@ -59,6 +59,20 @@ def api_remove_hubot(params):
         return failed()
 
 
+@put('/hubot')
+@apikey
+@param(require=['name'])
+def api_update_hubot(params):
+    h = Hubot(params['name'])
+    h.stop()
+    h.update()
+    h.start()
+    if h.last_response.status_code == 204:
+        return success(h.name)
+    else:
+        return failed()
+
+
 @get('/hubot/<name>/env')
 def api_get_hubot_env(name):
     h = Hubot(name)
