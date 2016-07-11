@@ -93,8 +93,8 @@ def api_get_hubot_env(name):
     return failed(error='No Such Container: {}'.format(name))
 
 
-@get('/hubot/<name>/links')
-def api_get_hubot_links(name):
+@get('/hubot/<name>/db')
+def api_get_hubot_db(name):
     h = Hubot(name)
     if h.enable:
         return success(h.db)
