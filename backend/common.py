@@ -122,7 +122,7 @@ class Hubot(object):
             headers={
                 'Content-type': 'application/json'
             },
-            data=hubot_payload
+            data=json.dumps(hubot_payload)
         )
 
     def get_env(self):
