@@ -11,6 +11,7 @@ RUN yes | yo hubot --owner="user" --description="No Description" --name="Hubot" 
     sed -i -e '/"hubot-google-images",/d' external-scripts.json &&\
     sed -i -e '/"hubot-google-translate",/d' external-scripts.json &&\
     rm hubot-scripts.json
+ADD scripts/name.coffee scripts/
 ADD hubot-scripts.json hubot-scripts.json
 ADD scripts_for_hubot/scripts/*.coffee scripts/
 
