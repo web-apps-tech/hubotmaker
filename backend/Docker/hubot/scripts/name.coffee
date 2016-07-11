@@ -15,4 +15,8 @@
 
 module.exports = (robot) ->
     robot.respond /tell your name/, (msg) ->
-        msg.send process.env.HUBOT_CONTAINER_NAME
+        env = process.env.HUBOT_CONTAINER_NAME.split(':')
+        hubotContainer = env[0]
+        redisContainer = env[1]
+        msg.send """My name is #{hubotContainer}.
+        My brain name is #{redisContainer}."""
