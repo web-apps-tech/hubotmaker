@@ -32,6 +32,8 @@ class Hubot(object):
             return [k + '=' + str(v) for k, v in dic.iteritems()]
         elif PY_VER[0] == 3:
             return [k + '=' + str(v) for k, v in dic.items()]
+        else:
+            raise Exception('PY_VER IS UNKNOWN')
 
     @classmethod
     def create(cls, slack_token):
