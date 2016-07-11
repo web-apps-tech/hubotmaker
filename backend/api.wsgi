@@ -9,6 +9,7 @@ import config
 app = application = Bottle()
 get = app.get
 post = app.post
+put = app.put
 delete = app.delete
 
 
