@@ -77,7 +77,9 @@ def api_update_hubot(params):
 @get('/hubot/<name>/env')
 def api_get_hubot_env(name):
     h = Hubot(name)
-    return success(h.get_env())
+    if h.enable:
+        return success(h.get_env())
+    return failed()
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
