@@ -111,7 +111,7 @@ class Hubot(object):
                 'Links': [self.db + ":db"]
             }
         }
-        self.last_response = requrests.post(
+        self.last_response = requests.post(
             config.DOCKER_BASEURI + endpoint,
             headers={
                 'Content-type': 'application/json'
