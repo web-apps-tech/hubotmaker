@@ -100,7 +100,7 @@ class Hubot(object):
             new_env['HUBOT_SLACK_TOKEN'] = slack_token
         endpoint = '/containers/{0}'.format(self.name)
         requests.delete(
-            config.DOCKER_BASEURI + endpoint + '?force=True'
+            config.DOCKER_BASEURI + endpoint
         )
         endpoint = '/containers/create'
         self.name = str(uuid4())
