@@ -27,9 +27,9 @@ class Hubot(object):
 
     def _dict2env(self, dic):
         PY_VER = platform.python_version_tuple()
-        if PY_VER[0] == 2:
+        if PY_VER[0] == '2':
             return [k + '=' + str(v) for k, v in dic.iteritems()]
-        elif PY_VER[0] == 3:
+        elif PY_VER[0] == '3':
             return [k + '=' + str(v) for k, v in dic.items()]
         else:
             raise Exception('PY_VER IS UNKNOWN: {}'.format(PY_VER[0]))
