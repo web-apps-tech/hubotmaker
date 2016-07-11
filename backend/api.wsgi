@@ -21,7 +21,7 @@ def api_create_hubot(params):
     if h.last_response.status_code in [200, 201]:
         return success(name=h.name)
     else:
-        return failed(name=h.name)
+        return failed(error=h.last_response.text)
 
 
 @post('/hubot/start')
@@ -33,7 +33,7 @@ def api_start_hubot(params):
     if h.last_response.status_code == 204:
         return success(name=h.name)
     else:
-        return failed(name=h.name)
+        return failed(error=h.last_response.text)
 
 
 @post('/hubot/stop')
@@ -45,7 +45,7 @@ def api_stop_hubot(params):
     if h.last_response.status_code == 204:
         return success(name=h.name)
     else:
-        return failed(name=h.name)
+        return failed(error=h.last_response.text)
 
 
 @delete('/hubot')
@@ -57,7 +57,7 @@ def api_remove_hubot(params):
     if h.last_response.status_code == 204:
         return success()
     else:
-        return failed()
+        return failed(error=h.last_response.text)
 
 
 @put('/hubot')
