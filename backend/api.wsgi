@@ -11,6 +11,7 @@ get = app.get
 post = app.post
 delete = app.delete
 
+
 @post('/hubot')
 @apikey
 @param(require=['slack_token'])
