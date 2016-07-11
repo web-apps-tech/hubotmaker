@@ -131,19 +131,19 @@ class Hubot(object):
 
 
 def failed(msg='Failed', **ka):
-    return dict(
+    return json.dumps(dict(
         status=False,
         message=msg,
         **ka
-    )
+    )) + '\n'
 
 
 def success(msg='Succeeded', **ka):
-    return dict(
+    return json.dumps(dict(
         status=True,
         message=msg,
         **ka
-    )
+    )) + '\n'
 
 
 def APIKeyNotValidError():
