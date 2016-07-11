@@ -105,7 +105,7 @@ class Hubot(object):
         self.name = str(uuid4())
         hubot_payload = {
             'Image': 'hubot',
-            'Env': _dict2env(new_env.iteritems()),
+            'Env': _dict2env(new_env),
             'HostConfig': {
                 'Links': [self.db + ":db"]
             }
