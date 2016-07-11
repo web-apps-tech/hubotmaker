@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from bottle import Bottle, request, response
+from bottle import Bottle
 
 from common import Hubot, apikey, param, success, failed
-import config
 
 app = application = Bottle()
 get = app.get
