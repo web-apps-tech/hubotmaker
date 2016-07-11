@@ -38,7 +38,7 @@ class Hubot(object):
         else:
             raise Exception('PY_VER IS UNKNOWN: {}'.format(PY_VER[0]))
 
-    def _is_enable(self, func):
+    def _is_enable(func):
         @wraps(func)
         def _(*a, **ka):
             if self.enable:
