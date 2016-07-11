@@ -58,7 +58,8 @@ class Hubot(object):
         hubot_payload = {
             'Image': config.DOCKER_HUBOT_IMAGE,
             'Env': [
-                'HUBOT_SLACK_TOKEN={0}'.format(slack_token)
+                'HUBOT_SLACK_TOKEN={0}'.format(slack_token),
+                'HUBOT_CONTAINER_NAME={0}'.format(name + ':' + db)
             ],
             'HostConfig': {
                 'Links': [db + ":db"]
@@ -137,6 +138,7 @@ class Hubot(object):
         )
         endpoint = '/containers/create'
         self.name = str(uuid4())
+        new_env['HUBOT_CONTAINER_NAME'] = self.name + ':' + self.db
         hubot_payload = {
             'Image': 'hubot',
             'Env': self._dict2env(new_env),
