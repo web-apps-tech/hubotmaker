@@ -220,7 +220,7 @@ def apikey(func):
     def _(*a, **ka):
         redis = Redis(**config.REDIS_INFO)
         apikey = request.params.get('apikey')
-        user = redis.hget('apikeys', apikey)
+        user = redis.hget('apikeys', apikey).decode()
         if apikey is None or user is None:
             return APIKeyNotValidError()
         return func(user=user, *a, **ka)
@@ -272,7 +272,14 @@ def reverse_dict(dic):
     if PY_VER == '2':
         return {v: k for k, v in dic.iteritems()}
     elif PY_VER == '3':
-        return {v: k for k, v in dic.items()}
+        return {v.decode(): k.decode() for k, v in dic.items()}
+
+
+def decode_bytesdict(dic):
+    PY_VER = platform.python_version_tuple()
+    if PY_VER == '3':
+        return {k.decode(): v.decode() for k, v in dic.items()}
+    return dic
 
 
 def root(func):
