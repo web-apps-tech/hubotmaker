@@ -173,7 +173,7 @@ class User(object):
         redis = Redis(**config.REDIS_INFO)
         apikey = 'hbt-' + str(uuid4())
         res = redis.hsetnx('users', name, [])
-        if res == 0:
+        if res:
             redis.hset('apikeys', apikey, name)
             return User(name)
         else:
