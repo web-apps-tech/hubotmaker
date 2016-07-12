@@ -73,11 +73,13 @@ def api_remove_hubot(params, user):
 
 @put('/hubot')
 @apikey
-@param(require=['name'])
+@param(require=['name'], option=['slack_token'])
 def api_update_hubot(params, user):
     h = Hubot(params['name'])
     h.stop()
-    h.update()
+    h.update(
+        slack_token=params['slack_token']
+    )
     if h.last_response.status_code in [200, 201]:
         h.start()
         if h.last_response.status_code == 204:
