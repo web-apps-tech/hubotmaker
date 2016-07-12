@@ -90,13 +90,12 @@ def api_remove_hubot(params, user):
 @apikey
 @param(require=['name'], option=['slack_token'])
 def api_update_hubot(params, user):
+    options = {k: v for k, v in option.items() if k != 'name'}
     u = User(user)
     h = Hubot(params['name'])
     h.stop()
     u.delete_hubot(h.name)
-    h.update(
-        slack_token=params['slack_token']
-    )
+    h.update(**options)
     if h.last_response.status_code in [200, 201]:
         u.add_hubot(h.name)
         h.start()
