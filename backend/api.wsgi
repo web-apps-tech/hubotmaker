@@ -50,8 +50,8 @@ def api_stop_hubot(params, user):
 @post('/hubot/restart')
 @apikey
 @param(require=['name'])
-def api_restart_hubot(params):
-    h = Hubot(params['name'], user)
+def api_restart_hubot(params, user):
+    h = Hubot(params['name'])
     h.restart()
     if h.last_response.status_code == 204:
         return success(name=h.name)
