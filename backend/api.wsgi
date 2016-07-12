@@ -3,7 +3,7 @@
 
 from bottle import Bottle
 
-from common import Hubot, apikey, param, success, failed, root
+from common import Hubot, User, apikey, param, success, failed, root
 
 app = application = Bottle()
 get = app.get
