@@ -90,6 +90,7 @@ def api_remove_hubot(params, user):
 @apikey
 @param(require=['name'], option=['slack_token'])
 def api_update_hubot(params, user):
+    u = User(user)
     h = Hubot(params['name'])
     h.stop()
     u.delete_hubot(h.name)
