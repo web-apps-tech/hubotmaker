@@ -236,3 +236,15 @@ def query(require=[], option=[]):
             return func(query=query, *a, **ka)
         return _
     return wrapper
+
+
+def root(func):
+    @wraps(func)
+    def _(*a, **ka):
+        redis = Redis(**config.REDIS_INFO)
+        apikey = request.params.get('apikey')
+        user = redis.hget('apikeys', apikey)
+        if apikey is None or user is None and user == 'root':
+            return APIKeyNotValidError()
+        return func(user=user, *a, **ka)
+    return _
