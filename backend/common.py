@@ -269,15 +269,15 @@ def query(require=[], option=[]):
 
 def reverse_dict(dic):
     PY_VER = platform.python_version_tuple()
-    if PY_VER == '2':
+    if PY_VER[0] == '2':
         return {v: k for k, v in dic.iteritems()}
-    elif PY_VER == '3':
+    elif PY_VER[0] == '3':
         return {v.decode(): k.decode() for k, v in dic.items()}
 
 
 def decode_bytesdict(dic):
     PY_VER = platform.python_version_tuple()
-    if PY_VER == '3':
+    if PY_VER[0] == '3':
         return {k.decode(): v.decode() for k, v in dic.items()}
     return dic
 
