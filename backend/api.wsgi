@@ -23,6 +23,13 @@ def api_create_user(params):
         return failed()
 
 
+@get('/user/hubot/list')
+@apikey
+def api_get_hubot_list(user):
+    u = User(user)
+    return success(u.hubots)
+
+
 @post('/hubot')
 @apikey
 @param(require=['slack_token'])
