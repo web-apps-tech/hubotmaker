@@ -27,8 +27,10 @@ def api_create_user(params):
 @apikey
 @param(require=['slack_token'])
 def api_create_hubot(params, user):
+    u = User(user)
     h = Hubot.create(params['slack_token'])
     if h.last_response.status_code in [200, 201]:
+        u.add_hubot(h.name)
         return success(name=h.name)
     else:
         return failed(error=h.last_response.text)
@@ -74,9 +76,11 @@ def api_restart_hubot(params, user):
 @apikey
 @param(require=['name'])
 def api_remove_hubot(params, user):
+    u = User(user)
     h = Hubot(params['name'])
     h.remove()
     if h.last_response.status_code == 204:
+        u.delete_hubot(h.name)
         return success()
     else:
         return failed(error=h.last_response.text)
@@ -88,10 +92,12 @@ def api_remove_hubot(params, user):
 def api_update_hubot(params, user):
     h = Hubot(params['name'])
     h.stop()
+    u.delete_hubot(h.name)
     h.update(
         slack_token=params['slack_token']
     )
     if h.last_response.status_code in [200, 201]:
+        u.add_hubot(h.name)
         h.start()
         if h.last_response.status_code == 204:
             return success(h.name)

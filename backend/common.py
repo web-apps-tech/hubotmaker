@@ -180,6 +180,15 @@ class User(object):
         else:
             return False
 
+    def add_hubot(self, hubot_name):
+        self.hubots.append(hubot_name)
+        redis = Redis(**config.REDIS_INFO)
+        redis.hset('users', self.name, self.hubots)
+
+    def delete_hubot(self, hubot_name):
+        self.hubots.remove(hubot_name)
+        redis = Redis(**config.REDIS_INFO)
+        redis.hset('users', self.name, self.hubots)
 
 
 def failed(msg='Failed', **ka):
