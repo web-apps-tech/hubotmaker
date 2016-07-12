@@ -13,7 +13,7 @@ delete = app.delete
 
 
 @post('/user')
-@root()
+@root
 @param(require=['username'])
 def api_create_user(params):
     u = User.create(params['username'])
