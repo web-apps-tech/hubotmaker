@@ -3,13 +3,23 @@
 
 from bottle import Bottle
 
-from common import Hubot, apikey, param, success, failed
+from common import Hubot, apikey, param, success, failed, root
 
 app = application = Bottle()
 get = app.get
 post = app.post
 put = app.put
 delete = app.delete
+
+
+@post('/user')
+@root(require=['username'])
+def api_create_user(params):
+    u = User.create(params['username'])
+    if u:
+        return success(apikey=u.apikey)
+    else:
+        return failed()
 
 
 @post('/hubot')

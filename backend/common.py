@@ -162,6 +162,25 @@ class Hubot(object):
         return self._env2dict(res.json()['Config']['Env'])
 
 
+class User(object):
+    def __init__(self, name):
+        self.name = name
+        redis = Redis(**config.REDIS_INFO)
+        self.apikey = reverse_dict(redis.hgetall('apikeys'))[name]
+
+    @classmethod
+    def create(cls, name):
+        redis = Redis(**config.REDIS_INFO)
+        apikey = 'hbt-' + str(uuid4())
+        res = redis.hsetnx('users', name, [])
+        if res == 0:
+            redis.hset('apikeys', apikey, name)
+            return User(name)
+        else:
+            return False
+
+
+
 def failed(msg='Failed', **ka):
     return json.dumps(dict(
         status=False,
@@ -236,6 +255,14 @@ def query(require=[], option=[]):
             return func(query=query, *a, **ka)
         return _
     return wrapper
+
+
+def reverse_dict(dic):
+    PY_VER = platform.python_version_tuple()
+    if PY_VER == '2':
+        return {v: k for k, v in dic.iteritems()}
+    elif PY_VER == '3':
+        return {v: k for k, v in dic.items()}
 
 
 def root(func):
