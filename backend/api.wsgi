@@ -15,7 +15,7 @@ delete = app.delete
 @post('/hubot')
 @apikey
 @param(require=['slack_token'])
-def api_create_hubot(params):
+def api_create_hubot(params, user):
     h = Hubot.create(params['slack_token'])
     if h.last_response.status_code in [200, 201]:
         return success(name=h.name)
@@ -26,7 +26,7 @@ def api_create_hubot(params):
 @post('/hubot/start')
 @apikey
 @param(require=['name'])
-def api_start_hubot(params):
+def api_start_hubot(params, user):
     h = Hubot(params['name'])
     h.start()
     if h.last_response.status_code == 204:
@@ -38,7 +38,7 @@ def api_start_hubot(params):
 @post('/hubot/stop')
 @apikey
 @param(require=['name'])
-def api_stop_hubot(params):
+def api_stop_hubot(params, user):
     h = Hubot(params['name'])
     h.stop()
     if h.last_response.status_code == 204:
@@ -51,7 +51,7 @@ def api_stop_hubot(params):
 @apikey
 @param(require=['name'])
 def api_restart_hubot(params):
-    h = Hubot(params['name'])
+    h = Hubot(params['name'], user)
     h.restart()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -62,7 +62,7 @@ def api_restart_hubot(params):
 @delete('/hubot')
 @apikey
 @param(require=['name'])
-def api_remove_hubot(params):
+def api_remove_hubot(params, user):
     h = Hubot(params['name'])
     h.remove()
     if h.last_response.status_code == 204:
@@ -74,7 +74,7 @@ def api_remove_hubot(params):
 @put('/hubot')
 @apikey
 @param(require=['name'])
-def api_update_hubot(params):
+def api_update_hubot(params, user):
     h = Hubot(params['name'])
     h.stop()
     h.update()

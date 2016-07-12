@@ -5,6 +5,7 @@ from bottle import request, response
 from functools import wraps
 import json
 import platform
+from redis import Redis
 import requests
 from uuid import uuid4
 
@@ -188,10 +189,12 @@ def RequireNotSatisfiedError(key):
 def apikey(func):
     @wraps(func)
     def _(*a, **ka):
-        if request.params.get('apikey') == config.APIKEY:
-            return func(*a, **ka)
-        else:
+        redis = Redis(**config.REDIS_INFO)
+        apikey = request.params.get('apikey')
+        user = redis.hget('apikeys', apikey)
+        if apikey is None or user is None:
             return APIKeyNotValidError()
+        return func(user=user, *a, **ka)
     return _
 
 
