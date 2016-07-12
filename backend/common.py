@@ -273,5 +273,5 @@ def root(func):
         user = redis.hget('apikeys', apikey)
         if apikey is None or user is None and user == 'root':
             return APIKeyNotValidError()
-        return func(user=user, *a, **ka)
+        return func(*a, **ka)
     return _
