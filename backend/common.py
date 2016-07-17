@@ -278,7 +278,7 @@ def reverse_dict(dic):
     if PY_VER[0] == '2':
         return {v: k for k, v in dic.iteritems()}
     elif PY_VER[0] == '3':
-        return {v.decode(): k.decode() for k, v in dic.items()}
+        return {v: k for k, v in dic.items()}
 
 
 def decode_bytesdict(dic):
