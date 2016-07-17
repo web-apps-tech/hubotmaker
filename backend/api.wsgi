@@ -12,6 +12,20 @@ put = app.put
 delete = app.delete
 
 
+@post('/admin/hubot/restartall')
+@root
+def api_admin_restart_all():
+    s = Service()
+    for user in s.users:
+        u = User(user)
+        for hubot in u.hubots:
+            h = Hubot(hubot)
+            h.restart()
+            if not h.last_response.status_code == 204:
+                return failed(h.last_response.text)
+    return success()
+
+
 @post('/user')
 @root
 @param(require=['username'])

@@ -191,6 +191,12 @@ class User(object):
         redis.hset('users', self.name, self.hubots)
 
 
+class Service(object):
+    def __init__(self):
+        self.redis = Redis(**config.REDIS_INFO)
+        self.users = self.redis.hkeys('users')
+
+
 def failed(msg='Failed', **ka):
     return json.dumps(dict(
         status=False,
