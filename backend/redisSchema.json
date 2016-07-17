@@ -1,3 +1,6 @@
 apikeys = {
     <APIKEY_HASH>: <USERNAME>
 }
+users = {
+        <USERNAME>: [<HUBOT>, <HUBOT>, ...]
+}
