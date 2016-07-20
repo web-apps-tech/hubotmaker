@@ -174,7 +174,7 @@ class User(object):
     def __init__(self, name):
         self.name = name
         redis = Redis(**config.REDIS_INFO)
-        self.apikey = reverse_dict(redis.hgetall('apikeys'))[name]
+        self.apikey = decode_bytesdict(reverse_dict(redis.hgetall('apikeys')))[name]
         self.hubots = json.loads(redis.hget('users', name).decode().replace("'", '"'))
 
     @classmethod
