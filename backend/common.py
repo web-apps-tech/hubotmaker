@@ -49,10 +49,14 @@ class Hubot(object):
         return _
 
     @classmethod
-    def create(cls, slack_token):
+    def create(cls, slack_token, script_env=None):
         endpoint = '/containers/create'
         name = str(uuid4())
         db = str(uuid4())
+        if isinstance(envs, list):
+            script_env = ["{0}=1".format(e) for e in script_env]
+        else:
+            script_env = []
         redis_payload = {
             'Image': config.DOCKER_REDIS_IMAGE
         }
@@ -61,7 +65,7 @@ class Hubot(object):
             'Env': [
                 'HUBOT_SLACK_TOKEN={0}'.format(slack_token),
                 'HUBOT_CONTAINER_NAME={0}'.format(name + ':' + db)
-            ],
+            ] + script_env,
             'HostConfig': {
                 'Links': [db + ":db"]
             }
@@ -128,7 +132,7 @@ class Hubot(object):
             )
 
     @_is_enable
-    def update(self, env={}, slack_token=None):
+    def update(self, env={}, slack_token=None, script_env=None):
         new_env = self.get_env()
         new_env.update(env)
         if slack_token is not None:
@@ -140,9 +144,13 @@ class Hubot(object):
         endpoint = '/containers/create'
         self.name = str(uuid4())
         new_env['HUBOT_CONTAINER_NAME'] = self.name + ':' + self.db
+        if isinstance(script_env, list):
+            script_env = ["{0}=1".format(e) for e in script_env]
+        else:
+            script_env = []
         hubot_payload = {
             'Image': 'hubot',
-            'Env': self._dict2env(new_env),
+            'Env': self._dict2env(new_env) + script_env,
             'HostConfig': {
                 'Links': [self.db + ":db"]
             }

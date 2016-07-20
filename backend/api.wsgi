@@ -46,10 +46,13 @@ def api_get_hubot_list(user):
 
 @post('/hubot')
 @apikey
-@param(require=['slack_token'])
+@param(require=['slack_token'], option=['script_env'])
 def api_create_hubot(params, user):
     u = User(user)
-    h = Hubot.create(params['slack_token'])
+    h = Hubot.create(
+        slack_token=params['slack_token'],
+        script_env=params.get('script_env')
+    )
     if h.last_response.status_code in [200, 201]:
         u.add_hubot(h.name)
         return success(name=h.name)
@@ -109,7 +112,7 @@ def api_remove_hubot(params, user):
 
 @put('/hubot')
 @apikey
-@param(require=['name'], option=['slack_token'])
+@param(require=['name'], option=['slack_token', 'script_env'])
 def api_update_hubot(params, user):
     options = {k: v for k, v in params.items() if k != 'name'}
     u = User(user)
