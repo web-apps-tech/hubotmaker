@@ -55,6 +55,8 @@ class Hubot(object):
         db = str(uuid4())
         if isinstance(script_env, list):
             script_env = ["{0}=1".format(e) for e in script_env]
+        elif isinstance(script_env, str):
+            script_env = ["{0}=1".format(e) for e in json.loads(script_env)]
         else:
             script_env = []
         redis_payload = {
@@ -146,6 +148,8 @@ class Hubot(object):
         new_env['HUBOT_CONTAINER_NAME'] = self.name + ':' + self.db
         if isinstance(script_env, list):
             script_env = ["{0}=1".format(e) for e in script_env]
+        elif isinstance(script_env, str):
+            script_env = ["{0}=1".format(e) for e in json.loads(script_env)]
         else:
             script_env = []
         hubot_payload = {
