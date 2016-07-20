@@ -53,7 +53,7 @@ class Hubot(object):
         endpoint = '/containers/create'
         name = str(uuid4())
         db = str(uuid4())
-        if isinstance(envs, list):
+        if isinstance(script_env, list):
             script_env = ["{0}=1".format(e) for e in script_env]
         else:
             script_env = []
