@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+
+sed -rie "s/\[(.+)\]/[\1, ]/" hubot-scripts.json
+
+sed -rie "s/\[(.*)\]/[\1${COWSAY:+\"cowsay.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${COIN:+\"coin.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${POMODORO:+\"pomodoro.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${BEERME:+\"beerme.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${BASE64:+\"base64.coffee\", }]/" hubot-scripts.json
+
+sed -rie "s/\[(.*), \]/[\1]/" hubot-scripts.json
+
+
+
+npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+exec node_modules/.bin/hubot --name "test" "$@"
