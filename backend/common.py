@@ -238,10 +238,10 @@ def apikey(func):
     def _(*a, **ka):
         redis = Redis(**config.REDIS_INFO)
         apikey = request.params.get('apikey')
-        user = redis.hget('apikeys', apikey).decode()
+        user = redis.hget('apikeys', apikey)
         if apikey is None or user is None:
             return APIKeyNotValidError()
-        return func(user=user, *a, **ka)
+        return func(user=user.decode(), *a, **ka)
     return _
 
 
