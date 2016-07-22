@@ -28,9 +28,9 @@ def api_admin_restart_all():
 
 @post('/user')
 @root
-@param(require=['username'])
+@param(require=['username', 'password'])
 def api_create_user(params):
-    u = User.create(params['username'])
+    u = User.create(params['username'], params['password'])
     if u:
         return success(apikey=u.apikey)
     else:
