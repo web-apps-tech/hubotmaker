@@ -39,10 +39,10 @@ def api_create_user(params):
 
 @put('/user/activate')
 @root
-@param(require=['username'])
+@param(require=['username', 'password'])
 def api_activate_user(params):
     u = User(params['username'])
-    if u.activate():
+    if u.activate(params['password']):
         return success()
     else:
         return failed()
