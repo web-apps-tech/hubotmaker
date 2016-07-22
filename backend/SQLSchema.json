@@ -15,6 +15,12 @@
                     "not null": true
                 },
                 {
+                    "name": "isadmin",
+                    "type": "bool",
+                    "default": 0,
+                    "not null": true
+                },
+                {
                     "name": "activate",
                     "type": "bool",
                     "default": 0,
