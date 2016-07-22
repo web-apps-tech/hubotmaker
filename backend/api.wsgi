@@ -3,7 +3,7 @@
 
 from bottle import Bottle
 
-from common import Hubot, User, Service, apikey, param, success, failed, root
+from common import Hubot, User, Service, apikey, password, param, success, failed, root
 
 app = application = Bottle()
 get = app.get
@@ -35,6 +35,25 @@ def api_create_user(params):
         return success(apikey=u.apikey)
     else:
         return failed()
+
+
+@put('/user/activate')
+@root
+@param(require=['username'])
+def api_activate_user(params):
+    u = User(params['username'])
+    if u.activate():
+        return success()
+    else:
+        return failed()
+
+
+@post('/user/apikey')
+@password
+def api_generate_apikey(params, user):
+    u = User(user)
+    apikey = u.generate_apikey()
+    return success(apikey=apikey)
 
 
 @get('/user/hubot/list')
