@@ -18,7 +18,7 @@ def api_admin_restart_all():
     s = Service()
     for user in s.users:
         u = User(user)
-        for hubot in u.hubots:
+        for hubot in u.get_hubot_list():
             h = Hubot(hubot)
             h.restart()
             if not h.last_response.status_code == 204:
