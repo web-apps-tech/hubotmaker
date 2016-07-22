@@ -1,0 +1,49 @@
+{
+    "tables": {
+        "users": {
+            "colmuns": {
+                "username": {
+                    "type": "varchar",
+                    "max_length": 64,
+                    "primary key": true
+                },
+                "password": {
+                    "type": "varchar",
+                    "max_length": 128
+                },
+                "activate": {
+                    "type": "bool",
+                    "default": 0
+                }
+            }
+        },
+        "hubots": {
+            "colmuns": {
+                "username": {
+                    "type": "varchar",
+                    "max_length": 64,
+                    "foreign key": {
+                        "table": "users",
+                        "col": "username",
+                        "on delete": "cascade",
+                        "on update": "cascade"
+                    }
+                },
+                "hubotname": {
+                    "type": "varchar",
+                    "max_length": 64
+                }
+            },
+            "primary key": {
+                "columns": [
+                    "username",
+                    "hubotname"
+                ]
+            }
+        }
+    },
+    "options": {
+        "engine": "InnoDB",
+        "charset": "utf8"
+    }
+}
