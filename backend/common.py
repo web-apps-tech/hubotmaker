@@ -255,6 +255,17 @@ class User(object):
 class Service(object):
     def __init__(self):
         self.redis = Redis(**config.REDIS_INFO)
+        self.users = self._get_userlist()
+
+    def _get_userlist(self):
+        query = 'SELECT username FROM users'
+        with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
+            try:
+                cursor.execute(query)
+                rows = cursor.fetchall()
+            except:
+                return None
+        return [row['username'] for row in rows]
 
 
 def failed(msg='Failed', **ka):
