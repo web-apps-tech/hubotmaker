@@ -50,7 +50,7 @@ def api_activate_user(params):
 
 @post('/user/apikey')
 @password
-def api_generate_apikey(params, user):
+def api_generate_apikey(user):
     u = User(user)
     apikey = u.generate_apikey()
     return success(apikey=apikey)

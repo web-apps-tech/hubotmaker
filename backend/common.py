@@ -402,5 +402,5 @@ def root(func):
             row = cursor.fetchone()
             if not row['isadmin']:
                 return NotPermittedError()
-        return func(*a, **ka)
+        return func(user=user, *a, **ka)
     return _
