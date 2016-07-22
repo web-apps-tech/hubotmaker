@@ -3,7 +3,10 @@
 
 from bottle import request, response
 from functools import wraps
+from hashlib import sha512 as enhash
 import json
+import pymysql as DB
+from pymysql.cursors import DictCursor as DC
 import platform
 from redis import Redis
 import requests
@@ -177,36 +180,66 @@ class Hubot(object):
 class User(object):
     def __init__(self, name):
         self.name = name
-        redis = Redis(**config.REDIS_INFO)
-        self.apikey = decode_bytesdict(reverse_dict(redis.hgetall('apikeys')))[name]
-        self.hubots = json.loads(redis.hget('users', name).decode().replace("'", '"'))
 
     @classmethod
-    def create(cls, name):
+    def create(cls, name, password):
+        query = 'INSERT INTO users (username, password) VALUES (%s, %s);'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(query, name, enhash(password))
+            except:
+                return None
+        return cls(name)
+
+    def activate(self, password):
+        query = 'UPDATE users \
+        SET activate=1 \
+        WHERE username=%s AND password=%s;'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(query, self.name, enhash(password))
+            except:
+                return False
+        return True
+
+    def generate_apikey(self):
         redis = Redis(**config.REDIS_INFO)
         apikey = 'hbt-' + str(uuid4())
-        res = redis.hsetnx('users', name, [])
-        if res:
-            redis.hset('apikeys', apikey, name)
-            return User(name)
-        else:
-            return False
+        redis.setex(apikey, self.name, config.APIKEY_TTL * 60 * 60)
+        return apikey
+
+    def get_hubot_list(self):
+        query = 'SELECT hubotname FROM hubots WHERE username=%s;'
+        with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
+            try:
+                cursor.execute(query, self.name)
+                rows = cursor.fetchall()
+            except:
+                return False
+        return [row['hubotname'] for row in rows]
 
     def add_hubot(self, hubot_name):
-        self.hubots.append(hubot_name)
-        redis = Redis(**config.REDIS_INFO)
-        redis.hset('users', self.name, self.hubots)
+        query = 'INSERT INTO hubots VALUES (%s, %s);'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(query, self.name, hubot_name)
+            except:
+                return False
+        return True
 
     def delete_hubot(self, hubot_name):
-        self.hubots.remove(hubot_name)
-        redis = Redis(**config.REDIS_INFO)
-        redis.hset('users', self.name, self.hubots)
+        query = 'DELETE FROM hubots WHERE username=%s AND hubotname=%s;'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(query, self.name, hubot_name)
+            except:
+                return False
+        return True
 
 
 class Service(object):
     def __init__(self):
         self.redis = Redis(**config.REDIS_INFO)
-        self.users = self.redis.hkeys('users')
 
 
 def failed(msg='Failed', **ka):
@@ -229,8 +262,16 @@ def APIKeyNotValidError():
     return failed('API key not valid')
 
 
+def NotPermittedError():
+    return failed('You are not permitted.')
+
+
 def RequireNotSatisfiedError(key):
     return failed('Requirements not satisfied', key=key)
+
+
+def AuthenticationError():
+    return failed('Auth Error')
 
 
 def apikey(func):
@@ -238,10 +279,29 @@ def apikey(func):
     def _(*a, **ka):
         redis = Redis(**config.REDIS_INFO)
         apikey = request.params.get('apikey')
-        user = redis.hget('apikeys', apikey)
+        user = redis.get(apikey)
         if apikey is None or user is None:
             return APIKeyNotValidError()
         return func(user=user.decode(), *a, **ka)
+    return _
+
+
+def password(func):
+    @wraps(func)
+    def _(*a, **ka):
+        user = request.params.get('username')
+        password = request.params.get('password')
+        if user is None or password is None:
+            return AuthenticationError()
+        with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
+            cursor.execute(
+                'SELECT * FROM users WHERE username=%s;',
+                user
+            )
+            row = cursor.fetchone()
+        if row['password'] != enhash(password):
+            return AuthenticationError()
+        return func(user=user, *a, **ka)
     return _
 
 
@@ -305,8 +365,16 @@ def root(func):
     def _(*a, **ka):
         redis = Redis(**config.REDIS_INFO)
         apikey = request.params.get('apikey')
-        user = redis.hget('apikeys', apikey)
-        if apikey is None or user is None and user == 'root':
+        user = redis.get(apikey)
+        if apikey is None or user is None:
             return APIKeyNotValidError()
+        with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
+            cursor.execute(
+                'SELECT isadmin FROM users WHERE username=%s;',
+                user
+            )
+            row = cursor.fetchone()
+            if not row['isadmin']:
+                return NotPermittedError()
         return func(*a, **ka)
     return _

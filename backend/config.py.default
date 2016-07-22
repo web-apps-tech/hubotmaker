@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 APIKEY = "apikey"
+APIKEY_TTL =  24 # hour
 DOCKER_BASEURI = 'http://localhost:2375'
 DOCKER_HUBOT_IMAGE = 'hubot:latest'
 DOCKER_REDIS_IMAGE = 'redis:alpine'
