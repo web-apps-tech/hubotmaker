@@ -9,19 +9,12 @@ import config
 
 
 def main():
-    conf = load_config()
     schema = load_schema()
     with MySQLdb.connect(**conf['MySQL']) as cursor:
         opts = schema.get('options')
         tables = schema['tables']
         queries = [build_query(name, tbl) for name, tbl in tables.items()]
         print(queries)
-
-
-def load_config():
-    with open('config.json', 'r') as f:
-        config = json.load(f)
-    return config
 
 
 def load_schema():
