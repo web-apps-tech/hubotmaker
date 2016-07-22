@@ -186,7 +186,10 @@ class User(object):
         query = 'INSERT INTO users (username, password) VALUES (%s, %s);'
         with DB.connect(**config.MySQL) as cursor:
             try:
-                cursor.execute(query, name, enhash(password.encode()).hexdigest())
+                cursor.execute(
+                    query,
+                    (name, enhash(password.encode()).hexdigest())
+                )
             except:
                 return None
         return cls(name)
@@ -197,7 +200,10 @@ class User(object):
         WHERE username=%s AND password=%s;'
         with DB.connect(**config.MySQL) as cursor:
             try:
-                cursor.execute(query, self.name, enhash(password.encode()).hexdigest())
+                cursor.execute(
+                    query,
+                    (self.name, enhash(password.encode()).hexdigest())
+                )
             except:
                 return False
         return True
@@ -212,7 +218,10 @@ class User(object):
         query = 'SELECT hubotname FROM hubots WHERE username=%s;'
         with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
             try:
-                cursor.execute(query, self.name)
+                cursor.execute(
+                    query,
+                    (self.name,)
+                )
                 rows = cursor.fetchall()
             except:
                 return False
@@ -222,7 +231,10 @@ class User(object):
         query = 'INSERT INTO hubots VALUES (%s, %s);'
         with DB.connect(**config.MySQL) as cursor:
             try:
-                cursor.execute(query, self.name, hubot_name)
+                cursor.execute(
+                    query,
+                    (self.name, hubot_name)
+                )
             except:
                 return False
         return True
@@ -231,7 +243,10 @@ class User(object):
         query = 'DELETE FROM hubots WHERE username=%s AND hubotname=%s;'
         with DB.connect(**config.MySQL) as cursor:
             try:
-                cursor.execute(query, self.name, hubot_name)
+                cursor.execute(
+                    query,
+                    (self.name, hubot_name)
+                )
             except:
                 return False
         return True
