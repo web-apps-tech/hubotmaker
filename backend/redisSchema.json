@@ -1,6 +1,3 @@
 apikeys = {
-    <APIKEY_HASH>: <USERNAME>
-}
-users = {
-        <USERNAME>: [<HUBOT>, <HUBOT>, ...]
+        <APIKEY>: <USERNAME> % SETEX
 }
