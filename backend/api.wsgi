@@ -32,7 +32,7 @@ def api_admin_restart_all():
 def api_create_user(params):
     u = User.create(params['username'], params['password'])
     if u:
-        return success(apikey=u.apikey)
+        return success()
     else:
         return failed()
 
