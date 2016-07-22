@@ -60,7 +60,7 @@ def api_generate_apikey(params, user):
 @apikey
 def api_get_hubot_list(user):
     u = User(user)
-    return success(u.hubots)
+    return success(u.get_hubot_list())
 
 
 @post('/hubot')
