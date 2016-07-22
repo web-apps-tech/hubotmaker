@@ -186,7 +186,7 @@ class User(object):
         query = 'INSERT INTO users (username, password) VALUES (%s, %s);'
         with DB.connect(**config.MySQL) as cursor:
             try:
-                cursor.execute(query, name, enhash(password.encode()))
+                cursor.execute(query, name, enhash(password.encode()).hexdigest())
             except:
                 return None
         return cls(name)
@@ -197,7 +197,7 @@ class User(object):
         WHERE username=%s AND password=%s;'
         with DB.connect(**config.MySQL) as cursor:
             try:
-                cursor.execute(query, self.name, enhash(password.encode()))
+                cursor.execute(query, self.name, enhash(password.encode()).hexdigest())
             except:
                 return False
         return True
