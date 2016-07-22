@@ -9,11 +9,12 @@ import config
 
 def main():
     schema = load_schema()
-    with MySQLdb.connect(**config.MySQL) as cursor:
+    with DB.connect(**config.MySQL) as cursor:
         opts = schema.get('options')
         tables = schema['tables']
         queries = [build_query(name, tbl) for name, tbl in tables.items()]
-        print(queries)
+        for query in queries:
+            cursor.execute(query)
 
 
 def load_schema():
@@ -23,23 +24,22 @@ def load_schema():
 
 
 def build_query(tbl_name, table):
-    return 'CREATE TABLE {tbl_name} ({columns});'.format(
+    return 'CREATE TABLE {tbl_name} ({columns}{foreign_key});'.format(
         tbl_name=tbl_name,
-        columns=', '.join(get_columns(table))
+        columns=', '.join(get_columns(table)),
+        foreign_key=get_foreign_key(table.get('foreign_key'))
     )
 
 
 def get_columns(table):
     cols = []
-    for colname in table:
-        col = table[colname]
+    for col in table['columns']:
         cols.append(
-            '{col_name} {data_type}{default_value}{key_idx}{fkey}'.format(
-                col_name=colname,
+            '{col_name} {data_type}{default_value}{key_idx}'.format(
+                col_name=col['name'],
                 data_type=get_datatype(col),
                 default_value=get_default(col),
                 key_idx=get_key_index(col),
-                fkey=get_foreign_key(colname, col)
             )
         )
     return cols
@@ -104,19 +104,17 @@ def get_key_index(col):
     return key
 
 
-def get_foreign_key(colname, col):
-    if col.get('foreign key'):
-        fk = col['foreign key']
-        return ' FOREIGN KEY ({}) REFERENCES {} [{}]{}{}'.format(
-            colname,
-            fk['table'],
-            fk['col'],
-            ' ON DELETE ' + fk['on delete'] if fk.get('on delete') else ''
-            ' ON UPDATE ' + fk['on update'] if fk.get('on update') else ''
+def get_foreign_key(fk):
+    if fk is not None:
+        return ', FOREIGN KEY ({}) REFERENCES {}({}){}{}'.format(
+            fk['key'],
+            fk['ref_table'],
+            fk['ref_col'],
+            ' ON DELETE ' + fk.get('on delete') if fk.get('on delete') else '',
+            ' ON UPDATE ' + fk.get('on update') if fk.get('on update') else ''
         )
     else:
         return ''
-
 
 if __name__ == '__main__':
     main()

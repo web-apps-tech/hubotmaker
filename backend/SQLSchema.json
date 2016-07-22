@@ -1,44 +1,54 @@
 {
     "tables": {
         "users": {
-            "colmuns": {
-                "username": {
+            "columns": [
+                {
+                    "name": "username",
                     "type": "varchar",
                     "max_length": 64,
                     "primary key": true
                 },
-                "password": {
+                {
+                    "name": "password",
                     "type": "varchar",
-                    "max_length": 128
+                    "max_length": 128,
+                    "not null": true
                 },
-                "activate": {
+                {
+                    "name": "activate",
                     "type": "bool",
-                    "default": 0
+                    "default": 0,
+                    "not null": true
                 }
-            }
+            ]
         },
         "hubots": {
-            "colmuns": {
-                "username": {
+            "columns": [
+                {
+                    "name": "username",
                     "type": "varchar",
                     "max_length": 64,
-                    "foreign key": {
-                        "table": "users",
-                        "col": "username",
-                        "on delete": "cascade",
-                        "on update": "cascade"
-                    }
+                    "not null": true
                 },
-                "hubotname": {
+                {
+                    "name": "hubotname",
                     "type": "varchar",
-                    "max_length": 64
+                    "max_length": 64,
+                    "not null": true
                 }
-            },
+            ],
             "primary key": {
                 "columns": [
                     "username",
                     "hubotname"
                 ]
+            },
+            "foreign key": {
+                "key": "username",
+                "ref_table": "users",
+                "ref_col": "username",
+                "on delete": "cascade",
+                "on update": "cascade"
             }
         }
     },
