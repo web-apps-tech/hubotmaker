@@ -2,15 +2,14 @@
 # -*- coding:utf-8 -*-
 
 import json
-import MySQLdb as DB
-from MySQLdb.cursors import DictCursor as DC
+import pymysql as DB
 
 import config
 
 
 def main():
     schema = load_schema()
-    with MySQLdb.connect(**conf['MySQL']) as cursor:
+    with MySQLdb.connect(**config.MySQL) as cursor:
         opts = schema.get('options')
         tables = schema['tables']
         queries = [build_query(name, tbl) for name, tbl in tables.items()]
