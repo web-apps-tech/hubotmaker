@@ -181,6 +181,7 @@ class Hubot(object):
 class User(object):
     def __init__(self, name):
         self.name = name
+        self.apikey = self._get_apikey()
         self.hubots = self._get_hubot_list()
         self.is_active = self._is_active()
 
@@ -203,6 +204,8 @@ class User(object):
             h.stop()
             h.remove()
             self.delete_hubot(hubot_name)
+        redis = Redis(**config.REDIS_INFO)
+        redis.delete(self.apikey)
         query = 'DELETE FROM users \
         WHERE username=%s;'
         with DB.connect(**config.MySQL) as cursor:
@@ -233,6 +236,7 @@ class User(object):
         redis = Redis(**config.REDIS_INFO)
         apikey = 'hbt-' + str(uuid4())
         redis.setex(apikey, self.name, config.APIKEY_TTL * 60 * 60)
+        self.apikey = apikey
         return apikey
 
     def _is_active(self):
@@ -260,6 +264,14 @@ class User(object):
             except:
                 return False
         return [row['hubotname'] for row in rows]
+
+    def _get_apikey(self):
+        redis = Redis(**config.REDIS_INFO)
+        for apikey in redis.keys('*'):
+            owner = redis.get(key).decode()
+            if self.name == owner:
+                return apikey
+        return None
 
     def add_hubot(self, hubot_name):
         query = 'INSERT INTO hubots VALUES (%s, %s);'
