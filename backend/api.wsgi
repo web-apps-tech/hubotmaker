@@ -70,6 +70,17 @@ def api_get_hubot_list(user):
     return success(u.hubots)
 
 
+@delete('/user')
+@root
+@param(require=['username'])
+def api_delete_user(params, user):
+    u = User(params['username'])
+    if u.remove():
+        return success()
+    else:
+        return failed()
+
+
 @post('/hubot')
 @apikey
 @param(require=['slack_token'], option=['script_env'])

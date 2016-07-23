@@ -196,6 +196,24 @@ class User(object):
                 return None
         return cls(name)
 
+    def remove(self):
+        for hubot_name in self.hubots:
+            h = Hubot(hubot_name)
+            h.stop()
+            h.remove()
+            self.delete_hubot(hubot_name)
+        query = 'DELETE FROM users \
+        WHERE username=%s;'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(
+                    query,
+                    (self.name, )
+                )
+            except:
+                return False
+        return True
+
     def activate(self, password):
         query = 'UPDATE users \
         SET activate=1 \
