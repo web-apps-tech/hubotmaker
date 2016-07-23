@@ -14,14 +14,14 @@ delete = app.delete
 
 @get('/admin/hubot/available_scripts')
 @root
-def api_admin_available_scripts():
+def api_admin_available_scripts(user):
     s = Service()
     return success(s.available_scripts)
 
 
 @post('/admin/hubot/restartall')
 @root
-def api_admin_restart_all():
+def api_admin_restart_all(user):
     s = Service()
     for user in s.users:
         u = User(user)
@@ -36,7 +36,7 @@ def api_admin_restart_all():
 @post('/user')
 @root
 @param(require=['username', 'password'])
-def api_create_user(params):
+def api_create_user(params, user):
     u = User.create(params['username'], params['password'])
     if u:
         return success()
@@ -47,7 +47,7 @@ def api_create_user(params):
 @put('/user/activate')
 @root
 @param(require=['username', 'password'])
-def api_activate_user(params):
+def api_activate_user(params, user):
     u = User(params['username'])
     if u.activate(params['password']):
         return success()
