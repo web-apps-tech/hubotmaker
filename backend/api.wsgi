@@ -25,7 +25,7 @@ def api_admin_restart_all(user):
     s = Service()
     for user in s.users:
         u = User(user)
-        for hubot in u.get_hubot_list():
+        for hubot in u.hubots:
             h = Hubot(hubot)
             h.restart()
             if not h.last_response.status_code == 204:
@@ -67,7 +67,7 @@ def api_generate_apikey(user):
 @apikey
 def api_get_hubot_list(user):
     u = User(user)
-    return success(u.get_hubot_list())
+    return success(u.hubots)
 
 
 @post('/hubot')

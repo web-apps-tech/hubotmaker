@@ -181,6 +181,7 @@ class Hubot(object):
 class User(object):
     def __init__(self, name):
         self.name = name
+        self.hubots = self._get_hubot_list()
 
     @classmethod
     def create(cls, name, password):
@@ -215,7 +216,7 @@ class User(object):
         redis.setex(apikey, self.name, config.APIKEY_TTL * 60 * 60)
         return apikey
 
-    def get_hubot_list(self):
+    def _get_hubot_list(self):
         query = 'SELECT hubotname FROM hubots WHERE username=%s;'
         with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
             try:
@@ -238,6 +239,7 @@ class User(object):
                 )
             except:
                 return False
+        self.hubots.append(hubot_name)
         return True
 
     def delete_hubot(self, hubot_name):
@@ -250,6 +252,7 @@ class User(object):
                 )
             except:
                 return False
+        self.hubots.remove(hubot_name)
         return True
 
 
