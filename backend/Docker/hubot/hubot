@@ -5,11 +5,32 @@ set -e
 
 sed -rie "s/\[(.+)\]/[\1, ]/" hubot-scripts.json
 
-sed -rie "s/\[(.*)\]/[\1${COWSAY:+\"cowsay.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${COIN:+\"coin.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${POMODORO:+\"pomodoro.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${BEERME:+\"beerme.coffee\", }]/" hubot-scripts.json
+# *TEMPLADE*
+# sed -rie "s/\[(.*)\]/[\1${HOGE:+\"hoge.coffee\", }]/" hubot-scripts.json
+
+sed -rie "s/\[(.*)\]/[\1${AMBUSH:+\"ambush.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${AWW:+\"aww.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${BASE58:+\"hoge.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${BASE64:+\"base64.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${BEERME:+\"beerme.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${COIN:+\"coin.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${CMDLINEFU:+\"commandlinefu.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${COWSAY:+\"cowsay.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${CORGIME:+\"corgime.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${DEALWITHIT:+\"dealwithit.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${DICE:+\"dice.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${EMOJI:+\"emoji.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${EMOJIME:+\"emoji-me.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${EVAL:+\"eval.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${FIBONACCI:+\"fibonacci.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${HASHING:+\"hashing.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${HISTORY:+\"history.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${KITTEN:+\"kitten.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${POMODORO:+\"pomodoro.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${TASKS:+\"tasks.coffee\", }]/" hubot-scripts.json
+
+
+sed -rie "s/\[(.*)\]/[\1\"uptime.coffee\", ]/" hubot-scripts.json
 
 sed -rie "s/\[(.*), \]/[\1]/" hubot-scripts.json
 
