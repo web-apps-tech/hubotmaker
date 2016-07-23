@@ -182,6 +182,7 @@ class User(object):
     def __init__(self, name):
         self.name = name
         self.hubots = self._get_hubot_list()
+        self.is_active = self._is_active()
 
     @classmethod
     def create(cls, name, password):
@@ -233,6 +234,19 @@ class User(object):
         apikey = 'hbt-' + str(uuid4())
         redis.setex(apikey, self.name, config.APIKEY_TTL * 60 * 60)
         return apikey
+
+    def _is_active(self):
+        query = 'SELECT activate FROM users WHERE username=%s;'
+        with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
+            try:
+                cursor.execute(
+                    query,
+                    (self.name, )
+                )
+                row = cursor.fetchone()
+            except:
+                return False
+        return bool(row['activate'])
 
     def _get_hubot_list(self):
         query = 'SELECT hubotname FROM hubots WHERE username=%s;'
