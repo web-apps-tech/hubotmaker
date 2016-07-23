@@ -21,7 +21,6 @@ sed -rie "s/\[(.*)\]/[\1${DEALWITHIT:+\"dealwithit.coffee\", }]/" hubot-scripts.
 sed -rie "s/\[(.*)\]/[\1${DICE:+\"dice.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${EMOJI:+\"emoji.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${EMOJIME:+\"emoji-me.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${EVAL:+\"eval.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${FIBONACCI:+\"fibonacci.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${HASHING:+\"hashing.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${HISTORY:+\"history.coffee\", }]/" hubot-scripts.json
