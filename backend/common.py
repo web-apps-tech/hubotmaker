@@ -8,6 +8,7 @@ import json
 import pymysql as DB
 from pymysql.cursors import DictCursor as DC
 import platform
+import re
 from redis import Redis
 import requests
 from uuid import uuid4
@@ -256,6 +257,7 @@ class Service(object):
     def __init__(self):
         self.redis = Redis(**config.REDIS_INFO)
         self.users = self._get_userlist()
+        self.available_scripts = self._get_hubot_scripts()
 
     def _get_userlist(self):
         query = 'SELECT username FROM users'
@@ -266,6 +268,15 @@ class Service(object):
             except:
                 return None
         return [row['username'] for row in rows]
+
+    def _get_hubot_scripts(self):
+        available = []
+        regex = re.compile('^.+\$\{(.+):\+.+$')
+        with open('Docker/hubot/hubot', 'r') as f:
+            for row in f:
+                if regex.match(row):
+                    available.append(regex.findall(row)[0])
+        return available
 
 
 def failed(msg='Failed', **ka):

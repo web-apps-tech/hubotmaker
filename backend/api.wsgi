@@ -12,6 +12,13 @@ put = app.put
 delete = app.delete
 
 
+@get('/admin/hubot/available_scripts')
+@root
+def api_admin_available_scripts():
+    s = Service()
+    return success(s.available_scripts)
+
+
 @post('/admin/hubot/restartall')
 @root
 def api_admin_restart_all():
