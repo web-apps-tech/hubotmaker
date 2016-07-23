@@ -10,7 +10,7 @@ sed -rie "s/\[(.+)\]/[\1, ]/" hubot-scripts.json
 
 sed -rie "s/\[(.*)\]/[\1${AMBUSH:+\"ambush.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${AWW:+\"aww.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${BASE58:+\"hoge.coffee\", }]/" hubot-scripts.json
+sed -rie "s/\[(.*)\]/[\1${BASE58:+\"base58.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${BASE64:+\"base64.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${BEERME:+\"beerme.coffee\", }]/" hubot-scripts.json
 sed -rie "s/\[(.*)\]/[\1${COIN:+\"coin.coffee\", }]/" hubot-scripts.json
