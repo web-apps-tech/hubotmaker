@@ -268,7 +268,7 @@ class User(object):
     def _get_apikey(self):
         redis = Redis(**config.REDIS_INFO)
         for apikey in redis.keys('*'):
-            owner = redis.get(key).decode()
+            owner = redis.get(apikey).decode()
             if self.name == owner:
                 return apikey
         return None
