@@ -177,6 +177,14 @@ class Hubot(object):
         res = requests.get(config.DOCKER_BASEURI + endpoint)
         return self._env2dict(res.json()['Config']['Env'])
 
+    @_is_enable
+    def get_status(self):
+        endpoint = '/containers/{}/json'
+        self.last_response = requests.get(
+            config.DOCKER_BASEURI + endpoint.format(self.name)
+        )
+        return json.loads(self.last_response.text)['State']['Status']
+
 
 class User(object):
     def __init__(self, name):

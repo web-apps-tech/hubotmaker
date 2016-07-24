@@ -168,6 +168,14 @@ def api_update_hubot(params, user):
     return failed(error=h.last_response.text)
 
 
+@get('/hubot/<name>/status')
+def api_get_hubot_status(name):
+    h = Hubot(name)
+    if h.enable:
+        return success(h.get_status())
+    return failed(error='No Such Container: {}'.format(name))
+
+
 @get('/hubot/<name>/env')
 def api_get_hubot_env(name):
     h = Hubot(name)
