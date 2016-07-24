@@ -15,6 +15,7 @@
 ** Hubot API
 *** POST /hubot
 *** POST /hubot/start
+*** POST /hubot/stop
 *** POST /hubot/restart
 *** DELETE /hubot
 *** PUT /hubot
