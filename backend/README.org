@@ -18,5 +18,6 @@
 *** POST /hubot/restart
 *** DELETE /hubot
 *** PUT /hubot
+*** GET /hubot/<name>/status
 *** GET /hubot/<name>/env
 *** GET /hubot/name/db
