@@ -20,4 +20,4 @@
 *** PUT /hubot
 *** GET /hubot/<name>/status
 *** GET /hubot/<name>/env
-*** GET /hubot/name/db
+*** GET /hubot/<name>/db
