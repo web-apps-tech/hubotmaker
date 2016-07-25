@@ -156,8 +156,10 @@ def api_update_hubot(params, user):
     options = {k: v for k, v in params.items() if k != 'name'}
     h = Hubot(params['name'])
     h.stop()
-    if not h.update(**options):
-        return failed(error='json not valid: script_env')
+    try:
+        h.update(**options)
+    except Exception as err:
+        return failed(error=err.message)
     if h.last_response.status_code in [200, 201]:
         h.start()
         if h.last_response.status_code == 204:

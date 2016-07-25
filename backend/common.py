@@ -49,7 +49,7 @@ class Hubot(object):
             if self.enable:
                 return func(self, *a, **ka)
             else:
-                return False
+                raise Exception('CANNOT FIND THE HUBOT')
         return _
 
     @classmethod
@@ -153,7 +153,7 @@ class Hubot(object):
             try:
                 script_env = ["{0}=1".format(e) for e in json.loads(script_env)]
             except:
-                return False
+                raise Exception('JSON NOT VALID: script_env')
         else:
             script_env = []
         old_env = self.get_env()
