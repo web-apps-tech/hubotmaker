@@ -163,7 +163,7 @@ def api_update_hubot(params, user):
         u.add_hubot(h.name)
         h.start()
         if h.last_response.status_code == 204:
-            return success(h.name)
+            return success()
     return failed(error=h.last_response.text)
 
 
