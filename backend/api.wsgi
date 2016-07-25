@@ -158,7 +158,8 @@ def api_update_hubot(params, user):
     h = Hubot(params['name'])
     h.stop()
     u.delete_hubot(h.name)
-    h.update(**options)
+    if not h.update(**options):
+        return failed(error='json not valid: script_env')
     if h.last_response.status_code in [200, 201]:
         u.add_hubot(h.name)
         h.start()

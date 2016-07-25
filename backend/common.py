@@ -139,6 +139,15 @@ class Hubot(object):
 
     @_is_enable
     def update(self, env={}, slack_token=None, script_env=None):
+        if isinstance(script_env, list):
+            script_env = ["{0}=1".format(e) for e in script_env]
+        elif isinstance(script_env, str):
+            try:
+                script_env = ["{0}=1".format(e) for e in json.loads(script_env)]
+            except:
+                return False
+        else:
+            script_env = []
         old_env = self.get_env()
         new_env = env
         if slack_token is not None:
@@ -151,12 +160,6 @@ class Hubot(object):
         )
         endpoint = '/containers/create'
         new_env['HUBOT_CONTAINER_NAME'] = self.name + ':' + self.db
-        if isinstance(script_env, list):
-            script_env = ["{0}=1".format(e) for e in script_env]
-        elif isinstance(script_env, str):
-            script_env = ["{0}=1".format(e) for e in json.loads(script_env)]
-        else:
-            script_env = []
         hubot_payload = {
             'Image': 'hubot',
             'Env': self._dict2env(new_env) + script_env,
