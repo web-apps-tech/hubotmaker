@@ -103,6 +103,8 @@ class Hubot(object):
             self.last_response = requests.delete(
                 config.DOCKER_BASEURI + endpoint.format(self.db)
             )
+            return True
+        return False
 
     @_is_enable
     def start(self):
@@ -114,6 +116,8 @@ class Hubot(object):
             self.last_response = requests.post(
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
+            return True
+        return False
 
     @_is_enable
     def stop(self):
@@ -125,6 +129,8 @@ class Hubot(object):
             self.last_response = requests.post(
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
+            return True
+        return False
 
     @_is_enable
     def restart(self):
@@ -136,6 +142,8 @@ class Hubot(object):
             self.last_response = requests.post(
                 config.DOCKER_BASEURI + endpoint.format(self.name)
             )
+            return True
+        return False
 
     @_is_enable
     def update(self, env={}, slack_token=None, script_env=None):
@@ -174,6 +182,7 @@ class Hubot(object):
             },
             data=json.dumps(hubot_payload)
         )
+        return True
 
     @_is_enable
     def get_env(self):
