@@ -5,7 +5,7 @@ set -e
 # *TEMPLADE*
 # ${HOGE:+"hoge.coffee", }
 
-cat <<EOF > hubot-scripts.json
+cat <<EOF | sed -re 's/\\//g' > hubot-scripts.json
 [
 ${AMBUSH:+\"ambush.coffee\", }
 ${AWW:+\"aww.coffee\", }
