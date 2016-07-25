@@ -2,43 +2,40 @@
 
 set -e
 
-
-sed -rie "s/\[(.+)\]/[\1, ]/" hubot-scripts.json
-
 # *TEMPLADE*
-# sed -rie "s/\[(.*)\]/[\1${HOGE:+\"hoge.coffee\", }]/" hubot-scripts.json
+# ${HOGE:+"hoge.coffee", }
 
-sed -rie "s/\[(.*)\]/[\1${AMBUSH:+\"ambush.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${AWW:+\"aww.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${BASE58:+\"base58.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${BASE64:+\"base64.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${BEERME:+\"beerme.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${COIN:+\"coin.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${CMDLINEFU:+\"commandlinefu.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${COWSAY:+\"cowsay.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${CORGIME:+\"corgime.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${DEALWITHIT:+\"dealwithit.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${DICE:+\"dice.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${EMOJI:+\"emoji.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${EMOJIME:+\"emoji-me.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${FIBONACCI:+\"fibonacci.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${HASHING:+\"hashing.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${HISTORY:+\"history.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${KITTENS:+\"kittens.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${POMODORO:+\"pomodoro.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${TASKS:+\"tasks.coffee\", }]/" hubot-scripts.json
+cat <<EOF > hubot-scripts.json
+[
+${AMBUSH:+"ambush.coffee", }
+${AWW:+"aww.coffee", }
+${BASE58:+"base58.coffee", }
+${BASE64:+"base64.coffee", }
+${BEERME:+"beerme.coffee", }
+${COIN:+"coin.coffee", }
+${CMDLINEFU:+"commandlinefu.coffee", }
+${COWSAY:+"cowsay.coffee", }
+${CORGIME:+"corgime.coffee", }
+${DEALWITHIT:+"dealwithit.coffee", }
+${DICE:+"dice.coffee", }
+${EMOJI:+"emoji.coffee", }
+${EMOJIME:+"emoji-me.coffee", }
+${FIBONACCI:+"fibonacci.coffee", }
+${HASHING:+"hashing.coffee", }
+${HISTORY:+"history.coffee", }
+${KITTENS:+"kittens.coffee", }
+${POMODORO:+"pomodoro.coffee", }
+${TASKS:+"tasks.coffee", }
 
-sed -rie "s/\[(.*)\]/[\1${DOLLAR:+\"dollar.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${GOOD:+\"good.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${OMIKUJI:+\"omikuji.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${INCREMENT:+\"increment.coffee\", }]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1${GREETINGS:+\"greetings.coffee\", }]/" hubot-scripts.json
+${DOLLAR:+"dollar.coffee", }
+${GOOD:+"good.coffee", }
+${OMIKUJI:+"omikuji.coffee", }
+${INCREMENT:+"increment.coffee", }
+${GREETINGS:+"greetings.coffee", }
 
-sed -rie "s/\[(.*)\]/[\1\"version.coffee\", ]/" hubot-scripts.json
-sed -rie "s/\[(.*)\]/[\1\"uptime.coffee\", ]/" hubot-scripts.json
-
-sed -rie "s/\[(.*), \]/[\1]/" hubot-scripts.json
-
+"version.coffee", "uptime.coffee"
+]
+EOF
 
 
 npm install
