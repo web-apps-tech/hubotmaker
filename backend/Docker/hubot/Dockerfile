@@ -13,6 +13,6 @@ RUN yes | yo hubot --owner="user" --description="No Description" --name="Hubot" 
     rm bin/hubot
 ADD scripts/name.coffee scripts/
 ADD hubot bin/hubot
-ADD scripts_for_hubot/scripts/*.coffee scripts/
+ADD scripts_for_hubot/scripts/*.coffee node_modules/hubot-scripts/src/scripts/
 
 CMD ["/bot/bin/hubot", "--adapter", "slack"]
