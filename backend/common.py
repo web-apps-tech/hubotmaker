@@ -25,7 +25,7 @@ class Hubot(object):
         )
         if res is not None:
             self.last_response = res
-        if res.status_code == 200:
+        if res and res.status_code == 200:
             self.db = res.json()['HostConfig']['Links'][0].split('/')[1].split(':')[0]
             self.enable = True
         else:
