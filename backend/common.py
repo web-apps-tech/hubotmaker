@@ -150,7 +150,6 @@ class Hubot(object):
             config.DOCKER_BASEURI + endpoint
         )
         endpoint = '/containers/create'
-        self.name = str(uuid4())
         new_env['HUBOT_CONTAINER_NAME'] = self.name + ':' + self.db
         if isinstance(script_env, list):
             script_env = ["{0}=1".format(e) for e in script_env]
