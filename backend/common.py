@@ -30,6 +30,7 @@ class Hubot(object):
             self.enable = True
         else:
             self.enable = False
+            raise Exception('CANNOT FIND THE HUBOT')
 
     def _env2dict(self, env):
         return {k: v for k, v in [item.split('=') for item in env]}

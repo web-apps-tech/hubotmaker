@@ -103,7 +103,10 @@ def api_create_hubot(params, user):
 @apikey
 @param(require=['name'])
 def api_start_hubot(params, user):
-    h = Hubot(params['name'])
+    try:
+        h = Hubot(params['name'])
+    except Exception as err:
+        return failed(error=err.message)
     h.start()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -115,7 +118,10 @@ def api_start_hubot(params, user):
 @apikey
 @param(require=['name'])
 def api_stop_hubot(params, user):
-    h = Hubot(params['name'])
+    try:
+        h = Hubot(params['name'])
+    except Exception as err:
+        return failed(error=err.message)
     h.stop()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -127,7 +133,10 @@ def api_stop_hubot(params, user):
 @apikey
 @param(require=['name'])
 def api_restart_hubot(params, user):
-    h = Hubot(params['name'])
+    try:
+        h = Hubot(params['name'])
+    except Exception as err:
+        return failed(error=err.message)
     h.restart()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -140,7 +149,10 @@ def api_restart_hubot(params, user):
 @param(require=['name'])
 def api_remove_hubot(params, user):
     u = User(user)
-    h = Hubot(params['name'])
+    try:
+        h = Hubot(params['name'])
+    except Exception as err:
+        return failed(error=err.message)
     h.remove()
     if h.last_response.status_code == 204:
         u.delete_hubot(h.name)
@@ -154,12 +166,12 @@ def api_remove_hubot(params, user):
 @param(require=['name'], option=['slack_token', 'script_env'])
 def api_update_hubot(params, user):
     options = {k: v for k, v in params.items() if k != 'name'}
-    h = Hubot(params['name'])
-    h.stop()
     try:
-        h.update(**options)
+        h = Hubot(params['name'])
     except Exception as err:
         return failed(error=err.message)
+    h.stop()
+    h.update(**options)
     if h.last_response.status_code in [200, 201]:
         h.start()
         if h.last_response.status_code == 204:
@@ -169,7 +181,10 @@ def api_update_hubot(params, user):
 
 @get('/hubot/<name>/status')
 def api_get_hubot_status(name):
-    h = Hubot(name)
+    try:
+        h = Hubot(name)
+    except Exception as err:
+        return failed(error=err.message)
     if h.enable:
         return success(h.get_status())
     return failed(error='No Such Container: {}'.format(name))
@@ -177,7 +192,10 @@ def api_get_hubot_status(name):
 
 @get('/hubot/<name>/env')
 def api_get_hubot_env(name):
-    h = Hubot(name)
+    try:
+        h = Hubot(name)
+    except Exception as err:
+        return failed(error=err.message)
     if h.enable:
         return success(h.get_env())
     return failed(error='No Such Container: {}'.format(name))
@@ -185,7 +203,10 @@ def api_get_hubot_env(name):
 
 @get('/hubot/<name>/db')
 def api_get_hubot_db(name):
-    h = Hubot(name)
+    try:
+        h = Hubot(name)
+    except Exception as err:
+        return failed(error=err.message)
     if h.enable:
         return success(h.db)
     return failed(error='No Such Container: {}'.format(name))
