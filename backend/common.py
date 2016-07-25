@@ -139,10 +139,12 @@ class Hubot(object):
 
     @_is_enable
     def update(self, env={}, slack_token=None, script_env=None):
-        new_env = self.get_env()
-        new_env.update(env)
+        old_env = self.get_env()
+        new_env = env
         if slack_token is not None:
             new_env['HUBOT_SLACK_TOKEN'] = slack_token
+        else:
+            new_env['HUBOT_SLACK_TOKEN'] = old_env['HUBOT_SLACK_TOKEN']
         endpoint = '/containers/{0}'.format(self.name)
         requests.delete(
             config.DOCKER_BASEURI + endpoint
