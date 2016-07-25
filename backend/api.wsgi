@@ -106,7 +106,7 @@ def api_start_hubot(params, user):
     try:
         h = Hubot(params['name'])
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     h.start()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -121,7 +121,7 @@ def api_stop_hubot(params, user):
     try:
         h = Hubot(params['name'])
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     h.stop()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -136,7 +136,7 @@ def api_restart_hubot(params, user):
     try:
         h = Hubot(params['name'])
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     h.restart()
     if h.last_response.status_code == 204:
         return success(name=h.name)
@@ -152,7 +152,7 @@ def api_remove_hubot(params, user):
     try:
         h = Hubot(params['name'])
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     h.remove()
     if h.last_response.status_code == 204:
         u.delete_hubot(h.name)
@@ -169,7 +169,7 @@ def api_update_hubot(params, user):
     try:
         h = Hubot(params['name'])
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     h.stop()
     h.update(**options)
     if h.last_response.status_code in [200, 201]:
@@ -184,7 +184,7 @@ def api_get_hubot_status(name):
     try:
         h = Hubot(name)
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     if h.enable:
         return success(h.get_status())
     return failed(error='No Such Container: {}'.format(name))
@@ -195,7 +195,7 @@ def api_get_hubot_env(name):
     try:
         h = Hubot(name)
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     if h.enable:
         return success(h.get_env())
     return failed(error='No Such Container: {}'.format(name))
@@ -206,7 +206,7 @@ def api_get_hubot_db(name):
     try:
         h = Hubot(name)
     except Exception as err:
-        return failed(error=err.message)
+        return failed(error=err)
     if h.enable:
         return success(h.db)
     return failed(error='No Such Container: {}'.format(name))
