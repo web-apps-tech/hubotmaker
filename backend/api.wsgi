@@ -27,9 +27,10 @@ def api_admin_restart_all(user):
         u = User(user)
         for hubot in u.hubots:
             h = Hubot(hubot)
-            h.restart()
-            if not h.last_response.status_code == 204:
-                return failed(h.last_response.text)
+            if h.get_status() == 'running':
+                h.restart()
+                if not h.last_response.status_code == 204:
+                    return failed(h.last_response.text)
     return success()
 
 
