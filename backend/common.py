@@ -340,7 +340,7 @@ class Service(object):
 
     def _get_hubot_scripts(self):
         available = []
-        regex = re.compile('^.+\$\{(.+):\+.+$')
+        regex = re.compile('^\$\{(.+):\+.+\}$')
         with open('Docker/hubot/hubot', 'r') as f:
             for row in f:
                 if regex.match(row):
