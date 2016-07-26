@@ -27,6 +27,7 @@ ${KITTENS:+\"kittens.coffee\", }
 ${POMODORO:+\"pomodoro.coffee\", }
 ${TASKS:+\"tasks.coffee\", }
 
+${CHOICE:+\"choice.coffee\", }
 ${DOLLAR:+\"dollar.coffee\", }
 ${GOOD:+\"good.coffee\", }
 ${OMIKUJI:+\"omikuji.coffee\", }
