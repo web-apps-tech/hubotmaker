@@ -345,7 +345,8 @@ class Service(object):
             for row in f:
                 if regex.match(row):
                     available.append(regex.findall(row)[0])
-        available.remove('HOGE')
+        if available.get('HOGE'):
+            available.remove('HOGE')
         return available
 
 
