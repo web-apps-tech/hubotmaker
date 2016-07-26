@@ -345,6 +345,7 @@ class Service(object):
             for row in f:
                 if regex.match(row):
                     available.append(regex.findall(row)[0])
+        available.sort()
         return available
 
 
