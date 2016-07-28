@@ -47,7 +47,7 @@ function UserActivate() {
             password: $("#Password").val()
         },
 	dataType: "json",
-        sucess: function(data) {
+        success: function(data) {
                 alert("submitted")
             if (data.status == true) {
                 RegisterCompleted();
