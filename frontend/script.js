@@ -58,6 +58,7 @@ function UserActivate() {
 
 function RegisterCompleted() {
     $(".RegisterCompleted").removeClass("hidden");
+    $(".login-form").addClass("hidden");
 }
 
 //$(".UserRegistSubmit").on("click",UserRegistSubmit());
