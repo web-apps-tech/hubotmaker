@@ -24,14 +24,15 @@ function UserRegistSubmit() {
             password: $("#Password").val()
         },
         processData: true,
-    }).done(function(data) {
-        if (data.status == true) {
-            alert("submitted")
-            UserActivate();
-        } else {
-            $("#Username").addClass("has-error");
-            $("#Password").addClass("has-error");
-        }
+        success: function(data) {
+            if (data.status == true) {
+                alert("submitted")
+                UserActivate();
+            } else {
+                $("#Username").addClass("has-error");
+                $("#Password").addClass("has-error");
+            }
+	}
     });
 }
 
