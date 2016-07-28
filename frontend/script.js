@@ -48,7 +48,6 @@ function UserActivate() {
         },
 	dataType: "json",
         success: function(data) {
-                alert("submitted")
             if (data.status == true) {
                 RegisterCompleted();
             }
