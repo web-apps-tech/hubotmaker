@@ -11,6 +11,9 @@ $(document).ready(function(){
 	        dataType: "json",
 	        success: function(data){
 	            console.log(data.status);
+		    for each(var i in data.message){
+		        consloe.log(data.message[i]);
+		    }
 	        }
         });
     }else{
