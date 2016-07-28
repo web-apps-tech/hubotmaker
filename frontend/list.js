@@ -7,8 +7,8 @@ listHTML += "<td>" + hubotId + "</td>\n";
 listHTML += "<td id='st_" + hubotId + "'>OFF</td>\n";
 listHTML += "<td>\n";
 listHTML += "<button class=\"btn btn-default edit\">Edit</button>\n";
-listHTML += "<button class=\"btn btn-info\">Start</button>\n";
-listHTML += "<button class=\"btn btn-warning hidden\">Stop</button>\n";
+listHTML += "<button class=\"btn btn-info\" hidden id='start_" + hubotId + "'>Start</button>\n";
+listHTML += "<button class=\"btn btn-warning hidden\" id='stop_" + hubotId + "'>Stop</button>\n";
 listHTML += "</td>\n";
 listHTML += "</tr>\n";
     return(listHTML);
@@ -25,8 +25,19 @@ function getStatus(APIKey,hubotId){
 	dataType: "json",
 	success: function(data){
 	    if(data.status){
-		var id = "#st_" + hubotId;
-	        $(id).text(data.message);
+		var status = data.message;
+		var st_id = "#st_" + hubotId;
+		var start_id = "#start_" + hubotId;
+		var stop_id = "#stop_" + hubotId;
+		if(status){
+	            $(st_id).text("Running");
+		    $(start_id).addClass("hidden");
+		    $(stop_id).removeClass("hidden");
+		}else{
+	            $(st_id).text("Exited");
+		    $(start_id).removeClass("hidden");
+		    $(stop_id).addClass("hidden");
+		}
 	    }
 	}
     });
