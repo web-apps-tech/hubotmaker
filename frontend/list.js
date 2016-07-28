@@ -84,7 +84,7 @@ $(document).ready(function(){
                     $(".edit").on("click", function() {
                         $('#EditModal').modal("show");
                     });
-		    setAvailabeScripts();
+		    setAvailableScripts();
 	        }
         });
     }else{
