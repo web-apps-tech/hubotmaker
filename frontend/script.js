@@ -87,7 +87,7 @@ function showAPIKey(APIKey){
 }
 
 function go2cpanel(){
-    location.href = "./list/";
+    location.href = "../list/";
 }
 
 
