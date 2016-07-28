@@ -14,6 +14,25 @@ listHTML += "</tr>\n";
     return(listHTML);
 }
 
+function getStatus(APIKey,hubotId){
+    var status = "OPPAI";
+    	$.ajax({
+        type: "GET",
+	url: ApiEndPoint + "/hubot/" + hubotId + "/status/",
+	data:{
+	    apikey: APIKey
+	    },
+	dataType: "json",
+	success: function(data){
+	    if(data.status){
+	        status = data.message;
+	    }
+	}
+    });
+return status;
+}
+
+
 
 $(document).ready(function(){
     var SESSID = $.cookie("SESSID");
@@ -30,7 +49,8 @@ $(document).ready(function(){
 		    var hubotIds = data.message;
 		    for (var i=0; i < hubotIds.length; i++){
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
-   			console.log(hubotIds[i]);
+                        console.log(getStatus(SESSID,hubotIds[i]));
+     			console.log(hubotIds[i]);
 		    } 
 	        }
         });
