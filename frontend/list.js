@@ -20,6 +20,6 @@ $(document).ready(function(){
 
 $(".logout").on("click",function(){
     console.log("logoutdayo");
-    $.removeCookie("SESSID");
+    $.cookie("SESSID",'',{expire: -1});
     location.href = "../login/";
 });
