@@ -22,6 +22,18 @@ listHTML += "</tr>\n";
     return(listHTML);
 }
 
+function generateCheckboxes(scriptName){
+var divHTML = "\n"
+
+divHTML += "<div class=\"checkbox\">\n";
+divHTML += "<label>\n";
+divHTML += "<input type=\"checkbox\">" + scriptName +"\n";
+divHTML += "</label>\n";
+divHTML += "</div>\n";
+
+    return(divHTML);
+}
+
 function getStatus(APIKey,hubotId){
     var status = "OPPAI";
     	$.ajax({
@@ -58,6 +70,9 @@ function setAvailableScripts(){
         dataType: "json",
         success: function(data){
 	    if(data.status){
+		for(var i=0;i < data.message.length; i++){
+		    $("#functions").append(generateCheckboxes(data.message[i]));
+		}    
 	        console.log(data.message);
 	    }
 	}
