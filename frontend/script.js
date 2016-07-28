@@ -68,7 +68,7 @@ function GenerateAPIKey(username, password) {
             username: username,
             password: password
         },
-	dataType: "json",
+	    dataType: "json",
         success: function(data) {
             if (data.status == true) {
                 showAPIKey(data.apikey);
@@ -86,7 +86,6 @@ function showAPIKey(APIKey){
     $(".api-key").val(APIKey);
 
 }
-
 
 
 //$(".UserRegistSubmit").on("click",UserRegistSubmit());
