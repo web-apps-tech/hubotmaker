@@ -23,7 +23,6 @@ function UserRegistSubmit() {
             username: $("#Username").val(),
             password: $("#Password").val()
         },
-//        processData: true,
         success: function(data) {
         alert("recieved");
     		if (data.status == true) {
@@ -47,7 +46,6 @@ function UserActivate() {
             username: $("#Username").val(),
             password: $("#Password").val()
         },
-        processData: true,
     }).done(function(data) {
         if (data.status == "ture") {
             RegisterCompleted();
