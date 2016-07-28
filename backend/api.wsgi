@@ -197,7 +197,9 @@ def api_get_hubot_status(name):
     except Exception as err:
         return failed(error=str(err))
     if h.enable:
-        return success("ON" if h.get_status() == 'running' else "OFF")
+        return success(
+            True if h.get_status() == 'running' else False
+        )
     return failed(error='No Such Container: {}'.format(name))
 
 
