@@ -11,7 +11,7 @@ var listHTML = "\n\
                                 <button class=\"btn btn-warning hidden\">Stop</button>\n\
                             </td>\n\
                         </tr>\n\
-			"
+			";
     return(listHTML);
 }
 
