@@ -2,16 +2,16 @@ var ApiEndPoint = "http://133.242.53.17/";
 
 function generateTbody(hubotId){
 var listHTML = "\n\
-                        <tr>\n\ 
-                            <td>" + hubotId + "</td>\n\
-                            <td>OFF</td>\n\
-                            <td>\n\
-                                <button class=\"btn btn-default edit\">Edit</button>\n\
-                                <button class=\"btn btn-info\">Start</button>\n\
-                                <button class=\"btn btn-warning hidden\">Stop</button>\n\
-                            </td>\n\
-                        </tr>\n\
-			";
+<tr>\n\ 
+<td>" + hubotId + "</td>\n\
+<td>OFF</td>\n\
+<td>\n\
+<button class=\"btn btn-default edit\">Edit</button>\n\
+<button class=\"btn btn-info\">Start</button>\n\
+<button class=\"btn btn-warning hidden\">Stop</button>\n\
+</td>\n\
+</tr>\n\
+";
     return(listHTML);
 }
 
