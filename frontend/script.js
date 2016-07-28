@@ -24,6 +24,7 @@ function UserRegistSubmit() {
             password: $("#Password").val()
         },
         success: function(data) {
+		console.log(data.status);
     		if (data.status == true) {
                 alert("submitted")
                 UserActivate();
