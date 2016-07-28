@@ -13,8 +13,7 @@ delete = app.delete
 
 
 @get('/admin/hubot/available_scripts')
-@root
-def api_admin_available_scripts(user):
+def api_admin_available_scripts():
     s = Service()
     return success(s.available_scripts)
 
@@ -191,7 +190,8 @@ def api_get_hubot_status(name):
 
 
 @get('/hubot/<name>/env')
-def api_get_hubot_env(name):
+@apikey
+def api_get_hubot_env(name, user):
     try:
         h = Hubot(name)
     except Exception as err:
