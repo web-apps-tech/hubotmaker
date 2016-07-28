@@ -19,7 +19,6 @@ $(document).ready(function(){
 });
 
 $(".logout").on("click",function(){
-    console.log("logoutdayo");
     $.cookie("SESSID",'',{expires: -1 ,path: "/"});
     location.href = "../login/";
 });
