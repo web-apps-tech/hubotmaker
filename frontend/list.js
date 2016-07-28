@@ -29,7 +29,7 @@ $(document).ready(function(){
 	            console.log(data.status);
 		    var hubotIds = data.message;
 		    for (var i=0; i < hubotIds.length; i++){
-                        $(".hubot-list-tbody").append(generateTbody(hubotIds[i]);
+                        $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
    			console.log(hubotIds[i]);
 		    } 
 	        }
