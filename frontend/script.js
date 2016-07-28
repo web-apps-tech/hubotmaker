@@ -23,6 +23,7 @@ function UserRegistSubmit() {
             username: $("#Username").val(),
             password: $("#Password").val()
         },
+	dataType: "json",
         success: function(data) {
 		console.log(data);
     		if (data.status == true) {
