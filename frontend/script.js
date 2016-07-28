@@ -57,7 +57,7 @@ function UserActivate() {
 }
 
 function RegisterCompleted() {
-    $("RegisterCompleted").removeClass("hidden");
+    $(".RegisterCompleted").removeClass("hidden");
 }
 
 //$(".UserRegistSubmit").on("click",UserRegistSubmit());
