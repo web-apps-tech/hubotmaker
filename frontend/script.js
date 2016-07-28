@@ -23,7 +23,7 @@ function UserRegistSubmit() {
             username: $("#Username").val(),
             password: $("#Password").val()
         },
-        processData: true,
+//        processData: true,
         success: function(data) {
         alert("recieved");
     		if (data.status == true) {
