@@ -19,7 +19,7 @@ $(".LoginButton").on("click",function(){
 	success: function(data){
 	    alert(data.status);
 	    if(data.status){
-	        $.cookie("SESSID",data.apikey);
+	        $.cookie("SESSID",data.apikey,{expires: 1, domain: "/"});
 		alert("Cookie Set:" + data.apikey);
 		location.href = "../list/";
 	    }else{
