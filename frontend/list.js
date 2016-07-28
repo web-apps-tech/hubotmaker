@@ -4,7 +4,7 @@ function generateTbody(hubotId){
 var listHTML = "\n";
 listHTML += "<tr>\n" ;
 listHTML += "<td>" + hubotId + "</td>\n";
-listHTML += "<td>OFF</td>\n";
+listHTML += "<td id='st_" + hubotId + "'>OFF</td>\n";
 listHTML += "<td>\n";
 listHTML += "<button class=\"btn btn-default edit\">Edit</button>\n";
 listHTML += "<button class=\"btn btn-info\">Start</button>\n";
@@ -25,11 +25,11 @@ function getStatus(APIKey,hubotId){
 	dataType: "json",
 	success: function(data){
 	    if(data.status){
-	        status = data.message;
+		var id = "#st_" + hubotId;
+	        $(id).text(data.message);
 	    }
 	}
     });
-return status;
 }
 
 
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		    var hubotIds = data.message;
 		    for (var i=0; i < hubotIds.length; i++){
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
-                        console.log(getStatus(SESSID,hubotIds[i]));
+                        getStatus(SESSID,hubotIds[i]);
      			console.log(hubotIds[i]);
 		    } 
 	        }
