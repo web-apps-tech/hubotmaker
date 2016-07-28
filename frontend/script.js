@@ -29,8 +29,9 @@ function UserRegistSubmit() {
     		if (data.status == true) {
                 UserActivate();
             } else {
-                $("#Username").addClass("has-error");
-                $("#Password").addClass("has-error");
+		$(".err-msg").removeClass("hidden");
+                $("#Username").parent("div").addClass("has-error");
+                $("#Password").parent("div").addClass("has-error");
             }
 	}
     });
