@@ -25,7 +25,8 @@ function UserRegistSubmit() {
         },
         processData: true,
         success: function(data) {
-            if (data.status == true) {
+        alert("recieved");
+    		if (data.status == true) {
                 alert("submitted")
                 UserActivate();
             } else {
