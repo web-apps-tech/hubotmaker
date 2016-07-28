@@ -50,15 +50,41 @@ function UserActivate() {
 	dataType: "json",
         success: function(data) {
             if (data.status == true) {
-                RegisterCompleted();
+                GenerateAPIKey();
             }
 	 }
     });
 }
 
-function RegisterCompleted() {
+function GenerateAPIKey() {
+
+    $.ajax({
+        type: "POST",
+        url: ApiEndPoint + "user/apikey",
+        cache: false,
+        data: {
+            username: $("#Username").val(),
+            password: $("#Password").val()
+        },
+	dataType: "json",
+        success: function(data) {
+            if (data.status == true) {
+                showAPIKey(data.apikey);
+            }
+	 }
+    });
+
+}
+
+function showAPIKey(APIKey){
+
     $(".RegisterCompleted").removeClass("hidden");
     $(".login-form").addClass("hidden");
+    $(".api-key").text(APIKey);
+
+
 }
+
+
 
 //$(".UserRegistSubmit").on("click",UserRegistSubmit());
