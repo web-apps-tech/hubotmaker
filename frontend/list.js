@@ -19,6 +19,7 @@ $(document).ready(function(){
 });
 
 $(".logout").on("click",function(){
+    console.log("logoutdayo");
     $.removeCookie("SESSID");
     location.href = "../login/";
 });
