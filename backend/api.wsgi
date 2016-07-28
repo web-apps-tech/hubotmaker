@@ -12,8 +12,8 @@ put = app.put
 delete = app.delete
 
 
-@get('/admin/hubot/available_scripts')
-def api_admin_available_scripts():
+@get('/available_scripts')
+def api_available_scripts():
     s = Service()
     return success(s.available_scripts)
 
