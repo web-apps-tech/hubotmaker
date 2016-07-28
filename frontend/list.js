@@ -71,7 +71,8 @@ function setAvailableScripts(){
         success: function(data){
 	    if(data.status){
 		for(var i=0;i < data.message.length; i++){
-		    $("#functions").append(generateCheckboxes(data.message[i]));
+		    $("#create-functions").append(generateCheckboxes(data.message[i]));
+		    $("#edit-functions").append(generateCheckboxes(data.message[i]));
 		}    
 	        console.log(data.message);
 	    }
