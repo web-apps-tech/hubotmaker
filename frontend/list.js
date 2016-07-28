@@ -1,20 +1,20 @@
 var ApiEndPoint = "http://133.242.53.17/";
-$(document).ready(function(){ 
+$(document).ready(function(){
     var SESSID = $.cookie("SESSID");
     if(SESSID !== undefined){
-    $.ajax({
-        type: "GET",
-	url: ApiEndPoint + "/user/hubot/list",
-	data:{
-	    apikey: SESSID
-	},
-	dataType: "json",
-	success: function(data){
-	      console.log(data.status);
-	}
-    });
+        $.ajax({
+            type: "GET",
+	        url: ApiEndPoint + "/user/hubot/list",
+	        data:{
+	            apikey: SESSID
+	        },
+	        dataType: "json",
+	        success: function(data){
+	            console.log(data.status);
+	        }
+        });
     }else{
-    location.href = "../login/";
+        location.href = "../login/";
     }
 });
 

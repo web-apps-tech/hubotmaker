@@ -15,20 +15,21 @@ $(".UserRegistSubmit").on("click", UserRegistSubmit);
 
 
 function UserRegistSubmit() {
-
+    var username = $("#Username").val()
+    var password = $("#Password").val()
     $.ajax({
         type: "POST",
         url: ApiEndPoint + "user",
         cache: false,
         data: {
-            username: $("#Username").val(),
-            password: $("#Password").val()
+            username: username,
+            password: password
         },
-	dataType: "json",
+	    dataType: "json",
         success: function(data) {
 		console.log(data);
-    		if (data.status == true) {
-                UserActivate();
+    		if (data.status) {
+                UserActivate(username, password);
             } else {
 		$(".err-msg").removeClass("hidden");
                 $("#Username").parent("div").addClass("has-error");
@@ -38,38 +39,38 @@ function UserRegistSubmit() {
     });
 }
 
-function UserActivate() {
+function UserActivate(username, password) {
 
     $.ajax({
         type: "PUT",
         url: ApiEndPoint + "user/activate",
         cache: false,
         data: {
-            username: $("#Username").val(),
-            password: $("#Password").val()
+            username: username,
+            password: password
         },
-	dataType: "json",
+	    dataType: "json",
         success: function(data) {
-            if (data.status == true) {
-                GenerateAPIKey();
+            if (data.status) {
+                GenerateAPIKey(username, password);
             }
 	 }
     });
 }
 
-function GenerateAPIKey() {
+function GenerateAPIKey(username, password) {
 
     $.ajax({
         type: "POST",
         url: ApiEndPoint + "user/apikey",
         cache: false,
         data: {
-            username: $("#Username").val(),
-            password: $("#Password").val()
+            username: username,
+            password: password
         },
-	dataType: "json",
+	    dataType: "json",
         success: function(data) {
-            if (data.status == true) {
+            if (data.status) {
                 showAPIKey(data.apikey);
             }
 	 }
@@ -85,7 +86,6 @@ function showAPIKey(APIKey){
     $(".api-key").val(APIKey);
 
 }
-
 
 
 //$(".UserRegistSubmit").on("click",UserRegistSubmit());
