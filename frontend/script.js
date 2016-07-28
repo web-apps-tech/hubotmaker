@@ -28,7 +28,7 @@ function UserRegistSubmit() {
 	dataType: "json",
         success: function(data) {
 		console.log(data);
-    		if (data.status == true) {
+    		if (data.status) {
                 UserActivate(username, password);
             } else {
 		$(".err-msg").removeClass("hidden");
@@ -51,7 +51,7 @@ function UserActivate(username, password) {
         },
 	dataType: "json",
         success: function(data) {
-            if (data.status == true) {
+            if (data.status) {
                 GenerateAPIKey(username, password);
             }
 	 }
@@ -70,7 +70,7 @@ function GenerateAPIKey(username, password) {
         },
 	    dataType: "json",
         success: function(data) {
-            if (data.status == true) {
+            if (data.status) {
                 showAPIKey(data.apikey);
             }
 	 }
