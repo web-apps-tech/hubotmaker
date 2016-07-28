@@ -11,9 +11,9 @@ $(document).ready(function(){
 	        dataType: "json",
 	        success: function(data){
 	            console.log(data.status);
-		    for each(var i in data.message){
-		        consloe.log(data.message[i]);
-		    }
+		    data.message.forEach(function(hubotId,i,data.message){
+                        consloe.log(hubotId[i]);
+		    });
 	        }
         });
     }else{
