@@ -11,9 +11,10 @@ $(document).ready(function(){
 	        dataType: "json",
 	        success: function(data){
 	            console.log(data.status);
-		    data.message.forEach(function(hubotId,i,data.message){
-                        console.log(hubotId);
-		    });
+		    var hubotIds = data.message;
+		    for (var i=0; i < hubotIds.length; i++){
+		        console.log(hubotIds[i]);
+		    } 
 	        }
         });
     }else{
