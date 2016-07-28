@@ -30,11 +30,11 @@ function getStatus(APIKey,hubotId){
 		var start_id = "#start_" + hubotId;
 		var stop_id = "#stop_" + hubotId;
 		if(status){
-	            $(st_id).text("Running");
+	            $(st_id).text("ON");
 		    $(start_id).addClass("hidden");
 		    $(stop_id).removeClass("hidden");
 		}else{
-	            $(st_id).text("Exited");
+	            $(st_id).text("OFF");
 		    $(start_id).removeClass("hidden");
 		    $(stop_id).addClass("hidden");
 		}
