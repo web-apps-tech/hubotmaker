@@ -17,6 +17,7 @@ $(".LoginButton").on("click",function(){
 	success: function(data){
 	    if(data.status){
 	        $.cookie("SESSID",data.apikey);
+		alert("Cookie Set:" + data.apikey);
 		location.href = "../list/";
 	    }else{
 	        LoginError();
