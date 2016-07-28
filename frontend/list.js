@@ -12,7 +12,7 @@ $(document).ready(function(){
 	        success: function(data){
 	            console.log(data.status);
 		    data.message.forEach(function(hubotId,i,data.message){
-                        consloe.log(hubotId[i]);
+                        console.log(hubotId[i]);
 		    });
 	        }
         });
