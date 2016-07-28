@@ -15,6 +15,7 @@ $(".LoginButton").on("click",function(){
 	
 	},
 	success: function(data){
+	    alert(data.status);
 	    if(data.status){
 	        $.cookie("SESSID",data.apikey);
 		alert("Cookie Set:" + data.apikey);
