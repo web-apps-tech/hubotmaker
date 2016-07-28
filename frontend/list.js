@@ -1,3 +1,11 @@
+$(".create-new").on("click", function() {
+    $('#CreateModal').modal("show");
+});
+$(".delete").on("click", function() {
+    $('#DeleteConfirm').modal("show");
+});
+
+
 var ApiEndPoint = "http://133.242.53.17";
 
 function generateTbody(hubotId){
@@ -61,6 +69,9 @@ $(document).ready(function(){
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                         getStatus(SESSID,hubotIds[i]);
 		    } 
+                    $(".edit").on("click", function() {
+                        $('#EditModal').modal("show");
+                    });
 	        }
         });
     }else{

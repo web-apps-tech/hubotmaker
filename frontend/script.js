@@ -1,15 +1,5 @@
 var ApiEndPoint = "http://133.242.53.17/";
 
-$(".create-new").on("click", function() {
-    $('#CreateModal').modal("show");
-});
-$(".edit").on("click", function() {
-    alert(3);
-    $('#EditModal').modal("show");
-});
-$(".delete").on("click", function() {
-    $('#DeleteConfirm').modal("show");
-});
 $(".UserRegistSubmit").on("click", UserRegistSubmit);
 
 
