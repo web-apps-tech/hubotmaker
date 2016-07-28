@@ -51,7 +51,19 @@ function getStatus(APIKey,hubotId){
     });
 }
 
+function setAvailableScripts(){
+    $.ajax({
+        type: "GET",
+        url: ApiEndPoint + "/available_scripts",
+        dataType: "json",
+        success: function(data){
+	    if(data.status){
+	        console.log(data.message);
+	    }
+	}
+    });
 
+}
 
 $(document).ready(function(){
     var SESSID = $.cookie("SESSID");
@@ -72,6 +84,7 @@ $(document).ready(function(){
                     $(".edit").on("click", function() {
                         $('#EditModal').modal("show");
                     });
+		    setAvailabeScripts();
 	        }
         });
     }else{
