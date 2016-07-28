@@ -9,7 +9,8 @@ $(".LoginButton").on("click",function(){
     $.ajax({
         type: "POST",
 	url: ApiEndPoint + "/user/apikey",
-	DataType: "json",
+	cache: false,
+	dataType: "json",
         data: {
 	    username: $("#Username").val(),
 	    password: $("#Password").val()
