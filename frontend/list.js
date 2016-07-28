@@ -1,4 +1,4 @@
-var ApiEndPoint = "http://133.242.53.17/";
+var ApiEndPoint = "http://133.242.53.17";
 
 function generateTbody(hubotId){
 var listHTML = "\n";
@@ -18,7 +18,7 @@ function getStatus(APIKey,hubotId){
     var status = "OPPAI";
     	$.ajax({
         type: "GET",
-	url: ApiEndPoint + "/hubot/" + hubotId + "/status/",
+	url: ApiEndPoint + "/hubot/" + hubotId + "/status",
 	data:{
 	    apikey: APIKey
 	    },
