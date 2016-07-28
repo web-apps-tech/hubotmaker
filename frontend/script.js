@@ -48,7 +48,7 @@ function UserActivate() {
         },
 	dataType: "json",
         sucess: function(data) {
-            if (data.status == "ture") {
+            if (data.status == true) {
                 RegisterCompleted();
                 alert("submitted")
             }
