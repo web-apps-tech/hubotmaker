@@ -17,3 +17,8 @@ $(document).ready(function(){
     location.href = "../login/";
     }
 });
+
+$(".logout").on("click",function(){
+    $.removeCookie("SESSID");
+    location.href = "../login/";
+});
