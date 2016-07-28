@@ -64,6 +64,18 @@ def api_generate_apikey(user):
         return failed('The user has not been activated')
 
 
+@get('/user/apikey')
+@password
+def api_get_apikey(user):
+    u = User(user)
+    if u.is_active:
+        apikey = u.apikey
+        if apikey:
+            return success(apikey=apikey)
+        return failed('apikey has not been generated.')
+    return failed('user has not been activated.')
+
+
 @get('/user/hubot/list')
 @apikey
 def api_get_hubot_list(user):
