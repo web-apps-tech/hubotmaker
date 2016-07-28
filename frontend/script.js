@@ -27,7 +27,6 @@ function UserRegistSubmit() {
         success: function(data) {
 		console.log(data);
     		if (data.status == true) {
-                alert("submitted")
                 UserActivate();
             } else {
                 $("#Username").addClass("has-error");
@@ -47,10 +46,13 @@ function UserActivate() {
             username: $("#Username").val(),
             password: $("#Password").val()
         },
-    }).done(function(data) {
-        if (data.status == "ture") {
-            RegisterCompleted();
-        }
+	dataType: "json",
+        sucess: function(data) {
+            if (data.status == "ture") {
+                RegisterCompleted();
+                alert("submitted")
+            }
+	 }
     });
 }
 
