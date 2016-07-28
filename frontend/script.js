@@ -10,7 +10,6 @@ $(".delete").on("click", function() {
     $('#DeleteConfirm').modal("show")
 });
 $(".UserRegistSubmit").on("click", UserRegistSubmit);
-$(".go2cpanel").on("click", go2cpanel);
 
 
 
@@ -83,12 +82,10 @@ function showAPIKey(APIKey){
     $(".RegisterCompleted").removeClass("hidden");
     $(".login-form").addClass("hidden");
     $(".api-key").text(APIKey);
+    $(".api-key").val(APIKey);
 
 }
 
-function go2cpanel(){
-    location.href = "../list/";
-}
 
 
 //$(".UserRegistSubmit").on("click",UserRegistSubmit());
