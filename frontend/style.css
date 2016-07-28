@@ -1,0 +1,22 @@
+body {
+  padding-top: 50px;
+}
+.row{
+  //padding: 40px 15px;
+  text-align: center;
+}
+.login-form,.hubot-list{
+  text-align: left;
+  margin-top: 100px;
+}
+
+.new-hubot{
+  text-align: right;
+}
+.delete-modal-button{
+  position:absolute;
+  left: 15px;
+}
+.hidden {
+  display: none;
+}
