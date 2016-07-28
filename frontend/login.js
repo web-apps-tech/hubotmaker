@@ -1,9 +1,8 @@
 var ApiEndPoint = "http://133.242.53.17/";
 $(document).ready(function() {
     var SESSID = $.cookie("SESSID");
-    alert(SESSID);
     if(SESSID !== undefined){    
-	document.href = "../list/";
+	location.href = "../list/";
     }
 });
 $(".LoginButton").on("click",function(){
