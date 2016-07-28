@@ -25,7 +25,7 @@ function UserRegistSubmit() {
             username: username,
             password: password
         },
-	dataType: "json",
+	    dataType: "json",
         success: function(data) {
 		console.log(data);
     		if (data.status) {
@@ -49,7 +49,7 @@ function UserActivate(username, password) {
             username: username,
             password: password
         },
-	dataType: "json",
+	    dataType: "json",
         success: function(data) {
             if (data.status) {
                 GenerateAPIKey(username, password);
