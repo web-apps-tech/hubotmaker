@@ -209,6 +209,10 @@ class User(object):
 
     @classmethod
     def create(cls, name, password):
+        if not re.match('\w{8,}', name):
+            return None
+        if not re.match('[a-zA-Z0-9@$#%&:;=+-]{8,}', password):
+            return None
         query = 'INSERT INTO users (username, password) VALUES (%s, %s);'
         with DB.connect(**config.MySQL) as cursor:
             try:
