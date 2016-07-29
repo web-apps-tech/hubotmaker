@@ -156,41 +156,41 @@ function getStatus(APIKey, hubotId) {
     });
 }
 
-function setMemo(APIKey, hubotId){
-  $.ajax({
-  type: "GET",
-  url: ApiEndPoint + "/hubot/" + hubotId + "/note",
-  data: {
-    apikey: APIKey
-  },
-  dataType: "json",
-  success: function(data){
-    var memoId = "#memo_" + hubotId;
-    if(data.status){
-      $(memoId).val(data.message);
-    }
-  }
-  });
+function setMemo(APIKey, hubotId) {
+    $.ajax({
+        type: "GET",
+        url: ApiEndPoint + "/hubot/" + hubotId + "/note",
+        data: {
+            apikey: APIKey
+        },
+        dataType: "json",
+        success: function(data) {
+            var memoId = "#memo_" + hubotId;
+            if (data.status) {
+                $(memoId).val(data.message);
+            }
+        }
+    });
 }
 
-function saveMemo(e){
-  var APIKey = $.cookie("SESSID");
-  var hubotId = e.target.id.split("_")[1];
-  var memoId = "#memo_" + hubotId;
-  $.ajax({
-  type: "POST",
-  url: ApiEndPoint + "/hubot/" + hubotId + "/note",
-  data: {
-    apikey: APIKey,
-    text: $(memoId).val();
-  },
-  dataType: "json",
-  success: function(data){
-    if(data.status){
-      console.log("Saved!");
-    }
-  }
-  });
+function saveMemo(e) {
+    var APIKey = $.cookie("SESSID");
+    var hubotId = e.target.id.split("_")[1];
+    var memoId = "#memo_" + hubotId;
+    $.ajax({
+        type: "POST",
+        url: ApiEndPoint + "/hubot/" + hubotId + "/note",
+        data: {
+            apikey: APIKey,
+            text: $(memoId).val()
+        },
+        dataType: "json",
+        success: function(data) {
+            if (data.status) {
+                console.log("Saved!");
+            }
+        }
+    });
 }
 
 function setAvailableScripts() {
@@ -266,7 +266,7 @@ $(document).ready(function() {
                     for (var i = 0; i < hubotIds.length; i++) {
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                         getStatus(SESSID, hubotIds[i]);
-                        setMemo(SESSID,hubotIds[i]);
+                        setMemo(SESSID, hubotIds[i]);
                         $(".start").on("click", function(e) {
                             startHubot(SESSID, e.target.id.split("_")[1]);
                         });
@@ -327,10 +327,10 @@ $(".logout").on("click", function() {
     logout();
 });
 
-function logout(){
-  $.cookie("SESSID", '', {
-      expires: -1,
-      path: "/"
-  });
-  location.href = "../login/";
+function logout() {
+    $.cookie("SESSID", '', {
+        expires: -1,
+        path: "/"
+    });
+    location.href = "../login/";
 }
