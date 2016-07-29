@@ -129,7 +129,9 @@ $(document).ready(function() {
                       var scriptName = checkboxes[i].id.split('_')[1]
                       console.log("scriptName:" + scriptName);
                       if(hubotEnvs[scriptName]){
-                          console.log("scriptName: found");
+                          checkboxes[i].prop("checked",true);
+                      }else{
+                          checkboxes[i].prop("checked",false);
                       }
 
                     }
