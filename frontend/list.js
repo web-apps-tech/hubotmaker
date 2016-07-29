@@ -102,7 +102,7 @@ $(document).ready(function() {
                     getStatus(SESSID, hubotIds[i]);
                 }
                 $(".edit").on("click", function(e) {
-                    console.log(e);
+                    console.log(e.target.parentNode);
                     $('#EditModal').modal("show");
                 });
                 setAvailableScripts();
