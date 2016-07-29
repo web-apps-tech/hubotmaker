@@ -222,6 +222,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 var hubotIds = data.message;
+                getUsername ();
                 for (var i = 0; i < hubotIds.length; i++) {
                     $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                     getStatus(SESSID, hubotIds[i]);
