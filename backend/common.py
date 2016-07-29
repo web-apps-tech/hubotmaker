@@ -230,7 +230,7 @@ class Note(object):
             try:
                 cursor.execute(
                     query,
-                    (text.encode('utf8'), self.hubotname)
+                    (text, self.hubotname)
                 )
             except:
                 raise Exception('insert note error')
@@ -248,7 +248,7 @@ class Note(object):
             except:
                 return None
         if row:
-            return row['note'].decode()
+            return row['note']
         else:
             return ''
 
