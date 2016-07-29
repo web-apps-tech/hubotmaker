@@ -3,7 +3,7 @@
 
 from bottle import Bottle
 
-from common import Hubot, User, Service, apikey, password, param, success, failed, root
+from common import Hubot, Note, User, Service, apikey, password, param, success, failed, root
 
 app = application = Bottle()
 get = app.get
@@ -223,6 +223,25 @@ def api_get_hubot_db(name):
     if h.enable:
         return success(h.db)
     return failed(error='No Such Container: {}'.format(name))
+
+
+@post('/hubot/<name>/note')
+@param(require=['text'])
+def api_post_hubot_note(params, name):
+    note = Note(name)
+    if note.set(params['text']):
+        return success()
+    return failed()
+
+
+@get('/hubot/<name>/note')
+def api_get_hubot_note(name):
+    note = Note(name)
+    text = note.get()
+    if text is not None:
+        return success(text)
+    else:
+        return failed()
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
