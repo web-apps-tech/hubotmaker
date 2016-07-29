@@ -20,7 +20,6 @@ function getHubotEnvs(APIKey, hubotId) {
     dataType: "json",
     async: false,
     success: function(data){
-      alert(data.status);
       if (data.status){
         console.log(data.message);
         envs = data.message;
@@ -124,7 +123,7 @@ $(document).ready(function() {
                 $(".edit").on("click", function(e) {
                     var hubotId = e.target.parentNode.parentNode.children[0].textContent;
                     var hubotEnvs = getHubotEnvs(SESSID,hubotId);
-                    var slackToken = hubotEnvs;
+                    var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                     console.log(slackToken);
                     $('#EditModal').modal("show");
                     $("#EditSlackToken").val(slackToken);
