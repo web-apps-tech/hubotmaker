@@ -231,9 +231,11 @@ def api_post_hubot_note(params, name):
     h = Hubot(name)
     if h.enable:
         n = Note(name)
-        if n.set(params['text']):
-            return success()
-        return failed(error='note insertion error')
+        try:
+            n.set(params['text'])
+        except Exception as err:
+            return failed(error=str(err))
+        return success()
     return failed(error='No such Hubot')
 
 

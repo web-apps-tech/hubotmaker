@@ -216,7 +216,7 @@ class Note(object):
                 )
                 row = cursor.fetchone()
             except:
-                return False
+                raise Exception('check note error')
             if not row:
                 try:
                     cursor.execute(
@@ -224,14 +224,14 @@ class Note(object):
                         (self.hubotname, )
                     )
                 except:
-                    return False
+                    raise Exception('init note error')
             try:
                 cursor.execute(
                     query,
                     (text, self.hubotname)
                 )
             except:
-                return False
+                raise Exception('insert note error')
         return True
 
     def get(self):
