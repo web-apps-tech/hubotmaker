@@ -39,6 +39,7 @@ $("#create-submit").on("click", function() {
 });
 
 $("#edit-submit").on("click", function() {
+    var hubotId = $("#edit-modal-hubot-id").text();
     var APIKey = $.cookie("SESSID");
     var envs = [];
     var slackToken = $("#SlackToken").val();
@@ -50,7 +51,7 @@ $("#edit-submit").on("click", function() {
             envs.push(tags[i].id.split("_")[1]);
         }
     }
-    updateHubot(APIKey, slackToken, envs);
+    updateHubot(APIKey, hubotId, slackToken, envs);
 });
 
 var ApiEndPoint = "http://133.242.53.17";
@@ -168,23 +169,23 @@ function createHubot(APIKey, slackToken, scriptEnvs) {
     });
 }
 
-function updateHubot(APIKey, slackToken, scriptEnvs){
-  $.ajax({
-      type: "PUT",
-      url: ApiEndPoint + "/hubot/" + hubotId,
-      data: {
-          apikey: APIKey,
-          slack_token: slackToken,
-          script_env: JSON.stringify(scriptEnvs)
-      },
-      dataType: "json",
-      success: function(data) {
-          if (data.status) {
-              $('#EditModal').modal("hide");
-              location.reload(true);
-          }
-      }
-  });
+function updateHubot(APIKey, hubotId, slackToken, scriptEnvs) {
+    $.ajax({
+        type: "PUT",
+        url: ApiEndPoint + "/hubot/" + hubotId,
+        data: {
+            apikey: APIKey,
+            slack_token: slackToken,
+            script_env: JSON.stringify(scriptEnvs)
+        },
+        dataType: "json",
+        success: function(data) {
+            if (data.status) {
+                $('#EditModal').modal("hide");
+                location.reload(true);
+            }
+        }
+    });
 }
 
 
