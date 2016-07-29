@@ -248,7 +248,7 @@ class Note(object):
             except:
                 return None
         if row:
-            return row['note'].decode()
+            return row['note']
         else:
             return ''
 
