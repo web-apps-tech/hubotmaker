@@ -42,6 +42,16 @@ def api_create_user(params):
     else:
         return failed()
 
+@delete('/user')
+@root
+@param(require=['username'])
+def api_delete_user(params, user):
+    u = User(params['username'])
+    if u.remove():
+        return success()
+    else:
+        return failed()
+
 
 @put('/user/activate')
 @param(require=['username', 'password'])
@@ -81,17 +91,6 @@ def api_get_apikey(user):
 def api_get_hubot_list(user):
     u = User(user)
     return success(u.hubots)
-
-
-@delete('/user')
-@root
-@param(require=['username'])
-def api_delete_user(params, user):
-    u = User(params['username'])
-    if u.remove():
-        return success()
-    else:
-        return failed()
 
 
 @post('/hubot')
