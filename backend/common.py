@@ -470,7 +470,7 @@ def password(func):
                 row = cursor.fetchone()
             except Exception as err:
                 return failed(error=str(err))
-        if row and row['password'] != enhash(password.encode()).hexdigest():
+        if not row or row['password'] != enhash(password.encode()).hexdigest():
             return AuthenticationError()
         return func(user=user, *a, **ka)
     return _
