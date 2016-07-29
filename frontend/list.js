@@ -118,7 +118,7 @@ function setAvailableScripts() {
 function createHubot(APIKey,slackToken,scriptEnvs){
   $.ajax({
   type: "POST",
-  url: "/hubot",
+  url: ApiEndPoint + "/hubot",
   data: {
     apikey: APIKey,
     slack_token: slackToken,
