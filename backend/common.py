@@ -242,7 +242,7 @@ class Note(object):
             try:
                 cursor.execute(
                     query,
-                    (self.hubot_name, )
+                    (self.hubotname, )
                 )
                 row = cursor.fetchone()
             except:
