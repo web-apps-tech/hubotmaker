@@ -6,7 +6,7 @@ $(".delete").on("click", function() {
 });
 $("#create-submit").on("click",function(){
   console.log($("#SlackToken").val());
-  console.log($("#create-functions .checkbox"));
+  console.log($("#create-functions .checkbox").children.children.prop());
 });
 
 var ApiEndPoint = "http://133.242.53.17";
