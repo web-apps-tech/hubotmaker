@@ -122,7 +122,7 @@ function createHubot(APIKey,slackToken,scriptEnvs){
   data: {
     apikey: APIKey,
     slack_token: slackToken,
-    script_env: scriptEnvs
+    script_env: JSON.stringify(scriptEnvs)
   },
   dataType: "json",
   success: function(data){
