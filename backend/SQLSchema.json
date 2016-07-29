@@ -56,6 +56,22 @@
                 "on delete": "cascade",
                 "on update": "cascade"
             }
+        },
+        "notes": {
+            "columns": [
+                {
+                    "name": "hubotname",
+                    "type": "varchar",
+                    "max_length": 64,
+                    "not null": true
+                },
+                {
+                    "name": "note",
+                    "type": "varchar",
+                    "max_length": 141,
+                    "not null": true
+                }
+            ]
         }
     },
     "options": {
