@@ -118,7 +118,7 @@ function setUsername (){
   dataType: "json",
   success: function(data){
     if(data.status){
-      $("username").text(data.message);
+      $(".username").text(data.message);
     }
   }
   });
