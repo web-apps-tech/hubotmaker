@@ -17,5 +17,6 @@ function strtHubot(APIKey, hubotId) {
 }
 
 $(".start").on("click", function(e) {
+  alert("clicked");
     console.log(e.target.id);
 });
