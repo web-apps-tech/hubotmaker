@@ -1,6 +1,6 @@
 var ApiEndPoint = "http://133.242.53.17";
 
-function strtHubot(APIKey, hubotId) {
+function startHubot(APIKey, hubotId) {
     $.ajax({
         type: "POST",
         url: ApiEndPoint + "/hubot/" + hubotId + "/start",
@@ -15,8 +15,3 @@ function strtHubot(APIKey, hubotId) {
         }
     });
 }
-
-$(".start").on("click", function(e) {
-  alert("clicked");
-    console.log(e.target.id);
-});
