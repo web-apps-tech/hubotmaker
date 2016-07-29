@@ -201,8 +201,8 @@ class Hubot(object):
 
 
 class Note(object):
-    def __init__(self, hubot_name):
-        self.hubot_name = hubot_name
+    def __init__(self, hubotname):
+        self.hubotname = hubotname
 
     def set(self, text):
         query = 'UPDATE notes SET note=%s WHERE hubotname=%s;'
@@ -212,7 +212,7 @@ class Note(object):
             try:
                 cursor.execute(
                     check_query,
-                    (self.hubot_name, )
+                    (self.hubotname, )
                 )
                 row = cursor.fetchone()
             except:
@@ -221,14 +221,14 @@ class Note(object):
                 try:
                     cursor.execute(
                         initialize_query,
-                        (self.hubot_name, )
+                        (self.hubotname, )
                     )
                 except:
                     return False
             try:
                 cursor.execute(
                     query,
-                    (text, self.hubot_name)
+                    (text, self.hubotname)
                 )
             except:
                 return False
