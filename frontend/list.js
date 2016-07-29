@@ -1,9 +1,7 @@
 $(".create-new").on("click", function() {
     $('#CreateModal').modal("show");
 });
-$(".delete").on("click", function() {
-    $('#DeleteConfirm').modal("show");
-});
+
 $("#create-submit").on("click",function(){
   var APIKey = $.cookie("SESSID");
   var envs = [];
@@ -175,6 +173,10 @@ $(document).ready(function() {
 
                     }
 
+                });
+                $(".delete").on("click", function() {
+                     $('#EditModal').modal("hide");
+                    $('#DeleteConfirm').modal("show");
                 });
                 setAvailableScripts();
             }
