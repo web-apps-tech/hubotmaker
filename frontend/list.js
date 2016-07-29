@@ -37,8 +37,8 @@ function generateTbody(hubotId) {
     listHTML += "<td id='st_" + hubotId + "'>OFF</td>\n";
     listHTML += "<td>\n";
     listHTML += "<button class=\"btn btn-default edit\">Edit</button>\n";
-    listHTML += "<button class=\"btn btn-info\" hidden id='start_" + hubotId + "'>Start</button>\n";
-    listHTML += "<button class=\"btn btn-warning hidden\" id='stop_" + hubotId + "'>Stop</button>\n";
+    listHTML += "<button class=\"btn btn-info start \" hidden id='start_" + hubotId + "'>Start</button>\n";
+    listHTML += "<button class=\"btn btn-warning stop hidden\" id='stop_" + hubotId + "'>Stop</button>\n";
     listHTML += "</td>\n";
     listHTML += "</tr>\n";
     return (listHTML);
@@ -128,11 +128,11 @@ $(document).ready(function() {
                     for (var i=0; i < checkboxes.length; i++){
                       var scriptName = checkboxes[i].id.split('_')[1];
                       console.log("scriptName:" + scriptName);
-                      var cbId = "#" + "edit_" + scriptName + "_cb";
+                      var checkboxbId = "#" + "edit_" + scriptName + "_cb";
                       if(hubotEnvs[scriptName]){
-                        $(cbId).prop("checked",true);
+                        $(checkboxbId).prop("checked",true);
                       }else{
-                        $(cbId).prop("checked",false);
+                        $(checkboxbId).prop("checked",false);
                       }
 
                     }
