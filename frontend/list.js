@@ -85,7 +85,7 @@ function generateTbody(hubotId) {
     var listHTML = "\n";
     listHTML += "<tr>\n";
     listHTML += "<td>" + hubotId + "</td>\n";
-    listHTML += "<td><input class=\"form-control\" id='memo_" + hubotId + "' placeholder=\"Note....\"><input type=\"button\" class=\"form-control\"></td>\n";
+    listHTML += "<td><input class=\"form-control\" id='memo_" + hubotId + "' placeholder=\"Note....\"><input type=\"button\" class=\"form-control\" value=\"Save\"></td>\n";
     listHTML += "<td id='st_" + hubotId + "'>Unknown</td>\n";
     listHTML += "<td>\n";
     listHTML += "<button class=\"btn btn-default edit\">Edit</button>\n";
