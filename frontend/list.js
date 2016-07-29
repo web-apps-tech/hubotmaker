@@ -121,7 +121,7 @@ $(document).ready(function() {
                     $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                     getStatus(SESSID, hubotIds[i]);
                 }
-                $(".edit").on("click", function(e,SESSID) {
+                $(".edit").on("click", function(e) {
                     var hubotId = e.target.parentNode.parentNode.children[0].textContent;
                     var hubotEnvs = getHubotEnvs(SESSID,hubotId);
                     var slackToken = hubotEnvs;
