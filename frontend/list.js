@@ -121,7 +121,7 @@ $(document).ready(function() {
                         startHubot(SESSID, e.target.id.split("_")[1]);
                     });
                     $(".stop").on("click", function(e) {
-                        startHubot(SESSID, e.target.id.split("_")[1]);
+                        stopHubot(SESSID, e.target.id.split("_")[1]);
                     });
                 }
                 $(".edit").on("click", function(e) {
