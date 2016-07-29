@@ -159,6 +159,7 @@ $(document).ready(function() {
                     var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                     $('#EditModal').modal("show");
+                    $("#edit-modal-hubot-id").text(hubotId);
                     $("#EditSlackToken").val(slackToken);
                     var checkboxes = $("#edit-functions .checkbox label");
                     for (var i = 0; i < checkboxes.length; i++) {
@@ -175,7 +176,7 @@ $(document).ready(function() {
 
                 });
                 $(".delete").on("click", function(e) {
-                  var hubotId = e.target.parentNode.parentNode.children[0].textContent;
+                  var hubotId = $("#edit-modal-hubot-id").val();
                      $('#EditModal').modal("hide");
                      $("#delete-hubot-id").text(hubotId);
                     $('#DeleteConfirm').modal("show");
