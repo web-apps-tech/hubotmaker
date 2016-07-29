@@ -275,11 +275,7 @@ $(document).ready(function() {
                     });
                     setAvailableScripts();
                 } else {
-                    $.cookie("SESSID", '', {
-                        expires: -1,
-                        path: "/"
-                    });
-                    location.href = "../login/";
+                    logout();
                 }
             }
         });
@@ -289,9 +285,13 @@ $(document).ready(function() {
 });
 
 $(".logout").on("click", function() {
-    $.cookie("SESSID", '', {
-        expires: -1,
-        path: "/"
-    });
-    location.href = "../login/";
+    logout();
 });
+
+function logout(){
+  $.cookie("SESSID", '', {
+      expires: -1,
+      path: "/"
+  });
+  location.href = "../login/";
+}
