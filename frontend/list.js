@@ -117,6 +117,10 @@ $(document).ready(function() {
                 for (var i = 0; i < hubotIds.length; i++) {
                     $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                     getStatus(SESSID, hubotIds[i]);
+                    $(".start").on("click", function(e) {
+                      alert("clicked");
+                        console.log(e.target.id);
+                    });
                 }
                 $(".edit").on("click", function(e) {
                     var hubotId = e.target.parentNode.parentNode.children[0].textContent;
