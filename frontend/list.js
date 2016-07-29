@@ -8,7 +8,8 @@ $("#create-submit").on("click",function(){
   console.log($("#SlackToken").val());
   var tags = $("#create-functions .checkbox label");
   for(var i=0; i < tags.length; i++){
-      console.log(tags[i].children[0].val());
+    var checkbox = tags[i].children[0];
+      console.log(checkbox.val());
   }
 
 });
