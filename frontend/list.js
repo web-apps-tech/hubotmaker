@@ -42,7 +42,7 @@ $("#edit-submit").on("click", function() {
     var hubotId = $("#edit-modal-hubot-id").text();
     var APIKey = $.cookie("SESSID");
     var envs = [];
-    var slackToken = $("#SlackToken").val();
+    var slackToken = $("#EditSlackToken").val();
     var tags = $("#edit-functions .checkbox label");
     for (var i = 0; i < tags.length; i++) {
         var checkboxId = "#" + tags[i].children[0].id;
