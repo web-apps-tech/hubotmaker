@@ -213,6 +213,8 @@ $(document).ready(function() {
                 }
                 $(".edit").on("click", function(e) {
                     var hubotId = e.target.parentNode.parentNode.children[0].textContent;
+                    var hubotStatus = e.target.parentNode.parentNode.children[1].textContent;
+                    console.log(hubotStatus);
                     var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                     $('#EditModal').modal("show");
