@@ -105,7 +105,7 @@ $(document).ready(function() {
                     var SlcackToken = e.target.parentNode.parentNode.children[0].textContent;
                     console.log(SlackToken);
                     $('#EditModal').modal("show");
-                    $("#SlackToken").val(SlackToken);
+                    $("#EditSlackToken").val(SlackToken);
                 });
                 setAvailableScripts();
             }
