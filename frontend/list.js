@@ -103,8 +103,10 @@ $(document).ready(function() {
                 }
                 $(".edit").on("click", function(e) {
                     console.log(e);
-                    console.log(e.target.parentNode.parentNode.children[0].textContent);
+                    var SlcackToken = e.target.parentNode.parentNode.children[0].textContent;
+                    console.log(SlackToken);
                     $('#EditModal').modal("show");
+                    $("#SlcackToken").val(SlackToken);
                 });
                 setAvailableScripts();
             }
