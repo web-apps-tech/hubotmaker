@@ -10,7 +10,7 @@ function startHubot(APIKey, hubotId) {
         dataType: "json",
         success: function(data) {
             if (data.status) {
-                alert("started");
+                $(".hubot-list-tbody").append(generateTbody(hubotId));
             }
         }
     });
