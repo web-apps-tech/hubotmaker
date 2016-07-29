@@ -85,7 +85,7 @@ function generateTbody(hubotId) {
     var listHTML = "\n";
     listHTML += "<tr>\n";
     listHTML += "<td>" + hubotId + "</td>\n";
-    listHTML += "<td><div class=\"form-inline\"><input class=\"form-control\" id='memo_" + hubotId + "' placeholder=\"Note....\"><input type=\"button\" class=\"form-control\" value=\"Save\"></div></td>\n";
+    listHTML += "<td><div class=\"form-inline\"><input class=\"form-control\" id='memo_" + hubotId + "' placeholder=\"Note....\"><input type=\"button\" class=\"form-control\" value=\"Save\" class=\"memo-save\"></div></td>\n";
     listHTML += "<td id='st_" + hubotId + "'>Unknown</td>\n";
     listHTML += "<td>\n";
     listHTML += "<button class=\"btn btn-default edit\">Edit</button>\n";
@@ -173,6 +173,25 @@ function setMemo(APIKey, hubotId){
   });
 }
 
+function saveMemo(e){
+  var hubotId = e.target.id.split("_")[1];
+  var memoId = "#memo_" + hubotId;
+  $.ajax({
+  type: "POST",
+  url: ApiEndPoint + "/hubot/" + hubotId + "/note",
+  data: {
+    apikey: APIKey,
+    text: $(memoId).val();
+  },
+  dataType: "json",
+  success: function(data){
+    if(data.status){
+      console.log("Saved!");
+    }
+  }
+  });
+}
+
 function setAvailableScripts() {
     $.ajax({
         type: "GET",
@@ -253,6 +272,7 @@ $(document).ready(function() {
                         $(".stop").on("click", function(e) {
                             stopHubot(SESSID, e.target.id.split("_")[1]);
                         });
+                        $(".memo-save").on("click", saveMemo);
                     }
                     $(".edit").on("click", function(e) {
                         var hubotId = e.target.parentNode.parentNode.children[0].textContent;
