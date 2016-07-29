@@ -461,7 +461,7 @@ def password(func):
         with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
             cursor.execute(
                 'SELECT * FROM users WHERE username=%s;',
-                user
+                (user, )
             )
             row = cursor.fetchone()
         if row and row['password'] != enhash(password.encode()).hexdigest():
