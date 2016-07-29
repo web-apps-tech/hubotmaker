@@ -78,6 +78,3 @@ function showAPIKey(APIKey) {
     });
 
 }
-
-
-//$(".UserRegistSubmit").on("click",UserRegistSubmit());
