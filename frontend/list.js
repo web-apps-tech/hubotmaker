@@ -281,6 +281,7 @@ $(document).ready(function() {
                         var hubotStatus = e.target.parentNode.parentNode.children[1].textContent;
                         var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                         var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
+                        console.log(hubotStatus);
                         if (hubotStatus == hubotStatusOn) {
                             $(".delete").prop("disabled", true);
                         } else {
