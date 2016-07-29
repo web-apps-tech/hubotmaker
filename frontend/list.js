@@ -102,7 +102,7 @@ $(document).ready(function() {
                     getStatus(SESSID, hubotIds[i]);
                 }
                 $(".edit").on("click", function(e) {
-                    var SlcackToken = e.target.parentNode.parentNode.children[0].textContent;
+                    var SlackToken = e.target.parentNode.parentNode.children[0].textContent;
                     console.log(SlackToken);
                     $('#EditModal').modal("show");
                     $("#EditSlackToken").val(SlackToken);
