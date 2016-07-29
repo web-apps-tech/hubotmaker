@@ -73,8 +73,7 @@ function showAPIKey(APIKey){
 
     $(".RegisterCompleted").removeClass("hidden");
     $(".login-form").addClass("hidden");
-    $(".api-key").text(APIKey);
-    $(".api-key").val(APIKey);
+    $.cookie("SESSID",APIKey,{expires: 1, path: "/"})
 
 }
 
