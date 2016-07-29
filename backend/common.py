@@ -205,8 +205,8 @@ class Note(object):
         self.hubot_name = hubot_name
 
     def set(self, text):
-        query = 'UPDATE notes SET note=%s WHERE hubot_name=%s;'
-        check_query = 'SELECT * FROM notes WHERE hubot_name=%s;'
+        query = 'UPDATE notes SET note=%s WHERE hubotname=%s;'
+        check_query = 'SELECT * FROM notes WHERE hubotname=%s;'
         initialize_query = 'INSERT INTO notes VALUES (%s, %s);'
         with DB.connect(**config.MySQL) as cursor:
             try:
@@ -235,7 +235,7 @@ class Note(object):
         return True
 
     def get(self):
-        query = 'SELECT note FROM notes WHERE hubot_name=%s;'
+        query = 'SELECT note FROM notes WHERE hubotname=%s;'
         with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
             try:
                 cursor.execute(
