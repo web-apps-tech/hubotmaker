@@ -177,6 +177,7 @@ $(document).ready(function() {
                 });
                 $(".delete").on("click", function(e) {
                   var hubotId = $("#edit-modal-hubot-id").text();
+                  console.log(hubotId);
                      $('#EditModal').modal("hide");
                      $("#delete-hubot-id").text(hubotId);
                     $('#DeleteConfirm').modal("show");
