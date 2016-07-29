@@ -177,12 +177,13 @@ function saveMemo(e) {
     var APIKey = $.cookie("SESSID");
     var hubotId = e.target.id.split("_")[1];
     var memoId = "#memo_" + hubotId;
+    var memoText = $(memoId).val();
     $.ajax({
         type: "POST",
         url: ApiEndPoint + "/hubot/" + hubotId + "/note",
         data: {
             apikey: APIKey,
-            text: $(memoId).val()
+            text: memoText
         },
         dataType: "json",
         success: function(data) {
