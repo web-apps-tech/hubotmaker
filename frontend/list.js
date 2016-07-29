@@ -221,9 +221,11 @@ $(document).ready(function() {
                     var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                     if(hubotStatus == hubotStatusOn){
-                      $(".delete").addClass("disabled");
+                      //$(".delete").addClass("disabled");
+                      $(".delete").prop("disabled", true);
                     }else{
-                      $(".delete").removeClass("disabled");
+                      //$(".delete").removeClass("disabled");
+                      $(".delete").prop("disabled", false);
                     }
                     $('#EditModal').modal("show");
                     $("#edit-modal-hubot-id").text(hubotId);
