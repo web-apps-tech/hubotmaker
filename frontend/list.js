@@ -9,7 +9,25 @@ $(".delete").on("click", function() {
 var ApiEndPoint = "http://133.242.53.17";
 
 
-function setHubotEnvs() {}
+function getHubotEnvs(APIKey, hubotId) {
+  var envs;
+  $.ajax({
+    type: "GET",
+    url: ApiEndPoint + "/hubot/" + hubotId + "/env",
+    data: {
+      apikey: APIKey,
+    },
+    dataType: "json",
+    async: false,
+    success: function(data){
+      if (data.status){
+        envs = data.message;
+      }
+    }
+
+  });
+  return envs;
+}
 
 
 function generateTbody(hubotId) {
@@ -101,11 +119,13 @@ $(document).ready(function() {
                     $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                     getStatus(SESSID, hubotIds[i]);
                 }
-                $(".edit").on("click", function(e) {
-                    var SlackToken = e.target.parentNode.parentNode.children[0].textContent;
-                    console.log(SlackToken);
+                $(".edit").on("click", function(e,SESSID) {
+                    var hubotId = e.target.parentNode.parentNode.children[0].textContent;
+                    var hubotEnvs = getHubotEnvs(SESSID,hubotId);
+                    var slackToken = hubotEnvs[0];
+                    console.log(slackToken);
                     $('#EditModal').modal("show");
-                    $("#EditSlackToken").val(SlackToken);
+                    $("#EditSlackToken").val(slackToken);
                 });
                 setAvailableScripts();
             }
