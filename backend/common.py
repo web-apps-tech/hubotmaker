@@ -207,8 +207,6 @@ class Note(object):
         self.hubotname = hubotname
 
     def set(self, text):
-        if re.match('[^a-zA-Z0-9 -,.+:;/&@]', text):
-            raise Exception('No valid char')
         query = 'UPDATE notes SET note=%s WHERE hubotname=%s;'
         check_query = 'SELECT * FROM notes WHERE hubotname=%s;'
         initialize_query = 'INSERT INTO notes VALUES (%s, %s);'

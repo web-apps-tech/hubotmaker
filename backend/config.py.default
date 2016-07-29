@@ -10,7 +10,8 @@ MySQL = {
     'host': 'localhost',
     "db": 'hubot_service',
     'user': '',
-    'passwd': ''
+    'passwd': '',
+    'charset': 'utf8'
 }
 REDIS_INFO = {
     'host': 'localhost',
