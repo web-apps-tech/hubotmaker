@@ -49,7 +49,7 @@ function generateCheckboxes(prefix,scriptName) {
 
     divHTML += "<div class=\"checkbox\">\n";
     divHTML += "<label id=\"" + prefix + "_" + scriptName + "\">";
-    divHTML += "<input type=\"checkbox\">\n";
+    divHTML += "<input type=\"checkbox\" id=\"" + prefix + "_" + scriptName + "_cb" + "\">\n";
     divHTML += scriptName + "</label>";
     divHTML += "</div>\n";
 
@@ -126,12 +126,13 @@ $(document).ready(function() {
                     $("#EditSlackToken").val(slackToken);
                     var checkboxes = $("#edit-functions .checkbox label");
                     for (var i=0; i < checkboxes.length; i++){
-                      var scriptName = checkboxes[i].id.split('_')[1]
+                      var scriptName = checkboxes[i].id.split('_')[1];
                       console.log("scriptName:" + scriptName);
+                      var cbId = "#" + "edit_" + scriptName + "_cb";
                       if(hubotEnvs[scriptName]){
-                          $("#" + checkboxes[i].id).prop("checked",true);
+                        $(cbId).prop("checked",true);
                       }else{
-                          $("#" + checkboxes[i].id).prop("checked",false);
+                        $(cbId).prop("checked",false);
                       }
 
                     }
