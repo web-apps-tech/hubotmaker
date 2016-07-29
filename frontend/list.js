@@ -277,12 +277,10 @@ $(document).ready(function() {
                         $(".memo-save").on("click", saveMemo);
                     }
                     $(".edit").on("click", function(e) {
-                      console.log(e);
                         var hubotId = e.target.parentNode.parentNode.children[0].textContent;
-                        var hubotStatus = e.target.parentNode.parentNode.children[1].textContent;
+                        var hubotStatus = e.target.parentNode.parentNode.children[2].textContent;
                         var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                         var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
-                        console.log(hubotStatus);
                         if (hubotStatus == hubotStatusOn) {
                             $(".delete").prop("disabled", true);
                         } else {
