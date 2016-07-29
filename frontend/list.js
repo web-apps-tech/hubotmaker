@@ -146,7 +146,8 @@ function createHubot(APIKey, slackToken, scriptEnvs) {
         dataType: "json",
         success: function(data) {
             if (data.status) {
-                alert("created");
+                $('#CreateModal').modal("hide");
+                location.reload(true);
             }
         }
     });
