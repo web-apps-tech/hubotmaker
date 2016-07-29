@@ -44,13 +44,12 @@ function generateTbody(hubotId) {
     return (listHTML);
 }
 
-function generateCheckboxes(scriptName) {
+function generateCheckboxes(prefix,scriptName) {
     var divHTML = "\n"
 
     divHTML += "<div class=\"checkbox\">\n";
-    divHTML += "<label>\n";
-    divHTML += "<input type=\"checkbox\">" + scriptName + "\n";
-    divHTML += "</label>\n";
+    divHTML += "<label for=\"" + prefix + "_" + scriptName + ">" + scriptName + "</label>\n";
+    divHTML += "<input type=\"checkbox\" name=\"" + prefix + "_" + scriptName + "\">\n";
     divHTML += "</div>\n";
 
     return (divHTML);
@@ -93,8 +92,8 @@ function setAvailableScripts() {
         success: function(data) {
             if (data.status) {
                 for (var i = 0; i < data.message.length; i++) {
-                    $("#create-functions").append(generateCheckboxes(data.message[i]));
-                    $("#edit-functions").append(generateCheckboxes(data.message[i]));
+                    $("#create-functions").append(generateCheckboxes("create",data.message[i]));
+                    $("#edit-functions").append(generateCheckboxes("edit",data.message[i]));
                 }
             }
         }
