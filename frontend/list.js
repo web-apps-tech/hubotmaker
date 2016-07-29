@@ -2,7 +2,6 @@ $(".create-new").on("click", function() {
     $('#CreateModal').modal("show");
 });
 $(".delete-modal-button").on("click", function() {
-  console.log("oppai");
     var APIKey = $.cookie("SESSID");
     var hubotId = $("#edit-modal-hubot-id").text();
     $.ajax({
@@ -14,7 +13,8 @@ $(".delete-modal-button").on("click", function() {
         dataType: "json",
         success: function(data) {
             if (data.status) {
-                console.log(data.message);
+                $('#DeleteConfirm').modal("hide");
+                location.reload(true);
             }
 
         }
@@ -203,6 +203,7 @@ $(document).ready(function() {
                     $('#EditModal').modal("hide");
                     $("#delete-hubot-id").text(hubotId);
                     $('#DeleteConfirm').modal("show");
+
                 });
                 setAvailableScripts();
             }
