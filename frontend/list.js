@@ -122,7 +122,7 @@ $(document).ready(function() {
                 $(".edit").on("click", function(e,SESSID) {
                     var hubotId = e.target.parentNode.parentNode.children[0].textContent;
                     var hubotEnvs = getHubotEnvs(SESSID,hubotId);
-                    var slackToken = hubotEnvs[0];
+                    var slackToken = hubotEnvs;
                     console.log(slackToken);
                     $('#EditModal').modal("show");
                     $("#EditSlackToken").val(slackToken);
