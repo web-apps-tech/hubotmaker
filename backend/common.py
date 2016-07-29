@@ -221,7 +221,7 @@ class Note(object):
                 try:
                     cursor.execute(
                         initialize_query,
-                        (self.hubotname, )
+                        (self.hubotname, '')
                     )
                 except:
                     raise Exception('init note error')
