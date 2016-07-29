@@ -103,7 +103,7 @@ $(document).ready(function() {
                 }
                 $(".edit").on("click", function(e) {
                     console.log(e);
-                    console.log(e.target.parentNode.parentNode.children);
+                    console.log(e.target.parentNode.parentNode.children[0]);
                     $('#EditModal').modal("show");
                 });
                 setAvailableScripts();
