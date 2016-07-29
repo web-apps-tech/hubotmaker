@@ -9,7 +9,9 @@ $("#create-submit").on("click",function(){
   var tags = $("#create-functions .checkbox label");
   for(var i=0; i < tags.length; i++){
     var checkboxId = "#" + tags[i].children[0].id;
-      console.log($(checkboxId).prop("checked"));
+      if($(checkboxId).prop("checked")){
+        console.log(tags[i].id);
+      }
   }
 
 });
