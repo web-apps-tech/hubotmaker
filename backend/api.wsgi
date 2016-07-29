@@ -99,10 +99,13 @@ def api_delete_user(params, user):
 @param(require=['slack_token'], option=['script_env'])
 def api_create_hubot(params, user):
     u = User(user)
-    h = Hubot.create(
-        slack_token=params['slack_token'],
-        script_env=params.get('script_env')
-    )
+    try:
+        h = Hubot.create(
+            slack_token=params['slack_token'],
+            script_env=params.get('script_env')
+        )
+    except Exception as err:
+        return failed(error=str(err))
     if h.last_response.status_code in [200, 201]:
         u.add_hubot(h.name)
         return success(name=h.name)

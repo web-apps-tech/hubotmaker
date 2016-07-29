@@ -58,6 +58,8 @@ class Hubot(object):
         endpoint = '/containers/create'
         name = str(uuid4())
         db = str(uuid4())
+        if not re.match('xoxb-...........-........................', slack_token):
+            raise Exception('Slack token not valid')
         if isinstance(script_env, list):
             script_env = ["{0}=1".format(e) for e in script_env]
         elif isinstance(script_env, str):
