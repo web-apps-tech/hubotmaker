@@ -16,17 +16,17 @@ function UserRegistSubmit() {
             username: username,
             password: password
         },
-	    dataType: "json",
+        dataType: "json",
         success: function(data) {
-		console.log(data);
-    		if (data.status) {
+
+            if (data.status) {
                 UserActivate(username, password);
             } else {
-		$(".err-msg").removeClass("hidden");
+                $(".err-msg").removeClass("hidden");
                 $("#Username").parent("div").addClass("has-error");
                 $("#Password").parent("div").addClass("has-error");
             }
-	}
+        }
     });
 }
 
@@ -40,12 +40,12 @@ function UserActivate(username, password) {
             username: username,
             password: password
         },
-	    dataType: "json",
+        dataType: "json",
         success: function(data) {
             if (data.status) {
                 GenerateAPIKey(username, password);
             }
-	 }
+        }
     });
 }
 
@@ -59,21 +59,24 @@ function GenerateAPIKey(username, password) {
             username: username,
             password: password
         },
-	    dataType: "json",
+        dataType: "json",
         success: function(data) {
             if (data.status) {
                 showAPIKey(data.apikey);
             }
-	 }
+        }
     });
 
 }
 
-function showAPIKey(APIKey){
+function showAPIKey(APIKey) {
 
     $(".RegisterCompleted").removeClass("hidden");
     $(".login-form").addClass("hidden");
-    $.cookie("SESSID",APIKey,{expires: 1, path: "/"})
+    $.cookie("SESSID", APIKey, {
+        expires: 1,
+        path: "/"
+    })
 
 }
 
