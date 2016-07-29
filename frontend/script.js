@@ -38,7 +38,7 @@ function UserDeleteSubmit(){
   var passwordForm = $("#delete-user-password")
   $.ajax({
       type: "DELETE",
-      url: ApiEndPoint + "user",
+      url: ApiEndPoint + "/user",
       cache: false,
       data: {
           username: usernameForm.val(),
