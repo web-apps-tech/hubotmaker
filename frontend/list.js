@@ -127,9 +127,9 @@ $(document).ready(function() {
                     var checkboxes = $("#edit-functions .checkbox label");
                     for (var i=0; i < checkboxes.length; i++){
                       var scriptName = checkboxes[i].id.split('_')[1]
-                      console.log("scriptName": + scriptName);
+                      console.log("scriptName:" + scriptName);
                       if(hubotEnvs[scriptName]){
-                        console.log("scriptName: found");
+                          console.log("scriptName: found");
                       }
 
                     }
