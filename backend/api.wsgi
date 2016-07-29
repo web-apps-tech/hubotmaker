@@ -166,7 +166,7 @@ def api_remove_hubot(name, user):
         return failed(error=str(err))
     h.remove()
     if h.last_response.status_code == 204:
-        u.delete_hubot()
+        u.delete_hubot(name)
         return success()
     else:
         return failed(error=h.last_response.text)
