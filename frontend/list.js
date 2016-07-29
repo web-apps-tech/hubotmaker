@@ -156,6 +156,23 @@ function getStatus(APIKey, hubotId) {
     });
 }
 
+function setMemo(APIKey, hubotId){
+  $.ajax({
+  type: "GET",
+  url: ApiEndPoint + "/hubot/" + hubotId + "/note",
+  data: {
+    apikey: APIKey
+  },
+  dataType: "json",
+  success: function(data){
+    var memoId = "#memo_" + hubotId;
+    if(data.status){
+      $(memoId).val(data.message);
+    }
+  }
+  });
+}
+
 function setAvailableScripts() {
     $.ajax({
         type: "GET",
@@ -229,6 +246,7 @@ $(document).ready(function() {
                     for (var i = 0; i < hubotIds.length; i++) {
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                         getStatus(SESSID, hubotIds[i]);
+                        setMemo(SESSID,hubotIds[i]);
                         $(".start").on("click", function(e) {
                             startHubot(SESSID, e.target.id.split("_")[1]);
                         });
@@ -239,7 +257,6 @@ $(document).ready(function() {
                     $(".edit").on("click", function(e) {
                         var hubotId = e.target.parentNode.parentNode.children[0].textContent;
                         var hubotStatus = e.target.parentNode.parentNode.children[1].textContent;
-                        console.log(hubotStatus);
                         var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                         var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                         if (hubotStatus == hubotStatusOn) {
