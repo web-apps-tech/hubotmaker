@@ -43,10 +43,9 @@ def api_create_user(params):
         return failed()
 
 @delete('/user')
-@root
-@param(require=['username'])
-def api_delete_user(params, user):
-    u = User(params['username'])
+@password
+def api_delete_user(user):
+    u = User(user)
     if u.remove():
         return success()
     else:
