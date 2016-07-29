@@ -124,7 +124,7 @@ $(document).ready(function() {
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                     $('#EditModal').modal("show");
                     $("#EditSlackToken").val(slackToken);
-                    var checkboxes = $("#edit-functions .checkbox");
+                    var checkboxes = $("#edit-functions .checkbox label");
                     for (var i=0; i < checkboxes.length; i++){
                       console.log(checkboxes[i].textContent);
                     }
