@@ -333,7 +333,7 @@ class User(object):
         if row:
             return bool(row['activate'])
         else:
-            return failed('No such User')
+            return False
 
     def _get_hubot_list(self):
         query = 'SELECT hubotname FROM hubots WHERE username=%s;'
