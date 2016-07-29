@@ -6,9 +6,9 @@ $(".delete").on("click", function() {
 });
 $("#create-submit").on("click",function(){
   console.log($("#SlackToken").val());
-  var divTags = $("#create-functions .checkbox");
-  for(var i=0; i < divTags.length; i++){
-      console.log(divTags[i].children);
+  var tags = $("#create-functions .checkbox label");
+  for(var i=0; i < tags.length; i++){
+      console.log(tags);
   }
 
 });
