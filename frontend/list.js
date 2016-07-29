@@ -85,7 +85,8 @@ function generateTbody(hubotId) {
     var listHTML = "\n";
     listHTML += "<tr>\n";
     listHTML += "<td>" + hubotId + "</td>\n";
-    listHTML += "<td><div class=\"form-inline\"><input class=\"form-control\" id='memo_" + hubotId + "' placeholder=\"Note....\"><input type=\"button\" class=\"form-control memo-save\" value=\"Save\" ></div></td>\n";
+    listHTML += "<td><div class=\"form-inline\"><input class=\"form-control\" id='memo_" + hubotId + "' placeholder=\"Note....\">"
+    listHTML += "<input type=\"button\" class=\"form-control memo-save\" value=\"Save\" id='memo_" + hubotId + "_button'></div></td>\n";
     listHTML += "<td id='st_" + hubotId + "'>Unknown</td>\n";
     listHTML += "<td>\n";
     listHTML += "<button class=\"btn btn-default edit\">Edit</button>\n";
@@ -177,13 +178,12 @@ function saveMemo(e) {
     var APIKey = $.cookie("SESSID");
     var hubotId = e.target.id.split("_")[1];
     var memoId = "#memo_" + hubotId;
-    var memoText = $(memoId).val();
     $.ajax({
         type: "POST",
         url: ApiEndPoint + "/hubot/" + hubotId + "/note",
         data: {
             apikey: APIKey,
-            text: memoText
+            text: $(memoId).val()
         },
         dataType: "json",
         success: function(data) {
