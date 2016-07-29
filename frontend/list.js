@@ -1,3 +1,6 @@
+var hubotStatusOn = "ON";
+var hubotStatusOff = "OFF";
+
 $(".create-new").on("click", function() {
     $('#CreateModal').modal("show");
 });
@@ -115,16 +118,16 @@ function getStatus(APIKey, hubotId) {
         dataType: "json",
         success: function(data) {
             if (data.status) {
-                var status = data.message;
+                var hubotStatus = data.message;
                 var st_id = "#st_" + hubotId;
                 var start_id = "#start_" + hubotId;
                 var stop_id = "#stop_" + hubotId;
-                if (status) {
-                    $(st_id).text("ON");
+                if (hubotStatus) {
+                    $(st_id).text(hubotStatusOn);
                     $(start_id).addClass("hidden");
                     $(stop_id).removeClass("hidden");
                 } else {
-                    $(st_id).text("OFF");
+                    $(st_id).text(hubotStatusOff);
                     $(start_id).removeClass("hidden");
                     $(stop_id).addClass("hidden");
                 }
@@ -217,6 +220,11 @@ $(document).ready(function() {
                     console.log(hubotStatus);
                     var hubotEnvs = getHubotEnvs(SESSID, hubotId);
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
+                    if(hubotStatus == hubotStatusOn){
+                      $(".delete").addClass("disabled");
+                    }else{
+                      $(".delete").removeClass("disabled");
+                    }
                     $('#EditModal').modal("show");
                     $("#edit-modal-hubot-id").text(hubotId);
                     $("#EditSlackToken").val(slackToken);
