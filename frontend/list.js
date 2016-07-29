@@ -4,7 +4,9 @@ $(".create-new").on("click", function() {
 $(".delete").on("click", function() {
     $('#DeleteConfirm').modal("show");
 });
-
+$("#create-submit").on("click",function(){
+  console.log($("#SlackToken"));
+});
 
 var ApiEndPoint = "http://133.242.53.17";
 
