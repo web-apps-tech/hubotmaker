@@ -106,7 +106,7 @@ function generateCheckboxes(prefix, scriptName) {
 
     return (divHTML);
 }
-function getUsername (){
+function setUsername (){
   var APIKey = $.cookie("SESSID");
 
   $.ajax({
@@ -118,7 +118,7 @@ function getUsername (){
   dataType: "json",
   success: function(data){
     if(data.status){
-      console.log(data.message);
+      $("username").text(data.message);
     }
   }
   });
@@ -222,7 +222,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 var hubotIds = data.message;
-                getUsername ();
+                setUsername ();
                 for (var i = 0; i < hubotIds.length; i++) {
                     $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                     getStatus(SESSID, hubotIds[i]);
