@@ -8,6 +8,11 @@ $(".delete").on("click", function() {
 
 var ApiEndPoint = "http://133.242.53.17";
 
+
+function setHubotEnvs(){
+}
+
+
 function generateTbody(hubotId){
 var listHTML = "\n";
 listHTML += "<tr>\n" ;
@@ -73,7 +78,7 @@ function setAvailableScripts(){
 		for(var i=0;i < data.message.length; i++){
 		    $("#create-functions").append(generateCheckboxes(data.message[i]));
 		    $("#edit-functions").append(generateCheckboxes(data.message[i]));
-		}    
+		}
 	        console.log(data.message);
 	    }
 	}
@@ -96,9 +101,10 @@ $(document).ready(function(){
 		    for (var i=0; i < hubotIds.length; i++){
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                         getStatus(SESSID,hubotIds[i]);
-		    } 
-                    $(".edit").on("click", function() {
+		    }
+                    $(".edit").on("click", function(e) {
                         $('#EditModal').modal("show");
+                        alert(e);
                     });
 		    setAvailableScripts();
 	        }
