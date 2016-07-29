@@ -53,6 +53,12 @@ def api_delete_user(params, user):
         return failed()
 
 
+@get('/user')
+@apikey
+def api_get_username(user):
+    return success(user)
+
+
 @put('/user/activate')
 @param(require=['username', 'password'])
 def api_activate_user(params):
