@@ -174,6 +174,7 @@ function setMemo(APIKey, hubotId){
 }
 
 function saveMemo(e){
+  var APIKey = $.cookie("SESSID");
   var hubotId = e.target.id.split("_")[1];
   var memoId = "#memo_" + hubotId;
   $.ajax({
