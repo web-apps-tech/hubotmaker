@@ -75,7 +75,7 @@ function showAPIKey(APIKey) {
     $.cookie("SESSID", APIKey, {
         expires: 1,
         path: "/"
-    })
+    });
 
 }
 
