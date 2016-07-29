@@ -184,7 +184,7 @@ def api_update_hubot(params, name, user):
     except Exception as err:
         return failed(error=str(err))
     h.stop()
-    h.update(**options)
+    h.update(**params)
     if h.last_response.status_code in [200, 201]:
         h.start()
         if h.last_response.status_code == 204:
