@@ -48,8 +48,9 @@ function generateCheckboxes(prefix,scriptName) {
     var divHTML = "\n"
 
     divHTML += "<div class=\"checkbox\">\n";
-    divHTML += "<label for=\"" + prefix + "_" + scriptName + "\">" + scriptName + "</label>\n";
-    divHTML += "<input type=\"checkbox\" name=\"" + prefix + "_" + scriptName + "\">\n";
+    divHTML += "<label id=\"" + prefix + "_" + scriptName + "\">";
+    divHTML += "<input type=\"checkbox\">\n";
+    divHTML += scriptName + "</label>";
     divHTML += "</div>\n";
 
     return (divHTML);
@@ -93,7 +94,7 @@ function setAvailableScripts() {
             if (data.status) {
                 for (var i = 0; i < data.message.length; i++) {
                     $("#create-functions").append(generateCheckboxes("create",data.message[i]));
-                    $("#edit-functions").append(generateCheckboxes("edit",data.message[i]));
+                    $("#edit-functions").append(generateCheckboxes("edit", data.message[i]));
                 }
             }
         }
@@ -125,7 +126,7 @@ $(document).ready(function() {
                     $("#EditSlackToken").val(slackToken);
                     var checkboxes = $("#edit-functions .checkbox label");
                     for (var i=0; i < checkboxes.length; i++){
-                      console.log(checkboxes[i]);
+                      console.log(checkboxes[i].id);
                     }
 
                 });
