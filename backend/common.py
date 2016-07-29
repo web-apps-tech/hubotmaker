@@ -464,7 +464,7 @@ def password(func):
                 user
             )
             row = cursor.fetchone()
-        if row['password'] != enhash(password.encode()).hexdigest():
+        if row and row['password'] != enhash(password.encode()).hexdigest():
             return AuthenticationError()
         return func(user=user, *a, **ka)
     return _
