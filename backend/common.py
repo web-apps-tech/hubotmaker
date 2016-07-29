@@ -459,11 +459,14 @@ def password(func):
         if user is None or password is None:
             return AuthenticationError()
         with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
-            cursor.execute(
-                'SELECT * FROM users WHERE username=%s;',
-                (user, )
-            )
-            row = cursor.fetchone()
+            try:
+                cursor.execute(
+                    'SELECT * FROM users WHERE username=%s;',
+                    (user, )
+                )
+                row = cursor.fetchone()
+            except Exception as err:
+                return failed(error=str(err))
         if row and row['password'] != enhash(password.encode()).hexdigest():
             return AuthenticationError()
         return func(user=user, *a, **ka)
