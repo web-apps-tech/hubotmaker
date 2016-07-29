@@ -236,7 +236,7 @@ def api_get_hubot_db(name):
 @post('/hubot/<name>/note')
 @apikey
 @param(require=['text'])
-def api_post_hubot_note(params, name):
+def api_post_hubot_note(params, name, user):
     h = Hubot(name)
     if h.enable:
         n = Note(name)
@@ -250,7 +250,7 @@ def api_post_hubot_note(params, name):
 
 @get('/hubot/<name>/note')
 @apikey
-def api_get_hubot_note(name):
+def api_get_hubot_note(name, user):
     h = Hubot(name)
     if h.enable:
         n = Note(name)
