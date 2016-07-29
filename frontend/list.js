@@ -102,6 +102,25 @@ function setAvailableScripts() {
 
 }
 
+function createHubot(APIKey,slackToken,scriptEnvs){
+  $.ajax({
+  type: "POST",
+  url: "/hubot",
+  data: {
+    apikey: APIKey,
+    slack_token: slackToken,
+    script_env: scriptEnvs
+  },
+  dataType: "json",
+  success: function(data){
+    if(data.status){
+      alert("created");
+    }
+  }
+  });
+}
+
+
 $(document).ready(function() {
     var SESSID = $.cookie("SESSID");
     if (SESSID !== undefined) {
