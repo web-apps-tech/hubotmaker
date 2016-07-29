@@ -35,8 +35,7 @@ function LoginError(){
 
 
 
-$("#Username").on("keyup", function(e) {
-  console.log(e.keyCode);
+$("#Username,#Password").on("keyup", function(e) {
 	if(e.keyCode === 13) {
 		$(".LoginButton").trigger("click");
 	}
