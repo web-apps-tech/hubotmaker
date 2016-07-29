@@ -1,20 +1,40 @@
 $(".create-new").on("click", function() {
     $('#CreateModal').modal("show");
 });
+$("#delete-modal-button").on("click", function() {
+    var APIKey = $.cookie("SESSID");
+    var hubotId = $("#edit-modal-hubot-id").text();
+    $.ajax({
+        type: "delete",
+        url: ApiEndPoint + "/hubot/" + hubotId,
+        data: {
+            apikey: APIKey
+        },
+        dataType: "json",
+        success: function(data) {
+            if (data.status) {
+                console.log(data.message);
+            }
 
-$("#create-submit").on("click",function(){
-  var APIKey = $.cookie("SESSID");
-  var envs = [];
-  var slackToken = $("#SlackToken").val();
-  var tags = $("#create-functions .checkbox label");
-  for(var i=0; i < tags.length; i++){
-    var checkboxId = "#" + tags[i].children[0].id;
-      if($(checkboxId).prop("checked")){
-        console.log(tags[i].id.split("_")[1]);
-        envs.push(tags[i].id.split("_")[1]);
-      }
-  }
-createHubot(APIKey,slackToken,envs);
+        }
+    });
+});
+
+
+
+$("#create-submit").on("click", function() {
+    var APIKey = $.cookie("SESSID");
+    var envs = [];
+    var slackToken = $("#SlackToken").val();
+    var tags = $("#create-functions .checkbox label");
+    for (var i = 0; i < tags.length; i++) {
+        var checkboxId = "#" + tags[i].children[0].id;
+        if ($(checkboxId).prop("checked")) {
+            console.log(tags[i].id.split("_")[1]);
+            envs.push(tags[i].id.split("_")[1]);
+        }
+    }
+    createHubot(APIKey, slackToken, envs);
 });
 
 var ApiEndPoint = "http://133.242.53.17";
@@ -113,22 +133,22 @@ function setAvailableScripts() {
 
 }
 
-function createHubot(APIKey,slackToken,scriptEnvs){
-  $.ajax({
-  type: "POST",
-  url: ApiEndPoint + "/hubot",
-  data: {
-    apikey: APIKey,
-    slack_token: slackToken,
-    script_env: JSON.stringify(scriptEnvs)
-  },
-  dataType: "json",
-  success: function(data){
-    if(data.status){
-      alert("created");
-    }
-  }
-  });
+function createHubot(APIKey, slackToken, scriptEnvs) {
+    $.ajax({
+        type: "POST",
+        url: ApiEndPoint + "/hubot",
+        data: {
+            apikey: APIKey,
+            slack_token: slackToken,
+            script_env: JSON.stringify(scriptEnvs)
+        },
+        dataType: "json",
+        success: function(data) {
+            if (data.status) {
+                alert("created");
+            }
+        }
+    });
 }
 
 
@@ -176,10 +196,10 @@ $(document).ready(function() {
 
                 });
                 $(".delete").on("click", function(e) {
-                  var hubotId = $("#edit-modal-hubot-id").text();
-                  console.log(hubotId);
-                     $('#EditModal').modal("hide");
-                     $("#delete-hubot-id").text(hubotId);
+                    var hubotId = $("#edit-modal-hubot-id").text();
+                    console.log(hubotId);
+                    $('#EditModal').modal("hide");
+                    $("#delete-hubot-id").text(hubotId);
                     $('#DeleteConfirm').modal("show");
                 });
                 setAvailableScripts();
