@@ -119,7 +119,7 @@ def api_start_hubot(name, user):
         return failed(error=str(err))
     h.start()
     if h.last_response.status_code == 204:
-        return success(name=h.name)
+        return success()
     elif h.last_response.status_code == 304:
         return failed(error="Given hubot already started")
     else:
@@ -135,7 +135,7 @@ def api_stop_hubot(name, user):
         return failed(error=str(err))
     h.stop()
     if h.last_response.status_code == 204:
-        return success(name=h.name)
+        return success()
     elif h.last_response.status_code == 304:
         return failed(error="Given hubot already stopped")
     else:
@@ -151,7 +151,7 @@ def api_restart_hubot(name, user):
         return failed(error=str(err))
     h.restart()
     if h.last_response.status_code == 204:
-        return success(name=h.name)
+        return success()
     else:
         return failed(error=h.last_response.text)
 
@@ -166,7 +166,7 @@ def api_remove_hubot(name, user):
         return failed(error=str(err))
     h.remove()
     if h.last_response.status_code == 204:
-        u.delete_hubot(h.name)
+        u.delete_hubot()
         return success()
     else:
         return failed(error=h.last_response.text)
