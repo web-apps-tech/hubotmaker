@@ -10,7 +10,7 @@ $("#create-submit").on("click",function(){
   for(var i=0; i < tags.length; i++){
     var checkboxId = "#" + tags[i].children[0].id;
       if($(checkboxId).prop("checked")){
-        console.log(tags[i].id.split("_"[1]));
+        console.log(tags[i].id.split("_")[1]);
       }
   }
 
