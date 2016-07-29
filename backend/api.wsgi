@@ -228,20 +228,25 @@ def api_get_hubot_db(name):
 @post('/hubot/<name>/note')
 @param(require=['text'])
 def api_post_hubot_note(params, name):
-    note = Note(name)
-    if note.set(params['text']):
-        return success()
-    return failed()
+    h = Hubot(name)
+    if h.enable:
+        n = Note(name)
+        if n.set(params['text']):
+            return success()
+        return failed(error='note insertion error')
+    return failed(error='No such Hubot')
 
 
 @get('/hubot/<name>/note')
 def api_get_hubot_note(name):
-    note = Note(name)
-    text = note.get()
-    if text is not None:
-        return success(text)
-    else:
-        return failed()
+    h = Hubot(name)
+    if h.enable:
+        n = Note(name)
+        text = n.get()
+        if text is not None:
+            return success(text)
+        return failed(error='note get error')
+    return failed(error='No such Hubot')
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
