@@ -110,12 +110,11 @@ def api_create_hubot(params, user):
         return failed(error=h.last_response.text)
 
 
-@post('/hubot/start')
+@post('/hubot/<name>/start')
 @apikey
-@param(require=['name'])
-def api_start_hubot(params, user):
+def api_start_hubot(name, user):
     try:
-        h = Hubot(params['name'])
+        h = Hubot(name)
     except Exception as err:
         return failed(error=str(err))
     h.start()
@@ -125,12 +124,11 @@ def api_start_hubot(params, user):
         return failed(error=h.last_response.text)
 
 
-@post('/hubot/stop')
+@post('/hubot/<name>/stop')
 @apikey
-@param(require=['name'])
-def api_stop_hubot(params, user):
+def api_stop_hubot(name, user):
     try:
-        h = Hubot(params['name'])
+        h = Hubot(name)
     except Exception as err:
         return failed(error=str(err))
     h.stop()
@@ -140,12 +138,11 @@ def api_stop_hubot(params, user):
         return failed(error=h.last_response.text)
 
 
-@post('/hubot/restart')
+@post('/hubot/<name>/restart')
 @apikey
-@param(require=['name'])
-def api_restart_hubot(params, user):
+def api_restart_hubot(name, user):
     try:
-        h = Hubot(params['name'])
+        h = Hubot(name)
     except Exception as err:
         return failed(error=str(err))
     h.restart()
@@ -155,13 +152,12 @@ def api_restart_hubot(params, user):
         return failed(error=h.last_response.text)
 
 
-@delete('/hubot')
+@delete('/hubot/<name>')
 @apikey
-@param(require=['name'])
-def api_remove_hubot(params, user):
+def api_remove_hubot(name, user):
     u = User(user)
     try:
-        h = Hubot(params['name'])
+        h = Hubot(name)
     except Exception as err:
         return failed(error=str(err))
     h.remove()
@@ -172,13 +168,12 @@ def api_remove_hubot(params, user):
         return failed(error=h.last_response.text)
 
 
-@put('/hubot')
+@put('/hubot/<name>')
 @apikey
-@param(require=['name'], option=['slack_token', 'script_env'])
-def api_update_hubot(params, user):
-    options = {k: v for k, v in params.items() if k != 'name'}
+@param(option=['slack_token', 'script_env'])
+def api_update_hubot(params, name, user):
     try:
-        h = Hubot(params['name'])
+        h = Hubot(name)
     except Exception as err:
         return failed(error=str(err))
     h.stop()
