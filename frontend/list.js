@@ -1,24 +1,7 @@
 $(".create-new").on("click", function() {
     $('#CreateModal').modal("show");
 });
-$("#delete-modal-button").on("click", function() {
-    var APIKey = $.cookie("SESSID");
-    var hubotId = $("#edit-modal-hubot-id").text();
-    $.ajax({
-        type: "delete",
-        url: ApiEndPoint + "/hubot/" + hubotId,
-        data: {
-            apikey: APIKey
-        },
-        dataType: "json",
-        success: function(data) {
-            if (data.status) {
-                console.log(data.message);
-            }
 
-        }
-    });
-});
 
 
 
@@ -201,6 +184,25 @@ $(document).ready(function() {
                     $('#EditModal').modal("hide");
                     $("#delete-hubot-id").text(hubotId);
                     $('#DeleteConfirm').modal("show");
+                });
+                $("#delete-modal-button").on("click", function() {
+                  console.log("oppai");
+                    var APIKey = $.cookie("SESSID");
+                    var hubotId = $("#edit-modal-hubot-id").text();
+                    $.ajax({
+                        type: "delete",
+                        url: ApiEndPoint + "/hubot/" + hubotId,
+                        data: {
+                            apikey: APIKey
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.status) {
+                                console.log(data.message);
+                            }
+
+                        }
+                    });
                 });
                 setAvailableScripts();
             }
