@@ -13,7 +13,7 @@ body {
 .new-hubot{
   text-align: right;
 }
-.delete-modal-button{
+.delete{
   position:absolute;
   left: 15px;
 }
