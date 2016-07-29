@@ -2,7 +2,9 @@ var ApiEndPoint = "http://133.242.53.17/";
 
 $(".UserRegistSubmit").on("click", UserRegistSubmit);
 
-
+$(".user-delete").on("click",function(){
+  $("#UserDeleteConfirm").modal("show");
+});
 
 
 function UserRegistSubmit() {
