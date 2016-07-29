@@ -50,7 +50,7 @@ $("#edit-submit").on("click", function() {
             envs.push(tags[i].id.split("_")[1]);
         }
     }
-    createHubot(APIKey, slackToken, envs);
+    updateHubot(APIKey, slackToken, envs);
 });
 
 var ApiEndPoint = "http://133.242.53.17";
