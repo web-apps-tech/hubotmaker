@@ -409,6 +409,16 @@ class Service(object):
         available.sort()
         return available
 
+    def get_count_active_user(self):
+        query = 'select count(distinct username) FROM hubot_service.hubots;'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(query)
+                rows = cursor.fetchone()
+            except:
+                return None
+        return rows[0]
+
 
 def failed(msg='Failed', **ka):
     return json.dumps(dict(
