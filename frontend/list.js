@@ -21,6 +21,7 @@ function getHubotEnvs(APIKey, hubotId) {
     async: false,
     success: function(data){
       if (data.status){
+        console.log(data.message);
         envs = data.message;
       }
     }
