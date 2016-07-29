@@ -200,6 +200,56 @@ class Hubot(object):
         return json.loads(self.last_response.text)['State']['Status']
 
 
+class Note(object):
+    def __init__(self, hubot_name):
+        self.hubot_name = hubot_name
+
+    def set(self, text):
+        query = 'UPDATE notes SET note=%s WHERE hubot_name=%s;'
+        check_query = 'SELECT * FROM notes WHERE hubot_name=%s;'
+        initialize_query = 'INSERT INTO notes VALUES (%s, %s);'
+        with DB.connect(**config.MySQL) as cursor:
+            try:
+                cursor.execute(
+                    check_query,
+                    (self.hubot_name, )
+                )
+                row = cursor.fetchone()
+            except:
+                return False
+            if not row:
+                try:
+                    cursor.execute(
+                        initialize_query,
+                        (self.hubot_name, )
+                    )
+                except:
+                    return False
+            try:
+                cursor.execute(
+                    query,
+                    (text, self.hubot_name)
+                )
+            except:
+                return False
+        return True
+
+    def get(self):
+        query = 'SELECT note FROM notes WHERE hubot_name=%s;'
+        with DB.connect(cursorclass=DC, **config.MySQL) as cursor:
+            try:
+                cursor.execute(
+                    query,
+                    (self.hubot_name, )
+                )
+                row = cursor.fetchone()
+            except:
+                return None
+        if row:
+            return row['note']
+        else:
+            return ''
+
 class User(object):
     def __init__(self, name):
         self.name = name
