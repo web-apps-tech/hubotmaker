@@ -124,7 +124,7 @@ $(document).ready(function() {
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
                     $('#EditModal').modal("show");
                     $("#EditSlackToken").val(slackToken);
-                    console.log($("#edit-functions");
+                    console.log($("#edit-functions"));
                 });
                 setAvailableScripts();
             }
