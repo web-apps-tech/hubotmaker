@@ -21,7 +21,6 @@ function getHubotEnvs(APIKey, hubotId) {
     async: false,
     success: function(data){
       if (data.status){
-        console.log(data.message);
         envs = data.message;
       }
     }
@@ -97,7 +96,6 @@ function setAvailableScripts() {
                     $("#create-functions").append(generateCheckboxes(data.message[i]));
                     $("#edit-functions").append(generateCheckboxes(data.message[i]));
                 }
-                console.log(data.message);
             }
         }
     });
@@ -124,7 +122,6 @@ $(document).ready(function() {
                     var hubotId = e.target.parentNode.parentNode.children[0].textContent;
                     var hubotEnvs = getHubotEnvs(SESSID,hubotId);
                     var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
-                    console.log(slackToken);
                     $('#EditModal').modal("show");
                     $("#EditSlackToken").val(slackToken);
                 });
