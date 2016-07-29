@@ -5,15 +5,18 @@ $(".delete").on("click", function() {
     $('#DeleteConfirm').modal("show");
 });
 $("#create-submit").on("click",function(){
-  console.log($("#SlackToken").val());
+  var APIKey = $.cookie("SESSID");
+  var envs;
+  var slackToken = $("#SlackToken").val();
   var tags = $("#create-functions .checkbox label");
   for(var i=0; i < tags.length; i++){
     var checkboxId = "#" + tags[i].children[0].id;
       if($(checkboxId).prop("checked")){
         console.log(tags[i].id.split("_")[1]);
+        envs.push(tags[i].id.split("_")[1]);
       }
   }
-
+createHubot(APIKey,slackToken,envs);
 });
 
 var ApiEndPoint = "http://133.242.53.17";
