@@ -126,7 +126,8 @@ $(document).ready(function() {
                     $("#EditSlackToken").val(slackToken);
                     var checkboxes = $("#edit-functions .checkbox label");
                     for (var i=0; i < checkboxes.length; i++){
-                      console.log(checkboxes[i].id);
+                      console.log("id:" + checkboxes[i].id.split('_')[1]);
+
                     }
 
                 });
