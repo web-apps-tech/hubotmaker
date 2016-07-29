@@ -48,7 +48,7 @@ function generateCheckboxes(prefix,scriptName) {
     var divHTML = "\n"
 
     divHTML += "<div class=\"checkbox\">\n";
-    divHTML += "<label for=\"" + prefix + "_" + scriptName + ">" + scriptName + "</label>\n";
+    divHTML += "<label for=\"" + prefix + "_" + scriptName + "\">" + scriptName + "</label>\n";
     divHTML += "<input type=\"checkbox\" name=\"" + prefix + "_" + scriptName + "\">\n";
     divHTML += "</div>\n";
 
