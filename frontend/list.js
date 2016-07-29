@@ -106,22 +106,23 @@ function generateCheckboxes(prefix, scriptName) {
 
     return (divHTML);
 }
-function setUsername (){
-  var APIKey = $.cookie("SESSID");
 
-  $.ajax({
-  type: "GET",
-  url: ApiEndPoint + "/user",
-  data: {
-    apikey: APIKey
-  },
-  dataType: "json",
-  success: function(data){
-    if(data.status){
-      $(".username").text(data.message);
-    }
-  }
-  });
+function setUsername() {
+    var APIKey = $.cookie("SESSID");
+
+    $.ajax({
+        type: "GET",
+        url: ApiEndPoint + "/user",
+        data: {
+            apikey: APIKey
+        },
+        dataType: "json",
+        success: function(data) {
+            if (data.status) {
+                $(".username").text(data.message);
+            }
+        }
+    });
 
 }
 
@@ -221,57 +222,65 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(data) {
-                var hubotIds = data.message;
-                setUsername ();
-                for (var i = 0; i < hubotIds.length; i++) {
-                    $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
-                    getStatus(SESSID, hubotIds[i]);
-                    $(".start").on("click", function(e) {
-                        startHubot(SESSID, e.target.id.split("_")[1]);
-                    });
-                    $(".stop").on("click", function(e) {
-                        stopHubot(SESSID, e.target.id.split("_")[1]);
-                    });
-                }
-                $(".edit").on("click", function(e) {
-                    var hubotId = e.target.parentNode.parentNode.children[0].textContent;
-                    var hubotStatus = e.target.parentNode.parentNode.children[1].textContent;
-                    console.log(hubotStatus);
-                    var hubotEnvs = getHubotEnvs(SESSID, hubotId);
-                    var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
-                    if(hubotStatus == hubotStatusOn){
-                      //$(".delete").addClass("disabled");
-                      $(".delete").prop("disabled", true);
-                    }else{
-                      //$(".delete").removeClass("disabled");
-                      $(".delete").prop("disabled", false);
+                if (data.status) {
+                    var hubotIds = data.message;
+                    setUsername();
+                    for (var i = 0; i < hubotIds.length; i++) {
+                        $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
+                        getStatus(SESSID, hubotIds[i]);
+                        $(".start").on("click", function(e) {
+                            startHubot(SESSID, e.target.id.split("_")[1]);
+                        });
+                        $(".stop").on("click", function(e) {
+                            stopHubot(SESSID, e.target.id.split("_")[1]);
+                        });
                     }
-                    $('#EditModal').modal("show");
-                    $("#edit-modal-hubot-id").text(hubotId);
-                    $("#EditSlackToken").val(slackToken);
-                    var checkboxes = $("#edit-functions .checkbox label");
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        var scriptName = checkboxes[i].id.split('_')[1];
-                        console.log("scriptName:" + scriptName);
-                        var checkboxbId = "#" + "edit_" + scriptName + "_cb";
-                        if (hubotEnvs[scriptName]) {
-                            $(checkboxbId).prop("checked", true);
+                    $(".edit").on("click", function(e) {
+                        var hubotId = e.target.parentNode.parentNode.children[0].textContent;
+                        var hubotStatus = e.target.parentNode.parentNode.children[1].textContent;
+                        console.log(hubotStatus);
+                        var hubotEnvs = getHubotEnvs(SESSID, hubotId);
+                        var slackToken = hubotEnvs["HUBOT_SLACK_TOKEN"];
+                        if (hubotStatus == hubotStatusOn) {
+                            //$(".delete").addClass("disabled");
+                            $(".delete").prop("disabled", true);
                         } else {
-                            $(checkboxbId).prop("checked", false);
+                            //$(".delete").removeClass("disabled");
+                            $(".delete").prop("disabled", false);
+                        }
+                        $('#EditModal').modal("show");
+                        $("#edit-modal-hubot-id").text(hubotId);
+                        $("#EditSlackToken").val(slackToken);
+                        var checkboxes = $("#edit-functions .checkbox label");
+                        for (var i = 0; i < checkboxes.length; i++) {
+                            var scriptName = checkboxes[i].id.split('_')[1];
+                            console.log("scriptName:" + scriptName);
+                            var checkboxbId = "#" + "edit_" + scriptName + "_cb";
+                            if (hubotEnvs[scriptName]) {
+                                $(checkboxbId).prop("checked", true);
+                            } else {
+                                $(checkboxbId).prop("checked", false);
+                            }
+
                         }
 
-                    }
+                    });
+                    $(".delete").on("click", function(e) {
+                        var hubotId = $("#edit-modal-hubot-id").text();
+                        console.log(hubotId);
+                        $('#EditModal').modal("hide");
+                        $("#delete-hubot-id").text(hubotId);
+                        $('#DeleteConfirm').modal("show");
 
-                });
-                $(".delete").on("click", function(e) {
-                    var hubotId = $("#edit-modal-hubot-id").text();
-                    console.log(hubotId);
-                    $('#EditModal').modal("hide");
-                    $("#delete-hubot-id").text(hubotId);
-                    $('#DeleteConfirm').modal("show");
-
-                });
-                setAvailableScripts();
+                    });
+                    setAvailableScripts();
+                } else {
+                    $.cookie("SESSID", '', {
+                        expires: -1,
+                        path: "/"
+                    });
+                    location.href = "../login/";
+                }
             }
         });
     } else {
