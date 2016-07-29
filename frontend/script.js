@@ -18,7 +18,6 @@ function UserRegistSubmit() {
         },
         dataType: "json",
         success: function(data) {
-
             if (data.status) {
                 UserActivate(username, password);
             } else {
