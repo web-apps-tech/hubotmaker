@@ -106,6 +106,24 @@ function generateCheckboxes(prefix, scriptName) {
 
     return (divHTML);
 }
+function getUsername (){
+  var APIKey = $.cookie("SESSID");
+
+  $.ajax({
+  type: "GET",
+  url: ApiEndPoint + "/user",
+  data: {
+    apikey: APIKey
+  },
+  dataType: "json",
+  success: function(data){
+    if(data.status){
+      console.log(data.message);
+    }
+  }
+  });
+
+}
 
 function getStatus(APIKey, hubotId) {
     var status = "OPPAI";
