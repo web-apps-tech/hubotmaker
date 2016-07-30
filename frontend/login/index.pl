@@ -3,6 +3,10 @@
 use HTML::Template;
 use CGI qw/:standard/;
 
+my $routing;
+my @params = split(/\//,$ENV{'PATH_INFO'});
+$routing = "/".$params[1];
+
 my $path_prefix = "../";
 my $title = "Hubot Maker :: User Login";
 
@@ -32,3 +36,5 @@ print header(-type => "text/html",
     print  $head->output;
     print  $navbar->output;
     print  $login->output;
+
+      print "routing:".$routing;
