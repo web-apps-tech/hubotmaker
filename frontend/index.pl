@@ -5,7 +5,7 @@ use CGI qw/:standard/;
 
 my $routing;
 my @params = split(/\//,$ENV{'PATH_INFO'});
-$routing = $params[1];
+$routing = "/".$params[1];
 
 
 if ($routing eq "/"){
@@ -48,4 +48,4 @@ print header(-type => "text/html",
     print  $navbar->output;
     print  $list->output;
 
-    print "routing:".$params[1];
+    print "routing:".$routing;
