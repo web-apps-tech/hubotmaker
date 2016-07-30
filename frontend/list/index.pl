@@ -23,5 +23,5 @@ print header(-type => "text/html",
     	 -Access_Control_Allow_Origin=>'*');
     print  $html_1->output;
     print  $head->output;
-    print  $nabvar->output;
+    print  $navbar->output;
     print  $list->output;
