@@ -264,6 +264,7 @@ $(document).ready(function() {
                 if (data.status) {
                     var hubotIds = data.message;
                     setUsername();
+                    $(".user-menu").removeClass("hidden");
                     for (var i = 0; i < hubotIds.length; i++) {
                         $(".hubot-list-tbody").append(generateTbody(hubotIds[i]));
                         getStatus(SESSID, hubotIds[i]);
