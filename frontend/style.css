@@ -23,3 +23,6 @@ body {
 .hidden {
   display: none;
 }
+.hubot-beginner{
+  margin: 30px;
+}
