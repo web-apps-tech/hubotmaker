@@ -19,12 +19,13 @@ my $login = HTML::Template->new(filename => '/var/www/haas-front/login.tmpl',
                                 );
 
 $head->param(PTH_PREFIX => $path_prefix);
-$head->param(PTH_PREFIX => $path_prefix));
+$login->param(PTH_PREFIX => $path_prefix));
 
 print header(-type => "text/html",
              -status => 200,
     	 -charset=>'utf-8',
     	 -Access_Control_Allow_Origin=>'*');
+
     print  $html_1->output;
     print  $head->output;
     print  $navbar->output;
