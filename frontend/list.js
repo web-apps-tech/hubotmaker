@@ -275,6 +275,7 @@ $(document).ready(function() {
                             stopHubot(SESSID, e.target.id.split("_")[1]);
                         });
                         $(".memo-save").on("click", saveMemo);
+                        $(".hubot-list").removeClass("hidden");
                     }
                     $(".edit").on("click", function(e) {
                         var hubotId = e.target.parentNode.parentNode.children[0].textContent;
