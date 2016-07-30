@@ -17,6 +17,10 @@ my $register = HTML::Template->new(filename => '/var/www/haas-front/register.tmp
                                 'die_on_bad_params' => 0
                                 );
 
+                                $head->param(PATH_PREFIX => $path_prefix);
+                                $register->param(PATH_PREFIX => $path_prefix);
+
+
 print header(-type => "text/html",
              -status => 200,
     	 -charset=>'utf-8',
