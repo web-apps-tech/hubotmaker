@@ -20,8 +20,8 @@ my $list = HTML::Template->new(filename => '/var/www/haas-front/list.tmpl',
 print header(-type => "text/html",
              -status => 200,
     	 -charset=>'utf-8',
-    	 -Access_Control_Allow_Origin=>'*'),
-      $html_1->output,
-      $head->output,
-      $nabvar->output,
-      $list->output;
+    	 -Access_Control_Allow_Origin=>'*');
+    print  $html_1->output;
+    print  $head->output;
+    print  $nabvar->output;
+    print  $list->output;
