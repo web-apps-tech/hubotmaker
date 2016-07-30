@@ -17,6 +17,9 @@ my $login = HTML::Template->new(filename => '/var/www/haas-front/login.tmpl',
                                 'die_on_bad_params' => 0
                                 );
 
+$template->param(PTH_PREFIX => "../");
+
+
 print header(-type => "text/html",
              -status => 200,
     	 -charset=>'utf-8',
