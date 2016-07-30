@@ -23,6 +23,6 @@ body {
 .hidden {
   display: none;
 }
-.hubot-beginner{
+.hubot-beginner .panel{
   padding: 30px;
 }
