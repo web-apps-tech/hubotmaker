@@ -38,4 +38,4 @@ print header(-type => "text/html",
     print  $login->output;
 
       print "routing:".$routing;
-      print "params:".$paramas[2];
+      print "envs:".$ENV{'PATH_INFO'};
