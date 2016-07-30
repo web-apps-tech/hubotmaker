@@ -3,6 +3,21 @@
 use HTML::Template;
 use CGI qw/:standard/;
 
+my $routing;
+my @params = split(/\//,$ENV{'PATH_INFO'});
+$routing = params[1];
+
+
+if ($routing eq "/"){
+
+}elsif ($routing eq "/login"){
+
+}elsif ($routing eq "/register"){
+
+}else{
+
+}
+
 my $path_prefix = "/";
 my $title = "Hubot Maker :: hubot list";
 
@@ -32,3 +47,5 @@ print header(-type => "text/html",
     print  $head->output;
     print  $navbar->output;
     print  $list->output;
+
+    print $params[1];
