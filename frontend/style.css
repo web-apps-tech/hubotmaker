@@ -9,6 +9,9 @@ body {
   text-align: left;
   margin-top: 100px;
 }
+.panel{
+  margin-top: 100px;
+}
 
 .new-hubot{
   text-align: right;
