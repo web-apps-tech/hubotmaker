@@ -3,6 +3,8 @@
 use HTML::Template;
 use CGI qw/:standard/;
 
+my $path_prefix = "../";
+
 
 my $html_1 = HTML::Template->new(filename => '/var/www/haas-front/html_1.tmpl',
                                 'die_on_bad_params' => 0
