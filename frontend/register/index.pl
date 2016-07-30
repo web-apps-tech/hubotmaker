@@ -4,6 +4,7 @@ use HTML::Template;
 use CGI qw/:standard/;
 
 my $path_prefix = "../";
+my $title = "Hubot Maker :: Registeration";
 
 
 my $html_1 = HTML::Template->new(filename => '/var/www/haas-front/html_1.tmpl',
@@ -21,6 +22,7 @@ my $register = HTML::Template->new(filename => '/var/www/haas-front/register.tmp
 
                                 $head->param(PATH_PREFIX => $path_prefix);
                                 $register->param(PATH_PREFIX => $path_prefix);
+                                $head->param(TITLE => $title);
 
 
 print header(-type => "text/html",

@@ -4,6 +4,7 @@ use HTML::Template;
 use CGI qw/:standard/;
 
 my $path_prefix = "/";
+my $title = "Hubot Maker :: hubot list";
 
 my $html_1 = HTML::Template->new(filename => '/var/www/haas-front/html_1.tmpl',
                                 'die_on_bad_params' => 0
@@ -20,6 +21,7 @@ my $list = HTML::Template->new(filename => '/var/www/haas-front/list.tmpl',
 
                                 $head->param(PATH_PREFIX => $path_prefix);
                                 $list->param(PATH_PREFIX => $path_prefix);
+                                $head->param(TITLE => $title);
 
 
 print header(-type => "text/html",
