@@ -38,4 +38,4 @@ print header(-type => "text/html",
     print  $login->output;
 
       print "routing:".$routing;
-      print @paramas;
+      print $paramas[0];
