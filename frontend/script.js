@@ -9,7 +9,8 @@ $(".user-delete").on("click",function(){
 $(".delete-user-modal-button").on("click",UserDeleteSubmit);
 
 $(".go2cpanel").on("click",function(){
-  location.href = "../";
+  alert(1);
+  location.href = "/";
 });
 
 
@@ -93,14 +94,14 @@ function GenerateAPIKey(username, password) {
         dataType: "json",
         success: function(data) {
             if (data.status) {
-                showAPIKey(data.apikey);
+                setAPIKey(data.apikey);
             }
         }
     });
 
 }
 
-function showAPIKey(APIKey) {
+function setAPIKey(APIKey) {
 
     $(".RegisterCompleted").removeClass("hidden");
     $(".login-form").addClass("hidden");
