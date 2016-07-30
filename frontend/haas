@@ -7,19 +7,32 @@ my $routing;
 my @params = split(/\//,$ENV{'PATH_INFO'});
 $routing = "/".$params[1];
 
+my $path_prefix;
+my $title;
+my $body;
+
 
 if ($routing eq "/"){
-
+   $path_prefix = "/";
+   $title = "Hubot Maker :: hubot list";
+   $body = HTML::Template->new(filename => '/var/www/haas-front/list.tmpl',
+                                  'die_on_bad_params' => 0
+                                  );
 }elsif ($routing eq "/login"){
-
+   $path_prefix = "../";
+   $title = "Hubot Maker :: User Login";
+   $body = HTML::Template->new(filename => '/var/www/haas-front/login.tmpl',
+                                  'die_on_bad_params' => 0
+                                  );
 }elsif ($routing eq "/register"){
-
+   $path_prefix = "../";
+   $title = "Hubot Maker :: Registeration";
+   $body = HTML::Template->new(filename => '/var/www/haas-front/register.tmpl',
+                                  'die_on_bad_params' => 0
+                                  );
 }else{
 
 }
-
-my $path_prefix = "/";
-my $title = "Hubot Maker :: hubot list";
 
 my $html_1 = HTML::Template->new(filename => '/var/www/haas-front/html_1.tmpl',
                                 'die_on_bad_params' => 0
@@ -30,13 +43,11 @@ my $head = HTML::Template->new(filename => '/var/www/haas-front/head.tmpl',
 my $navbar = HTML::Template->new(filename => '/var/www/haas-front/navbar.tmpl',
                                 'die_on_bad_params' => 0
                                 );
-my $list = HTML::Template->new(filename => '/var/www/haas-front/list.tmpl',
-                                'die_on_bad_params' => 0
-                                );
+
 
                                 $head->param(PATH_PREFIX => $path_prefix);
-                                $list->param(PATH_PREFIX => $path_prefix);
                                 $head->param(TITLE => $title);
+                                $body->param(PATH_PREFIX => $path_prefix);
 
 
 print header(-type => "text/html",
@@ -46,6 +57,4 @@ print header(-type => "text/html",
     print  $html_1->output;
     print  $head->output;
     print  $navbar->output;
-    print  $list->output;
-
-    print "routing:".$routing;
+    print  $body->output;
