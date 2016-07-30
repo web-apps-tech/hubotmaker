@@ -338,5 +338,5 @@ function logout() {
         expires: -1,
         path: "/"
     });
-    location.href = ".login/";
+    location.href = "./login/";
 }
