@@ -279,6 +279,8 @@ $(document).ready(function() {
                     }
                     if (hubotIds.length == 0){
                       $(".hubot-beginner").removeClass("hidden");
+                    }else{
+                      $(".hubot-beginner").addClass("hidden");
                     }
                     $(".edit").on("click", function(e) {
                         var hubotId = e.target.parentNode.parentNode.children[0].textContent;
