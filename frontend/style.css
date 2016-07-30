@@ -26,18 +26,6 @@ body {
 .hubot-beginner .panel{
   padding: 30px;
 }
-a{
-  outline:none;
-}
-a:hover{
-  outline:none;
-}
-a:active{
-  outline:none;
-}
-a:link{
-  outline:none;
-}
-a:visited{
+a, a:hover, a:active, a:link, a:visited{
   outline:none;
 }
