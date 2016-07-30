@@ -8,7 +8,7 @@ $(".user-delete").on("click",function(){
 
 $(".delete-user-modal-button").on("click",UserDeleteSubmit);
 
-$(".go2panel").on("click",function(){
+$(".go2cpanel").on("click",function(){
   location.href = "../";
 });
 
