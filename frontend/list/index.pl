@@ -4,16 +4,16 @@ use HTML::Template;
 use CGI qw/:standard/;
 
 
-my $html1 = HTML::Template->new(filename => '../html1.tmpl',
+my $html1 = HTML::Template->new(filename => '/var/www/haas-front/html1.tmpl',
                                 'die_on_bad_params' => 0
                                 );
-my $head = HTML::Template->new(filename => '../head.tmpl',
+my $head = HTML::Template->new(filename => '/var/www/haas-front/head.tmpl',
                                 'die_on_bad_params' => 0
                                 );
-my $navbar = HTML::Template->new(filename => '../navbar.tmpl',
+my $navbar = HTML::Template->new(filename => '/var/www/haas-front/navbar.tmpl',
                                 'die_on_bad_params' => 0
                                 );
-my $list = HTML::Template->new(filename => '../list.tmpl',
+my $list = HTML::Template->new(filename => '/var/www/haas-front/list.tmpl',
                                 'die_on_bad_params' => 0
                                 );
 
