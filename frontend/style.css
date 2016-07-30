@@ -26,3 +26,6 @@ body {
 .hubot-beginner .panel{
   padding: 30px;
 }
+.user-menu{
+  float: right;
+}
