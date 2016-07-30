@@ -26,6 +26,6 @@ body {
 .hubot-beginner .panel{
   padding: 30px;
 }
-a, li {
+a:hover {
     outline: none;
 }
