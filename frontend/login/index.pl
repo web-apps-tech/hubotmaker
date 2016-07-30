@@ -18,8 +18,8 @@ my $login = HTML::Template->new(filename => '/var/www/haas-front/login.tmpl',
                                 'die_on_bad_params' => 0
                                 );
 
-$head->param(PTH_PREFIX => $path_prefix);
-$login->param(PTH_PREFIX => $path_prefix);
+$head->param(PATH_PREFIX => $path_prefix);
+$login->param(PATH_PREFIX => $path_prefix);
 
 print header(-type => "text/html",
              -status => 200,
