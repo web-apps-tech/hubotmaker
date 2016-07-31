@@ -30,8 +30,8 @@ $(".LoginButton").on("click",function(){
 
 function LoginError(){
   $(".err-msg").removeClass("hidden");
-  usernameForm.parent("div").addClass("has-error");
-  passwordForm.parent("div").addClass("has-error");
+  $("#Username").parent("div").addClass("has-error");
+  $("#Password").parent("div").addClass("has-error");
 }
 
 
