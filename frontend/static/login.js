@@ -1,4 +1,4 @@
-var ApiEndPoint = "http://133.242.53.17/";
+var ApiEndPoint = "//hubot.web-apps.tech/api";
 $(document).ready(function() {
     var SESSID = $.cookie("SESSID");
     if(SESSID !== undefined){

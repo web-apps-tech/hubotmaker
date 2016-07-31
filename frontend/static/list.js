@@ -57,7 +57,7 @@ $("#edit-submit").on("click", function() {
     updateHubot(APIKey, hubotId, slackToken, envs);
 });
 
-var ApiEndPoint = "http://133.242.53.17";
+var ApiEndPoint = "//hubot.web-apps.tech/api";
 
 
 function getHubotEnvs(APIKey, hubotId) {
