@@ -58,4 +58,4 @@ print header(-type => "text/html",
     print  $head->output;
     print  $navbar->output;
     print  $body->output;
-      print "routing:".$routing;
+  
