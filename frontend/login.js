@@ -2,7 +2,7 @@ var ApiEndPoint = "http://133.242.53.17/";
 $(document).ready(function() {
     var SESSID = $.cookie("SESSID");
     if(SESSID !== undefined){
-	    location.href = "../";
+	    location.href = "/haas/";
     }
 });
 $(".LoginButton").on("click",function(){
@@ -19,7 +19,7 @@ $(".LoginButton").on("click",function(){
 	    success: function(data){
 	        if(data.status){
 	            $.cookie("SESSID",data.apikey,{expires: 1, path: "/"});
-		        location.href = "../";
+		        location.href = "/haas/";
 	        }else{
 	            LoginError();
 	        }
