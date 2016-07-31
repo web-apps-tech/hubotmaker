@@ -29,8 +29,9 @@ $(".LoginButton").on("click",function(){
 });
 
 function LoginError(){
-    console.log("error");
-    //�낮���񂦂�
+  $(".err-msg").removeClass("hidden");
+  usernameForm.parent("div").addClass("has-error");
+  passwordForm.parent("div").addClass("has-error");
 }
 
 
