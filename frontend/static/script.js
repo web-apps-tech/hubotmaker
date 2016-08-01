@@ -1,4 +1,4 @@
-var ApiEndPoint = "http://133.242.53.17/";
+var ApiEndPoint = "//api.hubot.web-apps.tech";
 $(".UserRegistSubmit").on("click", UserRegistSubmit);
 
 $(".user-delete").on("click",function(){
@@ -18,7 +18,7 @@ function UserRegistSubmit() {
     var password = $("#Password").val()
     $.ajax({
         type: "POST",
-        url: ApiEndPoint + "user",
+        url: ApiEndPoint + "/user",
         cache: false,
         data: {
             username: username,
@@ -65,7 +65,7 @@ function UserActivate(username, password) {
 
     $.ajax({
         type: "PUT",
-        url: ApiEndPoint + "user/activate",
+        url: ApiEndPoint + "/user/activate",
         cache: false,
         data: {
             username: username,
@@ -84,7 +84,7 @@ function GenerateAPIKey(username, password) {
 
     $.ajax({
         type: "POST",
-        url: ApiEndPoint + "user/apikey",
+        url: ApiEndPoint + "/user/apikey",
         cache: false,
         data: {
             username: username,

@@ -1,4 +1,4 @@
-var ApiEndPoint = "//hubot.web-apps.tech/api";
+var ApiEndPoint = "//api.hubot.web-apps.tech";
 $(document).ready(function() {
     var SESSID = $.cookie("SESSID");
     if(SESSID !== undefined){

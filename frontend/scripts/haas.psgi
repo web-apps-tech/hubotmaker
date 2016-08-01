@@ -14,25 +14,25 @@ my @params = split(/\//,$env->{'PATH_INFO'});
 $routing = "/".$params[1];
 
 my $path_prefix;
-my $title;
+my $title = "Hubot Maker (&beta;) :: ";
 my $body;
 
 
 if ($routing eq "/"){
    $path_prefix = "/static/";
-   $title = "Hubot Maker :: hubot list";
+   $title .= "hubot list";
    $body = HTML::Template->new(filename => '/var/www/haas-front/templates/list.tmpl',
                                   'die_on_bad_params' => 0
                                   );
 }elsif ($routing eq "/login"){
    $path_prefix = "/static/";
-   $title = "Hubot Maker :: User Login";
+   $title .= "User Login";
    $body = HTML::Template->new(filename => '/var/www/haas-front/templates/login.tmpl',
                                   'die_on_bad_params' => 0
                                   );
 }elsif ($routing eq "/register"){
    $path_prefix = "/static/";
-   $title = "Hubot Maker :: Registeration";
+   $title .= "Registeration";
    $body = HTML::Template->new(filename => '/var/www/haas-front/templates/register.tmpl',
                                   'die_on_bad_params' => 0
                                   );
