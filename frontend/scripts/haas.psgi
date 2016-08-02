@@ -13,27 +13,24 @@ my $app = sub {
     my @params = split(/\//,$env->{'PATH_INFO'});
     $routing = "/".$params[1];
 
-    my $path_prefix;
+    my $path_prefix = "/static/";
     my $title = "Hubot Maker (&beta;) :: ";
     my $body;
 
 
     if ($routing eq "/") {
-        $path_prefix = "/static/";
         $title .= "hubot list";
         $body = HTML::Template->new(
             filename => '/var/www/haas-front/templates/list.tpl',
             'die_on_bad_params' => 0
             );
     }elsif ($routing eq "/login"){
-        $path_prefix = "/static/";
         $title .= "User Login";
         $body = HTML::Template->new(
             filename => '/var/www/haas-front/templates/login.tpl',
             'die_on_bad_params' => 0
             );
     }elsif ($routing eq "/register"){
-        $path_prefix = "/static/";
         $title .= "Registeration";
         $body = HTML::Template->new(
             filename => '/var/www/haas-front/templates/register.tpl',
