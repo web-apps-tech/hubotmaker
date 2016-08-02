@@ -9,9 +9,8 @@ use Plack::Builder;
 my $app = sub {
     my $env = shift;
 
-    my $routing;
     my @params = split(/\//,$env->{'PATH_INFO'});
-    $routing = "/".$params[1];
+    my $routing = "/".$params[1];
 
     my $path_prefix = "/static/";
     my $title = "Hubot Maker (&beta;) :: ";
