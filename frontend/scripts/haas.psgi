@@ -38,28 +38,22 @@ my $app = sub {
     }else{
     }
 
-    my $html_1 = HTML::Template->new(
-        filename => '/var/www/haas-front/templates/html_1.tpl',
-        'die_on_bad_params' => 0
-        );
-    my $head = HTML::Template->new(
-        filename => '/var/www/haas-front/templates/head.tpl',
-        'die_on_bad_params' => 0
-        );
-    my $navbar = HTML::Template->new(
-        filename => '/var/www/haas-front/templates/navbar.tpl',
+    my $base = HTML::Template->new(
+        filename => '/var/www/haas-front/templates/base.tpl',
         'die_on_bad_params' => 0
         );
 
-    $head->param(PATH_PREFIX => $path_prefix);
-    $head->param(TITLE => $title);
+    $base->param(
+        PATH_PREFIX => $path_prefix,
+        TITLE => $title
+        );
     $body->param(PATH_PREFIX => $path_prefix);
 
     # アプリケーションの処理
     return [
         200,
         ['Content-Type'=>'text/html'],
-        [$html_1->output.$head->output.$navbar->output.$body->output]
+        [$base->output.$body->output]
         ];
 };
 
