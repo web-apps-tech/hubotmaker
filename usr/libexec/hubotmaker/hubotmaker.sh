@@ -15,8 +15,6 @@ export PERL_MM_OPT="INSTALL_BASE=/root/perl5"
 export PERL5LIB="/root/perl5/lib/perl5:$PERL5LIB"
 export PATH="/root/perl5/bin:$PATH"
 
-cd /root/app
+cd /root/hubotmaker/apps
 uwsgi uwsgi.ini
-
-cd /var/www/haas-front
 plackup -s FCGI --listen /var/run/plack/haas-front.sock --pid /var/run/plack/haas-front.pid -a scripts/haas.psgi
