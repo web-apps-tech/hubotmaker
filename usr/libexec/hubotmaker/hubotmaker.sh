@@ -17,4 +17,4 @@ export PATH="/root/perl5/bin:$PATH"
 
 cd /root/hubotmaker/apps
 uwsgi uwsgi.ini
-plackup -s FCGI --listen /var/run/plack/haas-front.sock --pid /var/run/plack/haas-front.pid -a scripts/haas.psgi
+plackup -s FCGI --listen /var/run/plack/haas-front.sock --pid /var/run/plack/haas-front.pid -a haas.psgi
