@@ -11,5 +11,5 @@ Environment="PERL_MB_OPT=--install_base /root/perl5";
 Environment="PERL_MM_OPT=INSTALL_BASE=/root/perl5";
 Environment="PERL5LIB=/root/perl5/lib/perl5:$PERL5LIB";
 Environment="PATH=/root/perl5/bin:$PATH";
-ExecStart=/root/scripts/hubotmaker.sh
+ExecStart=/usr/libexec/hubotmaker/hubotmaker.sh
 ExecStop=/bin/kill -QUIT `cat /var/run/plack/haas-front.pid` && /bin/kill -QUIT `cat/var/run/uwsgi/haasapi.sock`
