@@ -1,3 +1,3 @@
 [submodule "Docker/hubot/scripts_for_hubot"]
 	path = Docker/hubot/scripts_for_hubot
-	url = https://github.com/nasa9084/scripts_for_hubot.git
+	url = git://github.com/nasa9084/scripts_for_hubot.git
