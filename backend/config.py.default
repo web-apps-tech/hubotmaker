@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+APIKEY = "apikey"
+APIKEY_TTL =  24 # hour
+DOCKER_BASEURI = 'http://localhost:2375'
+DOCKER_HUBOT_IMAGE = 'hubot:latest'
+DOCKER_REDIS_IMAGE = 'redis:alpine'
+MySQL = {
+    'host': 'localhost',
+    "db": 'hubot_service',
+    'user': '',
+    'passwd': '',
+    'charset': 'utf8'
+}
+REDIS_INFO = {
+    'host': 'localhost',
+    'port': 6379,
+    'db': 0
+}

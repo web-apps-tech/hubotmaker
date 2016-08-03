@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+# *TEMPLADE*
+# ${HOGE:+"hoge.coffee", }
+
+cat <<EOF | sed -re 's/\\//g' > hubot-scripts.json
+[
+${AMBUSH:+\"ambush.coffee\", }
+${AWW:+\"aww.coffee\", }
+${BASE58:+\"base58.coffee\", }
+${BASE64:+\"base64.coffee\", }
+${BEERME:+\"beerme.coffee\", }
+${COIN:+\"coin.coffee\", }
+${CMDLINEFU:+\"commandlinefu.coffee\", }
+${COWSAY:+\"cowsay.coffee\", }
+${CORGIME:+\"corgime.coffee\", }
+${DEALWITHIT:+\"dealwithit.coffee\", }
+${DICE:+\"dice.coffee\", }
+${EMOJI:+\"emoji.coffee\", }
+${EMOJIME:+\"emoji-me.coffee\", }
+${FIBONACCI:+\"fibonacci.coffee\", }
+${HASHING:+\"hashing.coffee\", }
+${HISTORY:+\"history.coffee\", }
+${KITTENS:+\"kittens.coffee\", }
+${POMODORO:+\"pomodoro.coffee\", }
+${TASKS:+\"tasks.coffee\", }
+
+${CHOICE:+\"choice.coffee\", }
+${DOLLAR:+\"dollar.coffee\", }
+${GOOD:+\"good.coffee\", }
+${OMIKUJI:+\"omikuji.coffee\", }
+${INCREMENT:+\"increment.coffee\", }
+${GREETINGS:+\"greetings.coffee\", }
+
+"version.coffee", "uptime.coffee"
+]
+EOF
+
+
+npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+exec node_modules/.bin/hubot --name "test" "$@"

@@ -1,0 +1,81 @@
+{
+    "tables": {
+        "users": {
+            "columns": [
+                {
+                    "name": "username",
+                    "type": "varchar",
+                    "max_length": 64,
+                    "primary key": true
+                },
+                {
+                    "name": "password",
+                    "type": "varchar",
+                    "max_length": 128,
+                    "not null": true
+                },
+                {
+                    "name": "isadmin",
+                    "type": "bool",
+                    "default": 0,
+                    "not null": true
+                },
+                {
+                    "name": "activate",
+                    "type": "bool",
+                    "default": 0,
+                    "not null": true
+                }
+            ]
+        },
+        "hubots": {
+            "columns": [
+                {
+                    "name": "username",
+                    "type": "varchar",
+                    "max_length": 64,
+                    "not null": true
+                },
+                {
+                    "name": "hubotname",
+                    "type": "varchar",
+                    "max_length": 64,
+                    "not null": true
+                }
+            ],
+            "primary key": {
+                "columns": [
+                    "username",
+                    "hubotname"
+                ]
+            },
+            "foreign key": {
+                "key": "username",
+                "ref_table": "users",
+                "ref_col": "username",
+                "on delete": "cascade",
+                "on update": "cascade"
+            }
+        },
+        "notes": {
+            "columns": [
+                {
+                    "name": "hubotname",
+                    "type": "varchar",
+                    "max_length": 64,
+                    "not null": true
+                },
+                {
+                    "name": "note",
+                    "type": "varchar",
+                    "max_length": 141,
+                    "not null": true
+                }
+            ]
+        }
+    },
+    "options": {
+        "engine": "InnoDB",
+        "charset": "utf8"
+    }
+}
