@@ -18,7 +18,7 @@ def main():
 
 
 def load_schema():
-    with open('SQLSchema.json', 'r') as f:
+    with open('../spec/SQLSchema.json', 'r') as f:
         schema = json.load(f)
     return schema
 
