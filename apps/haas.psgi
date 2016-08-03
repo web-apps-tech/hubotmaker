@@ -20,26 +20,26 @@ my $app = sub {
     if ($routing eq "/") {
         $title .= "hubot list";
         $body = HTML::Template->new(
-            filename => '/var/www/haas-front/templates/list.tpl',
+            filename => '/root/hubotmaker/templates/list.tpl',
             'die_on_bad_params' => 0
             );
     }elsif ($routing eq "/login"){
         $title .= "User Login";
         $body = HTML::Template->new(
-            filename => '/var/www/haas-front/templates/login.tpl',
+            filename => '/root/hubotmaker/templates/login.tpl',
             'die_on_bad_params' => 0
             );
     }elsif ($routing eq "/register"){
         $title .= "Registeration";
         $body = HTML::Template->new(
-            filename => '/var/www/haas-front/templates/register.tpl',
+            filename => '/root/hubotmaker/templates/register.tpl',
             'die_on_bad_params' => 0
             );
     }else{
     }
 
     my $base = HTML::Template->new(
-        filename => '/var/www/haas-front/templates/base.tpl',
+        filename => '/root/hubotmaker/templates/base.tpl',
         'die_on_bad_params' => 0
         );
 
@@ -58,6 +58,6 @@ my $app = sub {
 };
 
 builder {
-    enable "Plack::Middleware::Static",  path => qr{^/static}, root => '/var/www/haas-front';
+    enable "Plack::Middleware::Static",  path => qr{^/static}, root => '/root/hubotmaker';
     $app;
 };
