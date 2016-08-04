@@ -6,9 +6,8 @@ set -eu
 sudo rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 sudo rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 
-sudo yum install -y git wget epel-release nginx openssl-devel bzip2-devel readline-devel
+sudo yum install -y wget epel-release nginx openssl-devel bzip2-devel readline-devel
 
-git clone git://github.com/web-apps-tech/hubotmaker.git ~/hubotmaker
 sudo cp ~/hubotmaker/etc/systemd/system/hubotmaker.service /etc/systemd/system/hubotmaker.service
 sudo sed -rie "s/user nginx;/user root root;/" /etc/nginx/nginx.conf
 sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
