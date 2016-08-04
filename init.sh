@@ -9,7 +9,7 @@ if [ ! -e ~/.anyenv ]; then
     sudo yum install -y wget epel-release nginx openssl-devel bzip2-devel readline-devel
 
     sudo cp ~/hubotmaker/etc/systemd/system/hubotmaker.service /etc/systemd/system/hubotmaker.service
-    sudo sed -rie "s/user nginx;/user root root;/" /etc/nginx/nginx.conf
+    sudo sed -rie "s/user +nginx;/user root root;/" /etc/nginx/nginx.conf
     sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
     sudo cp ~/hubotmaker/etc/nginx/conf.d/hubotmaker.conf /etc/nginx/conf.d/hubotmaker.conf
 
